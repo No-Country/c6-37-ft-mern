@@ -6,7 +6,7 @@ import Navbar from './Navbar'
 function Layout(props) {
   return (
     <Stack minH='100vh'>
-      <Stack minH='53vh' w='1280px' bgImage='/assets/top_wave.png' bgRepeat='no-repeat' >
+      <Stack minH='50vh' w='1280px' bgImage='/assets/top_wave.png' bgRepeat='no-repeat' >
         <Navbar />
         {props.children}
       </Stack>
