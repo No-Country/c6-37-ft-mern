@@ -9,6 +9,12 @@ const theme = extendTheme({
           fontSize: '16px',
           fontWeight: 'bold',
           textTransform:'capitalize'
+        },
+        'footbar': {
+          color: '#fff',
+          fontWeight: 'light',
+          textTransform: 'capitalize',
+          fontSize: '14px'
         }
       }
     }
