@@ -12,7 +12,8 @@ const clienteSchema = mongoose.Schema({
             nombre: String,
             fechaNacimiento: String,
             tamaño: String,
-            peso: String
+            peso: String,
+            raza: String
         }
     ]
 });
