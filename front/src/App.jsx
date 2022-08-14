@@ -1,21 +1,16 @@
-import { Stack } from '@chakra-ui/react'
-import Header from './components/header/Header'
-import Navbar from './layout/Navbar'
-import Footer from './layout/footer/Footer'
 
+import Layout from './layout/Layout';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routing from './layout/routing/Routing';
 
 function App() {
-
   return (
-    <Stack alignItems='center' minH='100vh' >
-      <Stack spacing='0px'>
-        <Navbar />
-        <Header />
-      </Stack>
-      
-      <Footer />
-    </Stack>
-  )
+    <Router>
+      <Layout>
+        <Routing />
+      </Layout>
+    </Router>
+  );
 }
 
-export default App
+export default App;
