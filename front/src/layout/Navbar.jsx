@@ -49,7 +49,13 @@ const Navbar = () => {
           >
             Login
           </Button>
-          <Button bg="transparent" color="white" _hover={{ bg: 'none' }}>
+          <Button
+            as={RouterLink}
+            to="/signup"
+            bg="transparent"
+            color="white"
+            _hover={{ bg: 'none' }}
+          >
             Sign Up
           </Button>
         </Flex>

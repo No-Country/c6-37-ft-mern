@@ -11,7 +11,6 @@ function Layout({ children }) {
     <Stack minH="100vh" alignItems="center" spacing="0px" w="1280px" m="0 auto">
       <Navbar />
       <Stack
-        minH="50vh"
         w="1280px"
         bgImage="/assets/top_wave.png"
         bgRepeat="no-repeat"
