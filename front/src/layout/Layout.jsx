@@ -14,6 +14,7 @@ function Layout({ children }) {
         w="1280px"
         bgImage="/assets/top_wave.png"
         bgRepeat="no-repeat"
+        spacing={0}
       >
         {children}
       </Stack>
