@@ -5,6 +5,7 @@ import cors from 'cors';
 
 // import documentRoutes from './routes/documents.js';
 import clienteRoutes from './routes/clienteRoutes.js';
+import usuarioRoutes from './routes/usuarioRoutes.js';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 // app.use('/documents', documentRoutes);
 app.use('/clientes', clienteRoutes);
+app.use('/usuarios', usuarioRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://petsociety:petsociety@cluster0.4j2rl.mongodb.net/?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
