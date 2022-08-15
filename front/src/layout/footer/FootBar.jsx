@@ -1,5 +1,5 @@
 import { HStack, Stack, Text, VStack } from "@chakra-ui/react"
-import { TiSocialInstagram, TiSocialFacebook } from 'react-icons/ti'
+import {FaFacebookSquare,FaInstagramSquare } from 'react-icons/fa'
 
 const FootBar = () => {
   return (
@@ -12,8 +12,8 @@ const FootBar = () => {
         <Text variant='footbar' >contact</Text>
       </Stack>
       <HStack color='white' gap='3' fontSize='24px'>
-        <TiSocialInstagram />
-        <TiSocialFacebook />
+        <FaInstagramSquare />
+        <FaFacebookSquare />
       </HStack>
     </VStack>
   )
