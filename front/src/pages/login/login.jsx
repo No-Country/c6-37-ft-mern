@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { MdOutlineEmail } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { Link as RouterLink } from 'react-router-dom';
+import axios from 'axios';
 
 let user = {
   id: '1',
@@ -42,12 +43,20 @@ const Login = () => {
 
   useEffect(() => {
     if (isLogged) {
-      navigate('/dashboard');
+      navigate('/admin');
     }
   }, [isLogged, navigate]);
 
-  const onLoginSuccess = () => {
-    login(user);
+  const onLoginSuccess = async () => {
+    const url = 'http://localhost:5000/usuarios';
+
+    await axios
+      .post(url, {
+        usuario: nameInput,
+        contrasena: passwordInput,
+      })
+      .then((data) => login(user))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -120,7 +129,9 @@ const Login = () => {
               />
             </InputGroup>
             {isNameError && (
-              <FormErrorMessage>Email is required.</FormErrorMessage>
+              <FormErrorMessage fontWeight="bold">
+                Email is required.
+              </FormErrorMessage>
             )}
           </FormControl>
           <FormControl
