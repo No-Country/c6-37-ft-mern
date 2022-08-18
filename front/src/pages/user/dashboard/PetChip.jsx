@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { BsPlus } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
+import EditPet from '../pet/EditPet';
 
 const PetChip = ({ pet }) => {
   return (
@@ -128,16 +129,7 @@ const PetChip = ({ pet }) => {
             </Flex>
           </GridItem>
           <GridItem colSpan={2} justifySelf="center">
-            <Button
-              colorScheme="blue"
-              size="sm"
-              borderRadius="full"
-              px={8}
-              fontFamily="Anek Bangla, sans-serif"
-              fontSize='lg'
-            >
-              Edit
-            </Button>
+            <EditPet/>
           </GridItem>
           <IconButton
             icon={<MdDelete fontSize="18px" />}

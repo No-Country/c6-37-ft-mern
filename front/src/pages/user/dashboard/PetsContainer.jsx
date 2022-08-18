@@ -17,6 +17,7 @@ import {
 import { BsPlus } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 import PetChip from './PetChip';
+import AddPet from '../pet/AddPet';
 
 const pet = {
   name: 'Firulais',
@@ -37,17 +38,15 @@ const PetsContainer = () => {
         <Text color="blue.500" fontSize="3xl" fontWeight="bold" fontFamily='Anek Bangla, sans-serif'>
           MY PETS
         </Text>
-        <Button colorScheme="blue" size="sm" borderRadius="full">
-          <BsPlus fontSize="20px" />
-          Add Pet
-        </Button>
+        <AddPet/>
       </Flex>
       <Accordion allowToggle>
         <PetChip pet={pet}/>
         <PetChip pet={pet}/>
         <PetChip pet={pet}/>
         <PetChip pet={pet}/>
-      </Accordion>
+      </Accordion >
+      
     </>
   );
 };

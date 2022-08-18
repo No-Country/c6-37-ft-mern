@@ -4,9 +4,11 @@ import {
   IconButton,
   Image,
   Text,
+
 } from '@chakra-ui/react';
 import useUser from './../../../hooks/useUser';
 import { BiEdit } from 'react-icons/bi';
+import EditProfile from '../Profile/EditProfile';
 
 const UserChip = () => {
   const { user } = useUser();
@@ -17,6 +19,7 @@ const UserChip = () => {
       gap={4}
       p={4}
       boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)"
+
     >
       <Image
         src={user.imgUrl}
@@ -24,7 +27,7 @@ const UserChip = () => {
         boxSize="90px"
         borderRadius="full"
       />
-      <Flex direction="column">
+      <Flex direction="column" width='100%'>
         <Text fontSize="2xl" fontWeight="bold" >
           {user.name}
         </Text>
@@ -35,18 +38,12 @@ const UserChip = () => {
           {user.address}
         </Text>
       </Flex>
-      <Flex alignSelf="flex-start" justifySelf="flex-end">
-        <IconButton
-          aria-label="Edit Profile"
-          icon={<BiEdit fontSize="18px" />}
-          size="sm"
-          colorScheme="blue"
-          color="white"
-          borderRadius="full"
-        />
+      <Flex  alignSelf="flex-start" justifySelf="flex-end" >
+      <EditProfile />
       </Flex>
     </Flex>
   );
 };
 
 export default UserChip;
+
