@@ -56,7 +56,8 @@ function Signup() {
         </Box>
 
         <Box
-          padding="10px"
+          py="10px"
+          px="20px"
           w={{ base: '100%', sm: '60%' }}
           h={{ base: '60%', sm: '100%' }}
           bg="#0B8CBF"
@@ -64,19 +65,14 @@ function Signup() {
           borderRightRadius={{ base: '0px', sm: '22px' }}
           align="center"
         >
-          <Heading color="white" size="lg" align="center" mt="40px" mb="40px">
+          <Heading color="white" size="lg" align="center" my="10">
             SIGN UP
           </Heading>
 
-          {/* Contenedor de name y lastName*/}
-          <Box
-            w="calc(100%/2 -10px)"
-            display="flex"
-            justifyContent="center"
-            gap="10px"
-          >
-            {/* Contenedor de name*/}
-            <Box>
+          <Stack flexDirection='column' gap={2}>
+            {/* Contenedor de name y lastName*/}
+            <Flex justifyContent="center" gap="10px">
+              {/* Contenedor de name*/}
               <InputGroup>
                 <InputLeftElement
                   h="30px"
@@ -84,19 +80,15 @@ function Signup() {
                   children={<BsFillPersonFill color="#cbd5e0" />}
                 />
                 <Input
-                  maxWidth="195px"
-                  w="100%"
                   h="30px"
                   bg="#ffffff"
-                  borderRadius="23px"
+                  borderRadius="full"
                   placeholder="Name"
                   fontFamily="Anek Bangla, sans-serif"
                 />
               </InputGroup>
-            </Box>
 
-            {/* Contenedor de lastName*/}
-            <Box>
+              {/* Contenedor de lastName*/}
               <InputGroup>
                 <InputLeftElement
                   h="30px"
@@ -104,96 +96,70 @@ function Signup() {
                   children={<BsFillPersonFill color="#cbd5e0" />}
                 />
                 <Input
-                  maxWidth="195px"
-                  w="100%"
                   h="30px"
                   bg="#ffffff"
-                  borderRadius="23px"
+                  borderRadius="full"
                   fontFamily="Anek Bangla, sans-serif"
                   placeholder="Last Name"
                 />
               </InputGroup>
-            </Box>
-          </Box>
+            </Flex>
 
-          {/* Contenedor de phone y email */}
-          <Box
-            w="calc(100%/2 -1px)"
-            display="flex"
-            justifyContent="center"
-            gap="10px"
-          >
-            {/* Contenedor phone */}
-            <Box>
-              <InputGroup h="30px">
+            {/* Contenedor de phone y email */}
+            <Flex justifyContent="center" gap="10px">
+              {/* Contenedor phone */}
+              <InputGroup>
                 <InputLeftElement
-                  h="70px"
                   pointerEvents="none"
                   children={<AiOutlinePhone color="#cbd5e0" />}
+                  h="30px"
                 />
                 <Input
                   h="30px"
-                  maxWidth="195px"
-                  mt="20px"
                   bg="#ffffff"
-                  borderRadius="23px"
+                  borderRadius="full"
                   fontFamily="Anek Bangla, sans-serif"
                   placeholder="Phone"
                 />
               </InputGroup>
-            </Box>
 
-            {/* contenedor email */}
-            <Box>
-              <InputGroup h="30px">
+              {/* contenedor email */}
+              <InputGroup>
                 <InputLeftElement
-                  h="70px"
+                  h="30px"
                   pointerEvents="none"
                   children={<MdOutlineEmail color="#cbd5e0" />}
                 />
                 <Input
                   h="30px"
-                  maxWidth="195px"
-                  mt="20px"
                   bg="#ffffff"
-                  borderRadius="23px"
+                  borderRadius="full"
                   fontFamily="Anek Bangla, sans-serif"
                   placeholder="Email"
                 />
               </InputGroup>
-            </Box>
-          </Box>
+            </Flex>
 
-          {/* Contenedor de Adress */}
+            {/* Contenedor de Adress */}
 
-          <Box w="100%" maxWidth="400px">
-            <InputGroup h="30px">
+            <InputGroup>
               <InputLeftElement
-                h="110px"
+                h="30px"
                 pointerEvents="none"
                 children={<MdPlace color="#cbd5e0" />}
               />
               <Input
                 h="30px"
-                mt="40px"
                 bg="#ffffff"
-                borderRadius="23px"
+                borderRadius="full"
                 fontFamily="Anek Bangla, sans-serif"
-                placeholder="Adress"
+                placeholder="Address"
               />
             </InputGroup>
-          </Box>
 
-          {/* Contenedor de password and repeat*/}
-          <Box
-            w="calc(100%/2 -10px)"
-            display="flex"
-            justifyContent="center"
-            gap="10px"
-            mt="60px"
-          >
-            {/* Contenedor de password*/}
-            <Box>
+            {/* Contenedor de password and repeat*/}
+            <Flex justifyContent="center" gap="10px">
+              {/* Contenedor de password*/}
               <InputGroup>
                 <InputLeftElement
                   h="30px"
@@ -202,19 +168,15 @@ function Signup() {
                 />
                 <Input
                   type="password"
-                  maxWidth="195px"
-                  w="100%"
                   h="30px"
                   bg="#ffffff"
-                  borderRadius="23px"
+                  borderRadius="full"
                   fontFamily="Anek Bangla, sans-serif"
                   placeholder="Password"
                 />
               </InputGroup>
-            </Box>
 
-            {/* Contenedor de repeat password*/}
-            <Box>
+              {/* Contenedor de repeat password*/}
               <InputGroup>
                 <InputLeftElement
                   h="30px"
@@ -223,18 +185,15 @@ function Signup() {
                 />
                 <Input
                   type="password"
-                  maxWidth="195px"
-                  w="100%"
                   h="30px"
                   bg="#ffffff"
-                  borderRadius="23px"
+                  borderRadius="full"
                   fontFamily="Anek Bangla, sans-serif"
                   placeholder="Repeat Password"
                 />
               </InputGroup>
-            </Box>
-          </Box>
-
+            </Flex>
+          </Stack>
           <Button
             borderRadius="64"
             mt="40px"

@@ -79,7 +79,7 @@ const Login = () => {
             WELCOME BACK!
           </Heading>
 
-          <InputGroup w="195px" h="30px">
+          <InputGroup w="195px" >
             <InputLeftElement
               h="30px"
               pointerEvents="none"
@@ -96,9 +96,9 @@ const Login = () => {
             />
           </InputGroup>
 
-          <InputGroup w="195px" h="30px">
+          <InputGroup w="195px" h="30px" mt='30px'>
             <InputLeftElement
-              h="87px"
+              h="30px"
               pointerEvents="none"
               children={<RiLockPasswordLine color="#718096" />}
             />
@@ -106,7 +106,6 @@ const Login = () => {
               type="password"
               h="30px"
               w="195px"
-              mt="30px"
               bg="#ffffff"
               borderRadius="23px"
               placeholder="Password"
@@ -114,7 +113,6 @@ const Login = () => {
             />
           </InputGroup>
 
-          <br />
 
           <Button borderRadius="64" mt="40px" size="sm" color="#0B8CBF" onClick={onLoginSuccess}>
             Continue

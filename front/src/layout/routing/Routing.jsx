@@ -6,6 +6,7 @@ import NoMatchRoute from './../../pages/noMatchRoute/NoMatchRoute';
 import Dashboard from './../../pages/user/dashboard/Dashboard';
 import Login from '../../pages/login/Login';
 import Signup from '../../pages/signup/Signup';
+import Admin from '../../pages/admin/Admin';
 
 const Routing = () => {
   return (
@@ -15,18 +16,10 @@ const Routing = () => {
       <Route path="/signup" element={<Signup />} />
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        {/* <Route path="/admin" element={<admin />} /> */}
+        <Route path="/admin" element={<Admin />} />
       </Route>
 
       <Route path="*" element={<NoMatchRoute />} />
-      {/* <PrivateRoute path='/dashboard' element={<NoMatchRoute/>} /> */}
-
-      {/* <Route path='/petshop' component={PetShop} /> */}
-      {/* <Route path='/login' component={Login} /> */}
-      {/* <Route path='/signUp' component={SignUp} /> */}
-      {/* <Route path='*'>
-        <NoMatchRoute/>
-      </Route> */}
     </Routes>
   );
 };
