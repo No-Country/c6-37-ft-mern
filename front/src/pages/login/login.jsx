@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
   Heading,
   Image,
   Input,
@@ -27,7 +30,15 @@ let user = {
 
 const Login = () => {
   const { login, isLogged } = useUser();
+  const [nameInput, setNameInput] = useState();
+  const [passwordInput, setPasswordInput] = useState();
   const navigate = useNavigate();
+
+  const handleNameInputChange = (e) => setNameInput(e.target.value);
+  const handlePasswordInputChange = (e) => setPasswordInput(e.target.value);
+
+  const isNameError = nameInput === '';
+  const isPasswordError = passwordInput === '';
 
   useEffect(() => {
     if (isLogged) {
@@ -40,7 +51,12 @@ const Login = () => {
   };
 
   return (
-    <Flex justifyContent="center" alignItems="center" margin='auto 0' pt='160px'>
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      margin="auto 0"
+      pt="160px"
+    >
       <Stack
         spacing="0px"
         direction={{ base: 'column', sm: 'row' }}
@@ -79,48 +95,81 @@ const Login = () => {
             WELCOME BACK!
           </Heading>
 
-          <InputGroup w="195px" >
-            <InputLeftElement
-              h="30px"
-              pointerEvents="none"
-              children={<MdOutlineEmail color="#718096" />}
-            />
-            <Input
-              className="inputEmail"
-              w="195px"
-              h="30px"
-              bg="#ffffff"
-              borderRadius="23px"
-              placeholder="Email"
-              fontFamily="Anek Bangla, sans-serif"
-            />
-          </InputGroup>
+          <FormControl
+            isInvalid={isNameError}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <InputGroup w="195px">
+              <InputLeftElement
+                h="30px"
+                pointerEvents="none"
+                children={<MdOutlineEmail color="#718096" />}
+              />
+              <Input
+                type="email"
+                w="195px"
+                h="30px"
+                bg="#ffffff"
+                borderRadius="23px"
+                placeholder="Email"
+                fontFamily="Anek Bangla, sans-serif"
+                value={nameInput}
+                onChange={handleNameInputChange}
+              />
+            </InputGroup>
+            {isNameError && (
+              <FormErrorMessage>Email is required.</FormErrorMessage>
+            )}
+          </FormControl>
+          <FormControl
+            isInvalid={isPasswordError}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <InputGroup w="195px" h="30px" mt="30px">
+              <InputLeftElement
+                h="30px"
+                pointerEvents="none"
+                children={<RiLockPasswordLine color="#718096" />}
+              />
+              <Input
+                type="password"
+                h="30px"
+                w="195px"
+                bg="#ffffff"
+                borderRadius="23px"
+                placeholder="Password"
+                fontFamily="Anek Bangla, sans-serif"
+                value={passwordInput}
+                onChange={handlePasswordInputChange}
+              />
+            </InputGroup>
+            {isPasswordError && (
+              <FormErrorMessage>Password is required.</FormErrorMessage>
+            )}
+          </FormControl>
 
-          <InputGroup w="195px" h="30px" mt='30px'>
-            <InputLeftElement
-              h="30px"
-              pointerEvents="none"
-              children={<RiLockPasswordLine color="#718096" />}
-            />
-            <Input
-              type="password"
-              h="30px"
-              w="195px"
-              bg="#ffffff"
-              borderRadius="23px"
-              placeholder="Password"
-              fontFamily="Anek Bangla, sans-serif"
-            />
-          </InputGroup>
-
-
-          <Button borderRadius="64" mt="40px" size="sm" color="#0B8CBF" onClick={onLoginSuccess}>
+          <Button
+            borderRadius="64"
+            mt="30px"
+            size="sm"
+            color="#0B8CBF"
+            onClick={onLoginSuccess}
+          >
             Continue
           </Button>
 
           <Text mt="30px" color="#fff" fontWeight="300">
             Don't you have an account?
-            <Text as={RouterLink} to="/signup" fontWeight="bold" display='block'>
+            <Text
+              as={RouterLink}
+              to="/signup"
+              fontWeight="bold"
+              display="block"
+            >
               Sign Up
             </Text>
           </Text>
