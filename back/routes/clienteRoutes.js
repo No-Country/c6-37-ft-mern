@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/', getClientes);
 router.post('/', createCliente);
-router.delete('/:id', deleteCliente);
+router.delete('/:email', deleteCliente);
 
 export default router;
