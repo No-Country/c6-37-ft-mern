@@ -11,3 +11,14 @@ export const verifyUsuario = async (req, res) => {
         res.status(404).json({message: error.message});
     }
 }
+
+export const createUsuario = async (req, res) => {
+    const usuario = req.body;
+    const newUsuario = new usuarioModel(usuario);
+    try {
+        await newUsuario.save();
+        res.status(201).json(newUsuario);
+    } catch (error) {
+        res.status(409).json({message: error.message});
+    }
+}
