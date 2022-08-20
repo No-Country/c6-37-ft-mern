@@ -4,7 +4,7 @@ import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, 
 function CustomModal(props) {
 
   return (
-    <Modal finalFocusRef={props.ref} isOpen={props.isOpen} onClose={props.onClose}>
+    <Modal finalFocusRef={props.ref} isOpen={props.isOpen} onClose={props.onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{props.title}</ModalHeader>

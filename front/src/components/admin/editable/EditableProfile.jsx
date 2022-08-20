@@ -4,9 +4,8 @@ import DeleteIcon from './DeleteIcon'
 import { useState } from 'react'
 import ButtonsForm from './ButtonsForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUserData } from '../../../redux/features/userSlice'
+import { setEditable, setUserData } from '../../../redux/features/userSlice'
 import { v4 as uuid } from 'uuid'
-import useUser from '../../../hooks/useUser'
 
 function EditableProfile() {
 
@@ -37,7 +36,11 @@ function EditableProfile() {
   const handleSubmit = () => {
     dispatch(setUserData(userInfo))
   }
-// 
+
+
+  const handleCancel = () => {
+    dispatch(setEditable())
+  }
 
   
   return (
@@ -61,7 +64,7 @@ function EditableProfile() {
             <Text fontSize='14px' fontWeight='bold' fontFamily='Anek Bangla, sans-serif'>Address:</Text>
             <Input placeholder={obj.address ? `${obj.address}` : `write your ${obj.address}`} px='5' name='address' onChange={handleChange} variant='unstyled' shadow='lg' maxW='490px' h='30px' rounded={0} _placeholder={{fontSize: '12px'}} />
           </Flex>
-          <ButtonsForm submit={handleSubmit} />
+          <ButtonsForm handleCancel={handleCancel}  submit={handleSubmit} />
         </Stack>
       </Stack>
 

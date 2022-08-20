@@ -1,30 +1,31 @@
-import React from 'react';
-import { MdEdit } from 'react-icons/md';
-import { FiTrash } from 'react-icons/fi';
 import { Box, Stack, useDisclosure } from '@chakra-ui/react';
+import { useRef } from 'react';
+import { FiTrash } from 'react-icons/fi';
+import { MdEdit } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
-import { delUserData, setEditable } from '../../redux/features/userSlice';
-import CustomModal from './CustomModal';
+import { delInfo, editInfo } from '../../../../redux/features/petSlice';
+import CustomModal from './../../CustomModal';
 
-const EditTool = () => {
+function EditToolPet() {
+  const finalRef = useRef(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
 
-  // const handleDelete = () => {
-  //   dispatch(delUserData())
-  // }
-
-  const handleEdit = () => {
-    dispatch(setEditable());
+  const handleClick = () => {
+    dispatch(editInfo());
   };
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const finalRef = React.useRef(null);
+  const handleDel = (e) => {
+    let empty = {};
+    dispatch(delInfo(empty));
+  };
+
+
 
   return (
-    <Stack direction="column" gap="4">
+    <Stack pb="10">
       <Box
         cursor="pointer"
-        ref={finalRef}
         onClick={onOpen}
         rounded={50}
         bg="#DC3545"
@@ -40,7 +41,7 @@ const EditTool = () => {
       </Box>
       <Box
         cursor="pointer"
-        onClick={handleEdit}
+        onClick={handleClick}
         rounded={50}
         bg="#0B8CBF"
         w="50px"
@@ -53,7 +54,6 @@ const EditTool = () => {
       >
         <MdEdit />
       </Box>
-
       <CustomModal
         finalFocusRef={finalRef}
         isOpen={isOpen}
@@ -65,6 +65,6 @@ const EditTool = () => {
       />
     </Stack>
   );
-};
+}
 
-export default EditTool;
+export default EditToolPet;

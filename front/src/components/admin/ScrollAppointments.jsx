@@ -72,11 +72,11 @@ function ScrollAppointments() {
         <Table variant='simple'>
         <Thead>
             <Tr>
-              <Th><Text fontSize='12px' fontFamil='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Consult</Text></Th>
-              <Th><Text fontSize='12px' fontFamil='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Client</Text></Th>
-              <Th><Text fontSize='12px' fontFamil='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Pet</Text></Th>
-              <Th><Text fontSize='12px' fontFamil='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Hour</Text></Th>
-              <Th><Text fontSize='12px' fontFamil='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Day</Text></Th>
+              <Th><Text fontSize='12px' fontFamily='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Consult</Text></Th>
+              <Th><Text fontSize='12px' fontFamily='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Client</Text></Th>
+              <Th><Text fontSize='12px' fontFamily='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Pet</Text></Th>
+              <Th><Text fontSize='12px' fontFamily='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Hour</Text></Th>
+              <Th><Text fontSize='12px' fontFamily='Anek Bangla, sans-serif' fontWeight='semibold' color='#404040' >Day</Text></Th>
             </Tr>
           </Thead>
           <Tbody>

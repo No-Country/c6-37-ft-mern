@@ -11,17 +11,12 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
-const DataTable = ({ title, data }) => {
-  const navigate = useNavigate();
-  
-  const handleClick = () => {
-  
+const DataTable = ({ title, data, handleSelect }) => {
 
-
+  function handleClick(e) {
+    console.log(e);
   }
-
 
   return (
     <Stack>
@@ -46,12 +41,12 @@ const DataTable = ({ title, data }) => {
                 cursor="pointer"
                 _hover={{ bg: '#EEEEEE' }}
                 onClick={
-                  handleClick
+                  ()=>handleSelect(row)
                 }
               >
                 {/* RECORRE CADA OBJETO, COMO SI FUERA UN ARRAY, ASI SE CONVIERTE EN UNA TABLA DINAMICA */}
                 {Object.keys(row).map((i) => (
-                  <Td key={i}>
+                  <Td key={i} value={row}>
                     <Text
                       fontFamily="Anek Bangla, sans-serif"
                       fontWeight="bold"

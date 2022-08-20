@@ -13,7 +13,7 @@ function UserProfileContainer() {
   
 
   return (
-    <VStack h='939px' w='925px' boxShadow='dark-lg' my='40' gap='10' py='5'>
+    <VStack  w='925px' boxShadow='0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)' gap='10' py='10'>
       {
         edit ?
         <EditableProfile /> :

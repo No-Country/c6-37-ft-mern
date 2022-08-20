@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {v4 as uuid} from 'uuid'
 
 const initialState = {
-  id:uuid(),
   name:'juan',
   lastName:'domingo',
-  phone: '343243242',
-  email:'adsda@asdad.com',
-  address:'adasdads',
-  imgUrl:'https://dsjadssad',
+  phone: '+01 984 039 492',
+  email:'example@example.com',
+  address:'Contoso Ltd 215 E Tasman CA San Jose',
+  imgUrl:'https://bit.ly/dan-abramov',
   editable: false,
 }
 

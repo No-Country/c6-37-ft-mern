@@ -20,7 +20,7 @@ const Routing = () => {
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/client/:id" element={<ClientProfile />} />
+        <Route path="/admin/client" element={<ClientProfile />} />
       </Route>
 
       <Route path="*" element={<NoMatchRoute />} />

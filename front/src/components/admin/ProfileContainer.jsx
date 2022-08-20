@@ -6,14 +6,6 @@ import { useSelector } from "react-redux";
 
 function ProfileContainer() {
 
-  // let client = {
-  //   id: "",
-  //   name: "",
-  //   lastName: "",
-  //   phone: "",
-  //   email: "",
-  //   address: "",
-  // };
 
   const state = useSelector(state => state.userData)
 

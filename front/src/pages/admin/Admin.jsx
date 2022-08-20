@@ -1,8 +1,8 @@
 import { Heading, Stack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Dashboard from './Dashboard';
-import Clients from './Clients';
-import Pets from './Pets';
+import ClientsList from './ClientsList';
+import PetsList from './PetsList';
 import Appointments from './Appointments';
 import Menu from './menu';
 
@@ -13,8 +13,8 @@ const Admin = () => {
     <Stack mt="140px">
       <Menu activeItem={activeItem} setActiveItem={setActiveItem}>
         {activeItem === 'dashboard' && <Dashboard />}
-        {activeItem === 'clients' && <Clients />}
-        {activeItem === 'pets' && <Pets />}
+        {activeItem === 'clients' && <ClientsList />}
+        {activeItem === 'pets' && <PetsList />}
         {activeItem === 'appointments' && <Appointments />}
       </Menu>
     </Stack>
