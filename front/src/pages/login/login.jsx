@@ -48,7 +48,7 @@ const Login = () => {
   }, [isLogged, navigate]);
 
   const onLoginSuccess = async () => {
-    const url = 'http://localhost:5000/usuarios';
+    const url = 'https://pet-society-backend.herokuapp.com/usuarios';
 
     await axios
       .post(url, {
