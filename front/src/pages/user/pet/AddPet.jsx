@@ -96,24 +96,25 @@ const AddPet = () => {
 
           </ModalBody>
           <ModalFooter justifyContent='center' gap='5px' my='10px'>
-						<Button
-						fontFamily="Anek Bangla, sans-serif"
-						fontSize='0.8rem'
-						colorScheme="white"
-						color='#0B8CBF'
-						border='2px solid #0B8CBF'
-						size="xs"
-						borderRadius="full"
-						w='90px' 
-						onClick={onClose}>Cancel</Button>
+			<Button
+				fontFamily="Anek Bangla, sans-serif"
+				fontSize='0.8rem'
+				colorScheme="white"
+				color='#0B8CBF'
+				border='2px solid #0B8CBF'
+				size="xs"
+				borderRadius="full"
+				w='90px' 
+				onClick={onClose}>Cancel</Button>
             <Button 
-						fontFamily="Anek Bangla, sans-serif"
-						fontSize='0.8rem'
-						colorScheme="blue"
-						size="xs"
-						borderRadius="full"
-						w='90px' 
-						onClick={onClose}>Save</Button>
+				fontFamily="Anek Bangla, sans-serif"
+				fontSize='0.8rem'
+				colorScheme="blue"
+				size="xs"
+				borderRadius="full"
+				w='90px' 
+				onClick={onClose}>Save
+			</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
