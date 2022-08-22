@@ -9,6 +9,16 @@ export const getClientes = async (req, res) => {
     }
 }
 
+export const getCliente = async (req, res) => {
+    const cliente = req.params.cliente;
+    try {
+        const clienteEncontrado = await clienteModel.findOne({cliente});
+        res.status(200).json(clienteEncontrado);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
 export const createCliente = async (req, res) => {
     const cliente = req.body;
     const newCliente = new clienteModel(cliente);
