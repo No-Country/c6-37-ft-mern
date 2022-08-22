@@ -21,7 +21,7 @@ function ProfileContainer() {
           </Flex>
 
           <Flex direction="row">
-            <DatosCard title="Phone Number" text={state.phone} />
+            <DatosCard title="Phone Number" text={state.phoneNumber} />
             <DatosCard title="Email" text={state.email} />
           </Flex>
 

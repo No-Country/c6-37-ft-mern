@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-const DataTable = ({ title, data, handleSelect }) => {
+const DataTable = ({ title, columns, rows, handleSelect }) => {
 
   function handleClick(e) {
     console.log(e);
@@ -29,13 +29,13 @@ const DataTable = ({ title, data, handleSelect }) => {
         <Table variant="simple">
           <Thead>
             <Tr>
-              {data.columns.map((column) => (
+              {columns.map((column) => (
                 <Th key={column.key}>{column.title}</Th>
               ))}
             </Tr>
           </Thead>
           <Tbody>
-            {data.rows.map((row, index) => (
+            {rows.map((row, index) => (
               <Tr
                 key={index}
                 cursor="pointer"
@@ -46,7 +46,7 @@ const DataTable = ({ title, data, handleSelect }) => {
               >
                 {/* RECORRE CADA OBJETO, COMO SI FUERA UN ARRAY, ASI SE CONVIERTE EN UNA TABLA DINAMICA */}
                 {Object.keys(row).map((i) => (
-                  <Td key={i} value={row}>
+                  <Td key={i}>
                     <Text
                       fontFamily="Anek Bangla, sans-serif"
                       fontWeight="bold"

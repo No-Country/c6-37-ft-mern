@@ -35,7 +35,7 @@ const UserMenu = () => {
         _hover={{ bg: '#FFFFFF26' }}
         _active={{ bg: '#FFFFFF26' }}
       >
-        {user.name}
+        {user.name + ' ' +user.lastName}
       </MenuButton>
       <MenuList>
         <MenuItem gap="2" onClick={handleClick}>

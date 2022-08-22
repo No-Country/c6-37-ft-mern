@@ -8,7 +8,6 @@ import Login from '../../pages/login/Login';
 import Signup from '../../pages/signup/Signup';
 import Admin from '../../pages/admin/Admin';
 import PetShop from '../../pages/petshop/PetShop';
-import ClientProfile from './../../pages/admin/ClientProfile';
 
 const Routing = () => {
   return (
@@ -20,7 +19,6 @@ const Routing = () => {
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/client" element={<ClientProfile />} />
       </Route>
 
       <Route path="*" element={<NoMatchRoute />} />

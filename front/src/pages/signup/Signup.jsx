@@ -2,14 +2,11 @@ import {
   Box,
   Stack,
   Image,
-  Input,
   Heading,
   Button,
   Text,
-  Link,
-  InputGroup,
-  InputLeftElement,
   Flex,
+  useToast,
 } from '@chakra-ui/react';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { AiOutlinePhone } from 'react-icons/ai';
@@ -18,11 +15,58 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { MdPlace } from 'react-icons/md';
 import useUser from '../../hooks/useUser';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import InputChip from './../../components/InputChip';
+import axios from 'axios';
 
 function Signup() {
-  const { isLogged } = useUser();
+  const toast = useToast();
+  const { login, isLogged } = useUser();
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    address: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    const clientUrl = 'https://pet-society-backend.herokuapp.com/clientes';
+    const userUrl =
+      'https://pet-society-backend.herokuapp.com/usuarios/registrar';
+
+    await axios.post(clientUrl, user);
+    await axios.post(userUrl, {
+      usuario: user.email,
+      contrasena: user.password,
+      isAdmin: false,
+    });
+
+    axios
+      .all([clientUrl, userUrl])
+      .then(()=>{
+        toast({
+          title: 'Successfully Registered.',
+          status: 'success',
+          duration: 6000,
+          position: 'bottom-right',
+          isClosable: true,
+        })
+      })
+      .then(() => {
+        navigate('/login');
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     if (isLogged) {
@@ -69,129 +113,83 @@ function Signup() {
             SIGN UP
           </Heading>
 
-          <Stack flexDirection='column' gap={2}>
+          <Stack flexDirection="column" gap={2}>
             {/* Contenedor de name y lastName*/}
             <Flex justifyContent="center" gap="10px">
               {/* Contenedor de name*/}
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<BsFillPersonFill color="#cbd5e0" />}
-                />
-                <Input
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="full"
-                  placeholder="Name"
-                  fontFamily="Anek Bangla, sans-serif"
-                />
-              </InputGroup>
+              <InputChip
+                type="text"
+                name="name"
+                placeholder="Name"
+                handleChange={handleChange}
+                children={<BsFillPersonFill color="#718096" />}
+              />
 
               {/* Contenedor de lastName*/}
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<BsFillPersonFill color="#cbd5e0" />}
-                />
-                <Input
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="full"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Last Name"
-                />
-              </InputGroup>
+
+              <InputChip
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                handleChange={handleChange}
+                children={<BsFillPersonFill color="#718096" />}
+              />
             </Flex>
 
             {/* Contenedor de phone y email */}
             <Flex justifyContent="center" gap="10px">
               {/* Contenedor phone */}
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<AiOutlinePhone color="#cbd5e0" />}
-                  h="30px"
-                />
-                <Input
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="full"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Phone"
-                />
-              </InputGroup>
+
+              <InputChip
+                type="tel"
+                name="phoneNumber"
+                placeholder="Phone Number"
+                handleChange={handleChange}
+                children={<AiOutlinePhone color="#718096" />}
+              />
 
               {/* contenedor email */}
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<MdOutlineEmail color="#cbd5e0" />}
-                />
-                <Input
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="full"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Email"
-                />
-              </InputGroup>
+
+              <InputChip
+                type="email"
+                name="email"
+                placeholder="Email"
+                handleChange={handleChange}
+                children={<MdOutlineEmail color="#718096" />}
+              />
             </Flex>
 
             {/* Contenedor de Adress */}
 
-            <InputGroup>
-              <InputLeftElement
-                h="30px"
-                pointerEvents="none"
-                children={<MdPlace color="#cbd5e0" />}
-              />
-              <Input
-                h="30px"
-                bg="#ffffff"
-                borderRadius="full"
-                fontFamily="Anek Bangla, sans-serif"
-                placeholder="Address"
-              />
-            </InputGroup>
+            <InputChip
+              type="text"
+              name="address"
+              placeholder="Address"
+              handleChange={handleChange}
+              children={<MdPlace color="#718096" />}
+            />
 
             {/* Contenedor de password and repeat*/}
             <Flex justifyContent="center" gap="10px">
               {/* Contenedor de password*/}
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<RiLockPasswordLine color="#cbd5e0" />}
-                />
-                <Input
-                  type="password"
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="full"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Password"
-                />
-              </InputGroup>
+
+              <InputChip
+                type="password"
+                name="password"
+                placeholder="Password"
+                handleChange={handleChange}
+                children={<RiLockPasswordLine color="#718096" />}
+              />
 
               {/* Contenedor de repeat password*/}
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<RiLockPasswordLine color="#cbd5e0" />}
-                />
-                <Input
-                  type="password"
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="full"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Repeat Password"
-                />
-              </InputGroup>
+
+              <InputChip
+                type="password"
+                name="repeatPassword"
+                placeholder="Repeat Password"
+                handleChange={handleChange}
+                children={<RiLockPasswordLine color="#718096" />}
+              />
             </Flex>
           </Stack>
           <Button
@@ -199,7 +197,7 @@ function Signup() {
             mt="40px"
             size="sm"
             color="#0B8CBF"
-            onClick={() => {}}
+            onClick={handleSubmit}
           >
             Continue
           </Button>

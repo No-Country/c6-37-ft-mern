@@ -4,178 +4,176 @@ import { FiArrowLeft } from 'react-icons/fi';
 import DataTable from '../../components/table/dataTable';
 import SearchBar from './SearchBar';
 import PetProfileContainer from './../../components/admin/pet_profile/PetProfileContainer';
-let data = {
-  columns: [
-    { key: '1', title: 'Name' },
-    { key: '2', title: 'Owner' },
-    { key: '3', title: 'Specie' },
-    { key: '4', title: 'Breed' },
-  ],
-  rows: [
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-    {
-      name: 'Firulais',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Jack Russell Terrier',
-    },
-    {
-      name: 'Toby',
-      owner: 'Gomez Smith',
-      specie: 'Cat',
-      breed: 'Persian',
-    },
-    {
-      name: 'Dana',
-      owner: 'Doe Gonzales',
-      specie: 'Dog',
-      breed: 'Labrador',
-    },
-  ],
-};
+const columns = [
+  { key: '1', title: 'Name' },
+  { key: '2', title: 'Owner' },
+  { key: '3', title: 'Specie' },
+  { key: '4', title: 'Breed' },
+];
+const rows = [
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+  {
+    name: 'Firulais',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Jack Russell Terrier',
+  },
+  {
+    name: 'Toby',
+    owner: 'Gomez Smith',
+    specie: 'Cat',
+    breed: 'Persian',
+  },
+  {
+    name: 'Dana',
+    owner: 'Doe Gonzales',
+    specie: 'Dog',
+    breed: 'Labrador',
+  },
+];
 
 const PetsList = () => {
   const [selectedPet, setSelectedPet] = useState(null);
@@ -212,7 +210,8 @@ const PetsList = () => {
           >
             <SearchBar search={['name', 'owner']} />
             <DataTable
-              data={data}
+              columns={columns}
+              rows={rows}
               handleSelect={(pet) => handleSelect(pet)}
             />
           </Stack>
