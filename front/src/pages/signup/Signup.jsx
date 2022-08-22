@@ -2,14 +2,11 @@ import {
   Box,
   Stack,
   Image,
-  Input,
   Heading,
   Button,
   Text,
-  Link,
-  InputGroup,
-  InputLeftElement,
   Flex,
+  useToast,
 } from '@chakra-ui/react';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { AiOutlinePhone } from 'react-icons/ai';
@@ -18,11 +15,58 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { MdPlace } from 'react-icons/md';
 import useUser from '../../hooks/useUser';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import InputChip from './../../components/InputChip';
+import axios from 'axios';
 
 function Signup() {
-  const { isLogged } = useUser();
+  const toast = useToast();
+  const { login, isLogged } = useUser();
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    address: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    const clientUrl = 'https://pet-society-backend.herokuapp.com/clientes';
+    const userUrl =
+      'https://pet-society-backend.herokuapp.com/usuarios/registrar';
+
+    await axios.post(clientUrl, user);
+    await axios.post(userUrl, {
+      usuario: user.email,
+      contrasena: user.password,
+      isAdmin: false,
+    });
+
+    axios
+      .all([clientUrl, userUrl])
+      .then(()=>{
+        toast({
+          title: 'Successfully Registered.',
+          status: 'success',
+          duration: 6000,
+          position: 'bottom-right',
+          isClosable: true,
+        })
+      })
+      .then(() => {
+        navigate('/login');
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     if (isLogged) {
@@ -56,7 +100,8 @@ function Signup() {
         </Box>
 
         <Box
-          padding="10px"
+          py="10px"
+          px="20px"
           w={{ base: '100%', sm: '60%' }}
           h={{ base: '60%', sm: '100%' }}
           bg="#0B8CBF"
@@ -64,183 +109,95 @@ function Signup() {
           borderRightRadius={{ base: '0px', sm: '22px' }}
           align="center"
         >
-          <Heading color="white" size="lg" align="center" mt="40px" mb="40px">
+          <Heading color="white" size="lg" align="center" my="10">
             SIGN UP
           </Heading>
 
-          {/* Contenedor de name y lastName*/}
-          <Box
-            w="calc(100%/2 -10px)"
-            display="flex"
-            justifyContent="center"
-            gap="10px"
-          >
-            {/* Contenedor de name*/}
-            <Box>
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<BsFillPersonFill color="#cbd5e0" />}
-                />
-                <Input
-                  maxWidth="195px"
-                  w="100%"
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="23px"
-                  placeholder="Name"
-                  fontFamily="Anek Bangla, sans-serif"
-                />
-              </InputGroup>
-            </Box>
-
-            {/* Contenedor de lastName*/}
-            <Box>
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<BsFillPersonFill color="#cbd5e0" />}
-                />
-                <Input
-                  maxWidth="195px"
-                  w="100%"
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="23px"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Last Name"
-                />
-              </InputGroup>
-            </Box>
-          </Box>
-
-          {/* Contenedor de phone y email */}
-          <Box
-            w="calc(100%/2 -1px)"
-            display="flex"
-            justifyContent="center"
-            gap="10px"
-          >
-            {/* Contenedor phone */}
-            <Box>
-              <InputGroup h="30px">
-                <InputLeftElement
-                  h="70px"
-                  pointerEvents="none"
-                  children={<AiOutlinePhone color="#cbd5e0" />}
-                />
-                <Input
-                  h="30px"
-                  maxWidth="195px"
-                  mt="20px"
-                  bg="#ffffff"
-                  borderRadius="23px"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Phone"
-                />
-              </InputGroup>
-            </Box>
-
-            {/* contenedor email */}
-            <Box>
-              <InputGroup h="30px">
-                <InputLeftElement
-                  h="70px"
-                  pointerEvents="none"
-                  children={<MdOutlineEmail color="#cbd5e0" />}
-                />
-                <Input
-                  h="30px"
-                  maxWidth="195px"
-                  mt="20px"
-                  bg="#ffffff"
-                  borderRadius="23px"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Email"
-                />
-              </InputGroup>
-            </Box>
-          </Box>
-
-          {/* Contenedor de Adress */}
-
-          <Box w="100%" maxWidth="400px">
-            <InputGroup h="30px">
-              <InputLeftElement
-                h="110px"
-                pointerEvents="none"
-                children={<MdPlace color="#cbd5e0" />}
+          <Stack flexDirection="column" gap={2}>
+            {/* Contenedor de name y lastName*/}
+            <Flex justifyContent="center" gap="10px">
+              {/* Contenedor de name*/}
+              <InputChip
+                type="text"
+                name="name"
+                placeholder="Name"
+                handleChange={handleChange}
+                children={<BsFillPersonFill color="#718096" />}
               />
-              <Input
-                h="30px"
-                mt="40px"
-                bg="#ffffff"
-                borderRadius="23px"
-                fontFamily="Anek Bangla, sans-serif"
-                placeholder="Adress"
+
+              {/* Contenedor de lastName*/}
+
+              <InputChip
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                handleChange={handleChange}
+                children={<BsFillPersonFill color="#718096" />}
               />
-            </InputGroup>
-          </Box>
+            </Flex>
 
-          {/* Contenedor de password and repeat*/}
-          <Box
-            w="calc(100%/2 -10px)"
-            display="flex"
-            justifyContent="center"
-            gap="10px"
-            mt="60px"
-          >
-            {/* Contenedor de password*/}
-            <Box>
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<RiLockPasswordLine color="#cbd5e0" />}
-                />
-                <Input
-                  type="password"
-                  maxWidth="195px"
-                  w="100%"
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="23px"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Password"
-                />
-              </InputGroup>
-            </Box>
+            {/* Contenedor de phone y email */}
+            <Flex justifyContent="center" gap="10px">
+              {/* Contenedor phone */}
 
-            {/* Contenedor de repeat password*/}
-            <Box>
-              <InputGroup>
-                <InputLeftElement
-                  h="30px"
-                  pointerEvents="none"
-                  children={<RiLockPasswordLine color="#cbd5e0" />}
-                />
-                <Input
-                  type="password"
-                  maxWidth="195px"
-                  w="100%"
-                  h="30px"
-                  bg="#ffffff"
-                  borderRadius="23px"
-                  fontFamily="Anek Bangla, sans-serif"
-                  placeholder="Repeat Password"
-                />
-              </InputGroup>
-            </Box>
-          </Box>
+              <InputChip
+                type="tel"
+                name="phoneNumber"
+                placeholder="Phone Number"
+                handleChange={handleChange}
+                children={<AiOutlinePhone color="#718096" />}
+              />
 
+              {/* contenedor email */}
+
+              <InputChip
+                type="email"
+                name="email"
+                placeholder="Email"
+                handleChange={handleChange}
+                children={<MdOutlineEmail color="#718096" />}
+              />
+            </Flex>
+
+            {/* Contenedor de Adress */}
+
+            <InputChip
+              type="text"
+              name="address"
+              placeholder="Address"
+              handleChange={handleChange}
+              children={<MdPlace color="#718096" />}
+            />
+
+            {/* Contenedor de password and repeat*/}
+            <Flex justifyContent="center" gap="10px">
+              {/* Contenedor de password*/}
+
+              <InputChip
+                type="password"
+                name="password"
+                placeholder="Password"
+                handleChange={handleChange}
+                children={<RiLockPasswordLine color="#718096" />}
+              />
+
+              {/* Contenedor de repeat password*/}
+
+              <InputChip
+                type="password"
+                name="repeatPassword"
+                placeholder="Repeat Password"
+                handleChange={handleChange}
+                children={<RiLockPasswordLine color="#718096" />}
+              />
+            </Flex>
+          </Stack>
           <Button
             borderRadius="64"
             mt="40px"
             size="sm"
             color="#0B8CBF"
-            onClick={() => {}}
+            onClick={handleSubmit}
           >
             Continue
           </Button>

@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  Flex,
-  IconButton,
-  Image,
-  Text,
-} from '@chakra-ui/react';
+import { Flex, Image, Text } from '@chakra-ui/react';
 import useUser from './../../../hooks/useUser';
-import { BiEdit } from 'react-icons/bi';
+import EditProfile from '../Profile/EditProfile';
 
 const UserChip = () => {
   const { user } = useUser();
@@ -24,26 +19,27 @@ const UserChip = () => {
         boxSize="90px"
         borderRadius="full"
       />
-      <Flex direction="column">
-        <Text fontSize="2xl" fontWeight="bold" >
+      <Flex direction="column" flex='1'>
+        <Text fontSize="2xl" fontWeight="bold">
           {user.name}
         </Text>
-        <Text fontSize="xs" fontFamily='Anek Bangla, sans-serif' color="rgba(0,0,0,.5)">
+        <Text
+          fontSize="xs"
+          fontFamily="Anek Bangla, sans-serif"
+          color="rgba(0,0,0,.5)"
+        >
           {user.phone}
         </Text>
-        <Text fontSize="xs" fontFamily='Anek Bangla, sans-serif' color="rgba(0,0,0,.5)">
+        <Text
+          fontSize="xs"
+          fontFamily="Anek Bangla, sans-serif"
+          color="rgba(0,0,0,.5)"
+        >
           {user.address}
         </Text>
       </Flex>
       <Flex alignSelf="flex-start" justifySelf="flex-end">
-        <IconButton
-          aria-label="Edit Profile"
-          icon={<BiEdit fontSize="18px" />}
-          size="sm"
-          colorScheme="blue"
-          color="white"
-          borderRadius="full"
-        />
+        <EditProfile />
       </Flex>
     </Flex>
   );

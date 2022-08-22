@@ -1,0 +1,37 @@
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  name: '',
+  lastName: '',
+  phoneNumber: '',
+  email: '',
+  address: '',
+  imgUrl: '',
+  editable: false,
+};
+
+export const userDataSlice = createSlice({
+  name: 'userData',
+  initialState,
+  reducers: {
+    setUserData: (state, action) => {
+      const { name, lastName, email, address, phoneNumber } = action.payload;
+      state.name = name;
+      state.lastName = lastName;
+      state.email = email;
+      state.address = address;
+      state.phoneNumber = phoneNumber;
+      state.editable = false;
+    },
+    delUserData: (state) => {
+      // consulta la db
+    },
+    setEditable: (state) => {
+      state.editable = !state.editable;
+    },
+  },
+});
+
+export const { setUserData, delUserData, setEditable } = userDataSlice.actions;
+
+export default userDataSlice.reducer;

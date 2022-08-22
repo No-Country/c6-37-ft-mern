@@ -1,46 +1,105 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
   Flex,
+  FormControl,
   Heading,
   Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Stack,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import useUser from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineEmail } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { Link as RouterLink } from 'react-router-dom';
-
-let user = {
-  id: '1',
-  name: 'John Doe',
-  imgUrl: 'https://bit.ly/dan-abramov',
-  phone: '+01 984 039 492',
-  address: 'Contoso Ltd 215 E Tasman CA San Jose',
-};
+import axios from 'axios';
+import InputChip from '../../components/InputChip';
 
 const Login = () => {
+  const toast = useToast();
   const { login, isLogged } = useUser();
+  const [user, setUser] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  let isNameError = false;
+  let isPasswordError = false;
+
+  const handleSubmit = async () => {
+    if (user.email === '' || user.password === '') {
+      toast({
+        title: 'Error',
+        description: 'Please fill all fields',
+        status: 'error',
+        duration: 9000,
+        position: 'bottom-right',
+        isClosable: true,
+      });
+      return;
+    }
+
+    const url = 'https://pet-society-backend.herokuapp.com/usuarios';
+
+    await axios
+      .post(url, {
+        usuario: user.email,
+        contrasena: user.password,
+      })
+      .then((res) =>
+        toast({
+          title: 'Welcome.',
+          status: 'success',
+          duration: 6000,
+          position: 'bottom-right',
+          isClosable: true,
+        })
+      )
+      .then(() => getClient())
+      .catch((error) =>
+        toast({
+          title: error.response.data.mesagge,
+          description: 'Please try Again.',
+          status: 'error',
+          duration: 6000,
+          position: 'bottom-right',
+          isClosable: true,
+        })
+      );
+  };
+
+  const getClient = async () => {
+    const url = 'https://pet-society-backend.herokuapp.com/clientes';
+
+    await axios
+      .get(url)
+      .then((res) => {
+        login(res.data.find((client) => client.email === user.email));
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     if (isLogged) {
-      navigate('/dashboard');
+      navigate('/admin');
     }
   }, [isLogged, navigate]);
 
-  const onLoginSuccess = () => {
-    login(user);
-  };
-
   return (
-    <Flex justifyContent="center" alignItems="center" margin='auto 0' pt='160px'>
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      margin="auto 0"
+      pt="160px"
+    >
       <Stack
         spacing="0px"
         direction={{ base: 'column', sm: 'row' }}
@@ -75,54 +134,60 @@ const Login = () => {
           borderRightRadius={{ sm: '22px', base: '0px' }}
           align="center"
         >
-          <Heading color="white" size="lg" align="center" mt="50px" mb="40px">
+          <Heading color="white" size="lg" align="center" my="50px">
             WELCOME BACK!
           </Heading>
 
-          <InputGroup w="195px" h="30px">
-            <InputLeftElement
-              h="30px"
-              pointerEvents="none"
+          <FormControl
+            isInvalid={isNameError}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            w="220px"
+          >
+            <InputChip
+              type="text"
+              name="email"
+              placeholder="Email"
+              handleChange={handleChange}
               children={<MdOutlineEmail color="#718096" />}
             />
-            <Input
-              className="inputEmail"
-              w="195px"
-              h="30px"
-              bg="#ffffff"
-              borderRadius="23px"
-              placeholder="Email"
-              fontFamily="Anek Bangla, sans-serif"
-            />
-          </InputGroup>
-
-          <InputGroup w="195px" h="30px">
-            <InputLeftElement
-              h="87px"
-              pointerEvents="none"
+          </FormControl>
+          <FormControl
+            isInvalid={isPasswordError}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            w="220px"
+            mt="30px"
+          >
+            <InputChip
+              type="password"
+              name="password"
+              placeholder="Password"
+              handleChange={handleChange}
               children={<RiLockPasswordLine color="#718096" />}
             />
-            <Input
-              type="password"
-              h="30px"
-              w="195px"
-              mt="30px"
-              bg="#ffffff"
-              borderRadius="23px"
-              placeholder="Password"
-              fontFamily="Anek Bangla, sans-serif"
-            />
-          </InputGroup>
+          </FormControl>
 
-          <br />
-
-          <Button borderRadius="64" mt="40px" size="sm" color="#0B8CBF" onClick={onLoginSuccess}>
+          <Button
+            borderRadius="64"
+            mt="30px"
+            size="sm"
+            color="#0B8CBF"
+            onClick={handleSubmit}
+          >
             Continue
           </Button>
 
           <Text mt="30px" color="#fff" fontWeight="300">
             Don't you have an account?
-            <Text as={RouterLink} to="/signup" fontWeight="bold" display='block'>
+            <Text
+              as={RouterLink}
+              to="/signup"
+              fontWeight="bold"
+              display="block"
+            >
               Sign Up
             </Text>
           </Text>
