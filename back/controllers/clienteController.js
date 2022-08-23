@@ -10,9 +10,9 @@ export const getClientes = async (req, res) => {
 }
 
 export const getCliente = async (req, res) => {
-    const email = req.params.email;
+    const {_id} = req.params;
     try {
-        const clienteEncontrado = await clienteModel.findOne({email});
+        const clienteEncontrado = await clienteModel.findOne({_id});
         res.status(200).json(clienteEncontrado);
     } catch (error) {
         res.status(404).json({message: error.message});
@@ -31,11 +31,21 @@ export const createCliente = async (req, res) => {
 }
 
 export const deleteCliente = async (req, res) => {
-    const email = req.params.email;
+    const {_id} = req.params;
     try {
-        await clienteModel.deleteOne({email});
+        await clienteModel.deleteOne({_id});
         res.status(200).json({message: 'Deleted'});
     } catch (error) {
         res.status(404).json({message: error.message});
     }
+}
+
+export const updateCliente = async (req, res) => {
+    const {_id} = req.params
+    const obj = req.body
+    try {
+        const editClient = await clienteModel.updateOne({_id}, {...obj})
+        const updatedClient = await clienteModel.findOne({_id})
+        res.status(200).json({message: 'updated', status: editClient, updatedClient})
+    }catch(err){res.status(400).json({message: err.message})}
 }

@@ -11,7 +11,7 @@ export const getById = async (req, res) => {
   const _id = req.params._id;
   try {
     const findPet = await petModel.findOne({_id})
-    res.status(200).json({pet: findPet})
+    res.status(200).json( findPet)
   }catch(err){
     res.status(404).json({message: err.message})
   }
@@ -33,5 +33,15 @@ export const deletePet = async (req, res) => {
   try {
     await petModel.deleteOne({_id});
     res.status(200).json({message: 'Deleted'})
+  } catch(err){res.status(400).json({message: err.message})}
+}
+
+export const updatePet = async (req, res) => {
+  const { _id } = req.params;
+  const obj = req.body;
+  try {
+    const editPet = await petModel.updateOne({_id}, {...obj})
+    const updatedPet = await petModel.findOne({_id})
+    res.status(200).json({message: 'updated', status: editPet , updatedPet} )
   } catch(err){res.status(400).json({message: err.message})}
 }
