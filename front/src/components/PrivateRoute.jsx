@@ -1,10 +1,9 @@
-import useUser from './../hooks/useUser';
 import { Navigate, Outlet, Route } from 'react-router-dom';
 
-const PrivateRoute = ({redirectPath='/login' }) => {
-  const { isLogged } = useUser();
+const PrivateRoute = ({redirectPath='/login', isAllowed }) => {
 
-  if (!isLogged) {
+
+  if (!isAllowed) {
     return <Navigate to={redirectPath} replace />; 
   }
 

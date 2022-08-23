@@ -31,6 +31,7 @@ const Navbar = () => {
       bgColor={scroll ? '#0B8CBF' : 'transparent'}
       borderRadius="0 0 20px 20px"
       zIndex={20}
+      transition = "all linear 0.3s"
     >
       <Flex as={RouterLink} to="/" w="150px">
         <Image src="/assets/logo.png" alt="logo" w="75px" />

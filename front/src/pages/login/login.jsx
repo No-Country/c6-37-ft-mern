@@ -20,13 +20,14 @@ import InputChip from '../../components/InputChip';
 
 const Login = () => {
   const toast = useToast();
-  const { login, isLogged } = useUser();
-  const [user, setUser] = useState({ email: '', password: '' });
+  const { login, isLogged, isAdmin } = useUser();
+  const [userInputs, setUserInputs] = useState({ email: '', password: '' });
+  const [user, setUser] = useState();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setUser({
-      ...user,
+    setUserInputs({
+      ...userInputs,
       [e.target.name]: e.target.value,
     });
   };
@@ -35,7 +36,7 @@ const Login = () => {
   let isPasswordError = false;
 
   const handleSubmit = async () => {
-    if (user.email === '' || user.password === '') {
+    if (userInputs.email === '' || userInputs.password === '') {
       toast({
         title: 'Error',
         description: 'Please fill all fields',
@@ -47,24 +48,27 @@ const Login = () => {
       return;
     }
 
-    const url = 'https://pet-society-backend.herokuapp.com/usuarios';
+    // const url = 'https://pet-society-backend.herokuapp.com/usuarios';
+    const url = 'http://localhost:5000/usuarios';
 
     await axios
       .post(url, {
-        usuario: user.email,
-        contrasena: user.password,
+        usuario: userInputs.email,
+        contrasena: userInputs.password,
       })
-      .then((res) =>
+      .then((res) => {
+        setUser(res.data);
+
         toast({
-          title: 'Welcome.',
+          title: `Welcome.`,
           status: 'success',
           duration: 6000,
           position: 'bottom-right',
           isClosable: true,
-        })
-      )
-      .then(() => getClient())
+        });
+      })
       .catch((error) =>
+        // console.log(error)
         toast({
           title: error.response.data.mesagge,
           description: 'Please try Again.',
@@ -77,21 +81,35 @@ const Login = () => {
   };
 
   const getClient = async () => {
-    const url = 'https://pet-society-backend.herokuapp.com/clientes';
+    // const url = 'https://pet-society-backend.herokuapp.com/clientes/';
+    const url = 'http://localhost:5000/clientes/';
 
     await axios
-      .get(url)
+      .get(url + user.usuario)
       .then((res) => {
-        login(res.data.find((client) => client.email === user.email));
+        let data = { ...res.data, isAdmin: user.isAdmin };
+        login(data);
       })
       .catch((error) => console.log(error));
   };
 
+  const createProfile = () => {
+    let data = {
+      name: 'Administrator',
+      lastName: '',
+      email: '',
+      password: '',
+      address: '',
+      phoneNumber: '',
+      isAdmin: true,
+    };
+    login(data);
+  };
+
   useEffect(() => {
-    if (isLogged) {
-      navigate('/admin');
-    }
-  }, [isLogged, navigate]);
+    isLogged && (isAdmin ? navigate('/admin') : navigate('/dashboard'));
+    user && (user.isAdmin ? createProfile() : getClient());
+  }, [isLogged, user]);
 
   return (
     <Flex
