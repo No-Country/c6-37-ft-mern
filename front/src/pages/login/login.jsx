@@ -17,6 +17,7 @@ import { RiLockPasswordLine } from 'react-icons/ri';
 import { Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
 import InputChip from '../../components/InputChip';
+import { getUsers } from '../../services/users'
 
 const Login = () => {
   const toast = useToast();
@@ -57,6 +58,7 @@ const Login = () => {
         contrasena: userInputs.password,
       })
       .then((res) => {
+        
         setUser(res.data);
 
         toast({
@@ -110,6 +112,11 @@ const Login = () => {
     isLogged && (isAdmin ? navigate('/admin') : navigate('/dashboard'));
     user && (user.isAdmin ? createProfile() : getClient());
   }, [isLogged, user]);
+
+  useEffect(() => {
+    getUsers()
+    .then(data => console.log(data))
+  }, [])
 
   return (
     <Flex
