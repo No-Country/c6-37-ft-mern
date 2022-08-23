@@ -6,6 +6,6 @@ const appointmentSchema = mongoose.Schema({
     pet: String
 })
 
-const clienteModel = mongoose.model('clienteModel', appointmentSchema);
+const appointmentModel = mongoose.model('appointmentModel', appointmentSchema);
 
-export default appointmentSchema;
+export default appointmentModel;

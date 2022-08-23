@@ -1,19 +1,19 @@
-import petModel from '../models/petModel'
+import petModel from '../models/petModel.js'
 
 export const getPets = async (req, res) => {
  try {
   const pets = await petModel.find()
   res.status(200).json(pets)
- } catch(err){res.status(404).res.json({message: err.message})}
+ } catch(err){res.status(404).json({message: err.message})}
 }
 
 export const getById = async (req, res) => {
   const _id = req.params._id;
   try {
     const findPet = await petModel.findOne({_id})
-    res.status(200).res.json({pet: findPet})
+    res.status(200).json({pet: findPet})
   }catch(err){
-    res.status(404).res.json({message: err.message})
+    res.status(404).json({message: err.message})
   }
 }
 
@@ -32,6 +32,6 @@ export const deletePet = async (req, res) => {
   const _id = req.params._id
   try {
     await petModel.deleteOne({_id});
-    res.status(200).res.json({message: 'deleted'})
-  } catch(err){res.status(400).res.json({message: err.message})}
+    res.status(200).json({message: 'Deleted'})
+  } catch(err){res.status(400).json({message: err.message})}
 }

@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getAppointments, getAppointment, createAppointment, deleteAppointment } from '../controllers/AppointmentController.js';
+import { getAppointments, getAppointment, createAppointment, deleteAppointment } from '../controllers/appointmentController.js';
 
 const router = express.Router();
 
