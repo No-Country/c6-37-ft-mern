@@ -6,7 +6,7 @@ const Shifts = (props) => {
   return (
 
       <Flex justifyContent="flex-start" gap='12px'>
-            <MdOutlinePets fontWeight="bold" fontSize="1.2rem" />
+            <MdOutlinePets fontWeight="bold" fontSize="5px" />
             <Text
               fontFamily="Anek Bangla, sans-serif"
               fontWeight="bold"

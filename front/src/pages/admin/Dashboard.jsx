@@ -166,7 +166,7 @@ const Dashboard = () => {
 
   return (
     <Stack gap="48px">
-      <Heading>Welcome Dr. {user.name}</Heading>
+      <Heading>Welcome</Heading>
       <Stack>
         <Grid templateColumns="repeat(3, 1fr)" gap="16px">
           {chipItems.map((item, index) => (

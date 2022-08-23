@@ -16,11 +16,11 @@ import { useNavigate } from 'react-router-dom';
 import { MdOutlineSpaceDashboard } from 'react-icons/md';
 
 const UserMenu = () => {
-  const { user, logout } = useUser();
+  const { user, logout, isAdmin } = useUser();
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/dashboard');
+    isAdmin ? navigate('/admin') : navigate('/dashboard');
   };
 
   return (
@@ -35,7 +35,7 @@ const UserMenu = () => {
         _hover={{ bg: '#FFFFFF26' }}
         _active={{ bg: '#FFFFFF26' }}
       >
-        {user.name + ' ' +user.lastName}
+        {user.name && user.name}  {user.lastName && user.lastName}
       </MenuButton>
       <MenuList>
         <MenuItem gap="2" onClick={handleClick}>

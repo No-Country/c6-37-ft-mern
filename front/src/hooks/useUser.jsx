@@ -16,7 +16,8 @@ const useUser = () => {
   }, [setUser, localStorage]);
 
   return {
-    isLogged: Boolean(user),
+    isLogged: !!user,
+    isAdmin: user && user.isAdmin,
     user: user,
     login,
     logout,

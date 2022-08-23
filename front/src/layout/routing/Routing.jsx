@@ -8,19 +8,23 @@ import Login from '../../pages/login/Login';
 import Signup from '../../pages/signup/Signup';
 import Admin from '../../pages/admin/Admin';
 import PetShop from '../../pages/petshop/PetShop';
+import useUser from '../../hooks/useUser';
 
 const Routing = () => {
+  const { isLogged, isAdmin } = useUser();
+
   return (
     <Routes>
       <Route index element={<Landing />} />
       <Route path="/petshop" element={<PetShop />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route element={<PrivateRoute />}>
+      <Route element={<PrivateRoute isAllowed={isLogged & !isAdmin} />}>
         <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+      <Route element={<PrivateRoute isAllowed={isAdmin} redirectPath="/" />}>
         <Route path="/admin" element={<Admin />} />
       </Route>
-
       <Route path="*" element={<NoMatchRoute />} />
     </Routes>
   );

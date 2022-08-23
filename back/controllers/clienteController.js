@@ -10,9 +10,9 @@ export const getClientes = async (req, res) => {
 }
 
 export const getCliente = async (req, res) => {
-    const cliente = req.params.cliente;
+    const email = req.params.email;
     try {
-        const clienteEncontrado = await clienteModel.findOne({cliente});
+        const clienteEncontrado = await clienteModel.findOne({email});
         res.status(200).json(clienteEncontrado);
     } catch (error) {
         res.status(404).json({message: error.message});
