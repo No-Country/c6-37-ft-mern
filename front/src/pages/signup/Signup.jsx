@@ -18,10 +18,13 @@ import useUser from '../../hooks/useUser';
 import { useEffect, useState } from 'react';
 import InputChip from './../../components/InputChip';
 import axios from 'axios';
+import SignUpForm from './SignUpForm';
+import { createClient } from '../../services/clients';
+import { createUser } from '../../services/users';
 
 function Signup() {
   const toast = useToast();
-  const { login, isLogged } = useUser();
+  const { isLogged } = useUser();
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: '',
@@ -39,21 +42,10 @@ function Signup() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    const clientUrl = 'https://pet-society-backend.herokuapp.com/clientes';
-    const userUrl =
-      'https://pet-society-backend.herokuapp.com/usuarios/registrar';
+  const handleSubmit = async () => {
 
-    await axios.post(clientUrl, user);
-    await axios.post(userUrl, {
-      usuario: user.email,
-      contrasena: user.password,
-      isAdmin: false,
-    });
-
-    axios
-      .all([clientUrl, userUrl])
-      .then(()=>{
+    await createUser(user).then(()=>{
+      createClient(user).catch((error) => console.log(error));
         toast({
           title: 'Successfully Registered.',
           status: 'success',
@@ -69,147 +61,12 @@ function Signup() {
   };
 
   useEffect(() => {
-    if (isLogged) {
-      navigate('/dashboard');
-    }
-  }, [isLogged, navigate]);
+    isLogged && (isAdmin ? navigate('/admin') : navigate('/dashboard'));
+  }, [isLogged]);
 
   return (
     <Flex justifyContent="center" alignItems="center" m="auto" pt="160px">
-      <Stack
-        spacing="0px"
-        direction={{ base: 'column', sm: 'row' }}
-        w={{ base: '440px', sm: '740px' }}
-        h={{ base: '780px', sm: '470px' }}
-        borderRadius="22px"
-        boxShadow="5px 5px 15px 0px gray"
-      >
-        <Box
-          w={{ base: '100%', sm: '40%' }}
-          h={{ base: '40%', sm: '100%' }}
-          borderLeftRadius={{ base: '0px', sm: '22px' }}
-          // borderTopRadius={{ base: "22px", sm: "0pxpx" }}
-        >
-          <Image
-            src="/assets/signup_bg.jpg"
-            boxSize="470px"
-            objectFit="cover"
-            borderLeftRadius={{ base: '0px', sm: '22px' }}
-            // borderTopRadius={{ base: "22px", sm: "0pxpx" }}
-          />
-        </Box>
-
-        <Box
-          py="10px"
-          px="20px"
-          w={{ base: '100%', sm: '60%' }}
-          h={{ base: '60%', sm: '100%' }}
-          bg="#0B8CBF"
-          // borderBottomRadius={{ base:"22px", sm: "0px" }}
-          borderRightRadius={{ base: '0px', sm: '22px' }}
-          align="center"
-        >
-          <Heading color="white" size="lg" align="center" my="10">
-            SIGN UP
-          </Heading>
-
-          <Stack flexDirection="column" gap={2}>
-            {/* Contenedor de name y lastName*/}
-            <Flex justifyContent="center" gap="10px">
-              {/* Contenedor de name*/}
-              <InputChip
-                type="text"
-                name="name"
-                placeholder="Name"
-                handleChange={handleChange}
-                children={<BsFillPersonFill color="#718096" />}
-              />
-
-              {/* Contenedor de lastName*/}
-
-              <InputChip
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                handleChange={handleChange}
-                children={<BsFillPersonFill color="#718096" />}
-              />
-            </Flex>
-
-            {/* Contenedor de phone y email */}
-            <Flex justifyContent="center" gap="10px">
-              {/* Contenedor phone */}
-
-              <InputChip
-                type="tel"
-                name="phoneNumber"
-                placeholder="Phone Number"
-                handleChange={handleChange}
-                children={<AiOutlinePhone color="#718096" />}
-              />
-
-              {/* contenedor email */}
-
-              <InputChip
-                type="email"
-                name="email"
-                placeholder="Email"
-                handleChange={handleChange}
-                children={<MdOutlineEmail color="#718096" />}
-              />
-            </Flex>
-
-            {/* Contenedor de Adress */}
-
-            <InputChip
-              type="text"
-              name="address"
-              placeholder="Address"
-              handleChange={handleChange}
-              children={<MdPlace color="#718096" />}
-            />
-
-            {/* Contenedor de password and repeat*/}
-            <Flex justifyContent="center" gap="10px">
-              {/* Contenedor de password*/}
-
-              <InputChip
-                type="password"
-                name="password"
-                placeholder="Password"
-                handleChange={handleChange}
-                children={<RiLockPasswordLine color="#718096" />}
-              />
-
-              {/* Contenedor de repeat password*/}
-
-              <InputChip
-                type="password"
-                name="repeatPassword"
-                placeholder="Repeat Password"
-                handleChange={handleChange}
-                children={<RiLockPasswordLine color="#718096" />}
-              />
-            </Flex>
-          </Stack>
-          <Button
-            borderRadius="64"
-            mt="40px"
-            size="sm"
-            color="#0B8CBF"
-            onClick={handleSubmit}
-          >
-            Continue
-          </Button>
-
-          <Text mt="30px" color="#fff" fontWeight="300">
-            Do you have an account?{' '}
-            <Text as={RouterLink} to="/login" fontWeight="bold" display="block">
-              Login
-            </Text>
-          </Text>
-        </Box>
-      </Stack>
+      <SignUpForm handleChange={handleChange} handleSubmit={handleSubmit} />
     </Flex>
   );
 }

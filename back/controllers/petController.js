@@ -7,7 +7,7 @@ export const getPets = async (req, res) => {
  } catch(err){res.status(404).json({message: err.message})}
 }
 
-export const getById = async (req, res) => {
+export const getPet = async (req, res) => {
   const _id = req.params._id;
   try {
     const findPet = await petModel.findOne({_id})
