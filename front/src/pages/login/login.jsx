@@ -4,8 +4,8 @@ import useUser from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LoginForm from './LoginForm';
-import { getUser } from './../../services/users';
-import { getClient } from './../../services/clients';
+import { getUser } from '../../services/users';
+import { getClient } from '../../services/clients';
 
 const Login = () => {
   const toast = useToast();
@@ -59,7 +59,7 @@ const Login = () => {
   };
 
   const getClientData = async () => {
-    await getClient(user)
+    await getClient(user.usuario)
       .then((res) => {
         login(res.data);
       })
