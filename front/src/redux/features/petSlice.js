@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  id:'',
-  name:'Firulais',
-  specie:'dog',
-  size:'mini',
-  breed:'jack russel',
-  birth:'03/16/18',
-  sex:'male',
-  weight:'12.5 kg',
-  imgUrl:'https://www.petdarling.com/wp-content/uploads/2014/08/perros-jack-russell-terrier.jpg',
-  note:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes',
+  name:'',
+  specie:'',
+  size:'',
+  breed:'',
+  birth:'',
+  sex:'',
+  weight:'',
+  imgUrl:'',
+  note:'',
+  owner:'',
   editable: false
 }
 
@@ -18,15 +18,14 @@ const petSlice = createSlice({
   name:'petData',
   initialState,
   reducers: {
-    editInfo: (state) => {
+    editPetData: (state) => {
       state.editable = !state.editable
     },
-    delInfo: (state, action) => {
+    delPetData: (state, action) => {
       state = action.payload
     },
-    updateInfo: (state, action) => {
-      const {id, name, specie, size, breed, sex, birth, weight, note} = action.payload
-      state.id = id;
+    setPetData: (state, action) => {
+      const {name, specie, size, breed, sex, birth, weight, note, owner} = action.payload
       state.name = name;
       state.specie = specie;
       state.size = size;  
@@ -35,11 +34,12 @@ const petSlice = createSlice({
       state.birth = birth;
       state.weight = weight;
       state.note = note;
+      state.owner = owner;
       state.editable = false;
     }
   }
 })
 
-export const { editInfo, delInfo, updateInfo } = petSlice.actions;
+export const { editPetData, delPetData, setPetData } = petSlice.actions;
 
 export default petSlice.reducer;

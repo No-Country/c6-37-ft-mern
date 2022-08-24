@@ -1,16 +1,18 @@
 import React from 'react';
 import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  Heading,
-  Image,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
-
-const LoginForm = () => {
+    Box,
+    Button,
+    FormControl,
+    Heading,
+    Image,
+    Stack,
+    Text,
+  } from '@chakra-ui/react';
+  import { MdOutlineEmail } from 'react-icons/md';
+  import { RiLockPasswordLine } from 'react-icons/ri';
+  import { Link as RouterLink } from 'react-router-dom';
+  import InputChip from '../../components/InputChip';
+const LoginForm = ({handleChange, handleSubmit}) => {
   return (
     <Stack
       spacing="0px"
@@ -51,7 +53,6 @@ const LoginForm = () => {
         </Heading>
 
         <FormControl
-          isInvalid={isNameError}
           display="flex"
           flexDirection="column"
           alignItems="center"
@@ -66,7 +67,6 @@ const LoginForm = () => {
           />
         </FormControl>
         <FormControl
-          isInvalid={isPasswordError}
           display="flex"
           flexDirection="column"
           alignItems="center"

@@ -5,9 +5,9 @@ import { updateCliente, getClientes, getCliente, createCliente, deleteCliente } 
 const router = express.Router();
 
 router.get('/', getClientes);
-router.get('/:_id', getCliente);
+router.get('/:email', getCliente);
 router.post('/', createCliente);
 router.delete('/:_id', deleteCliente);
-router.put('/:_id', updateCliente);
+router.put('/:email', updateCliente);
 
 export default router;
