@@ -195,7 +195,10 @@ const PetsList = () => {
     await getClient(petData.owner).then((client) => (clientData = client.data));
 
     console.log(petData);
+    console.log(clientData);
+
     setSelectedPet(petData);
+    setSelectedClient(clientData);
 
   };
 

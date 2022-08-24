@@ -7,8 +7,8 @@ export const getPets = async () => {
   return resp;
 };
 
-export const getPet = async ({ id }) => {
-  const resp = await axios.post(URL, { _id: id });
+export const getPet = async (_id ) => {
+  const resp = await axios.get(URL + _id);
   return resp;
 };
 

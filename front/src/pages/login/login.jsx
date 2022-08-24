@@ -4,8 +4,10 @@ import useUser from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LoginForm from './LoginForm';
-import { getUser } from '../../services/users';
+import { getUser, getUsers } from '../../services/users';
 import { getClient } from '../../services/clients';
+
+
 
 const Login = () => {
   const toast = useToast();
@@ -22,18 +24,18 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
-    if (userInputs.email === '' || userInputs.password === '') {
-      toast({
-        title: 'Error',
-        description: 'Please fill all fields',
-        status: 'error',
-        duration: 9000,
-        position: 'bottom-right',
-        isClosable: true,
-      });
+    // if (userInputs.email === '' || userInputs.password === '') {
+    //   toast({
+    //     title: 'Error',
+    //     description: 'Please fill all fields',
+    //     status: 'error',
+    //     duration: 9000,
+    //     position: 'bottom-right',
+    //     isClosable: true,
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
     await getUser(userInputs)
       .then((res) => {
@@ -87,7 +89,6 @@ const Login = () => {
 
   useEffect(() => {
     getUsers()
-    .then(data => console.log(data))
   }, [])
 
   return (
@@ -97,7 +98,7 @@ const Login = () => {
       margin="auto 0"
       pt="160px"
     >
-      <LoginForm handleChange={handleChange} handleSubmit={handleSubmit} />
+      <LoginForm handleChangeLogin={handleChange} handleSubmitLogin={handleSubmit} />
     </Flex>
   );
 };
