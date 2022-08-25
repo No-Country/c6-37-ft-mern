@@ -8,12 +8,9 @@ import {
   Flex,
   Grid,
   GridItem,
-  IconButton,
   Text,
 } from '@chakra-ui/react';
-import { MdDelete } from 'react-icons/md';
-import EditPet from '../pet/EditPet';
-import { useEffect } from 'react';
+import EditPet from './../pet/EditPet';
 import DeletePetButton from './DeletePetButton';
 
 const PetChip = ({ pet,refresh, setRefresh }) => {

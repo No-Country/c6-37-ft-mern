@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { AiOutlineCaretDown } from 'react-icons/ai';
 import { BiLogOut } from 'react-icons/bi';
-import useUser from '../hooks/useUser';
+import useUser from './../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineSpaceDashboard } from 'react-icons/md';
 

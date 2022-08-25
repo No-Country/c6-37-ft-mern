@@ -1,5 +1,5 @@
 import {Stack, VStack} from '@chakra-ui/react'
-import ScrollAppointments from '../ScrollAppointments'
+import ScrollAppointments from './../ScrollAppointments'
 import OwnerCont from './owner/OwnerCont'
 import PetProfile from './pet/PetProfile'
 

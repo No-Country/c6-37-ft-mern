@@ -4,7 +4,7 @@ import DeleteIcon from './DeleteIcon'
 import { useState } from 'react'
 import ButtonsForm from './ButtonsForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEditable, setUserData } from '../../../redux/features/userSlice'
+import { setEditable, setUserData } from './../../../redux/features/userSlice'
 import { v4 as uuid } from 'uuid'
 
 function EditableProfile() {
@@ -21,7 +21,6 @@ function EditableProfile() {
     }
   )
 
-  // const obj = JSON.parse(localStorage.getItem('user'))
   const obj = useSelector(state => state.userData)
   const dispatch = useDispatch()
 

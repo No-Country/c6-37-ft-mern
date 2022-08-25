@@ -1,21 +1,13 @@
 import {
   Box,
-  Button,
   Stack,
   Text,
   Link,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
 } from "@chakra-ui/react";
 import React from "react";
 import { BsFillXCircleFill, BsPlus } from "react-icons/bs";
-import { MdOutlinePets } from "react-icons/md";
-import NewAppointment from "../appointments/NewApointment";
-import Shifts from "../appointments/Shifts";
+import NewAppointment from "./../appointments/NewApointment";
+import Shifts from "./../appointments/Shifts";
 
 
 function NextShifts() {

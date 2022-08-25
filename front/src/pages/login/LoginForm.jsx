@@ -11,7 +11,7 @@ import {
   import { MdOutlineEmail } from 'react-icons/md';
   import { RiLockPasswordLine } from 'react-icons/ri';
   import { Link as RouterLink } from 'react-router-dom';
-  import InputChip from '../../components/InputChip';
+  import InputChip from './../../components/InputChip';
 const LoginForm = ({handleChange, handleSubmit}) => {
   return (
     <Stack

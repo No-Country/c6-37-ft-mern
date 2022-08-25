@@ -1,8 +1,8 @@
 import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import DataTable from '../../components/table/dataTable';
-import useUser from '../../hooks/useUser';
+import DataTable from './../../components/table/dataTable';
+import useUser from './../../hooks/useUser';
 import CounterChip from './CounterChip';
 
 const columns = [

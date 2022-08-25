@@ -1,13 +1,13 @@
 import { Button, Heading, Stack, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import DataTable from '../../components/table/dataTable';
+import DataTable from './../../components/table/dataTable';
 import { FiArrowLeft } from 'react-icons/fi';
 import SearchBar from './SearchBar';
 import ClientProfile from './ClientProfile';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUserData } from '../../redux/features/userSlice';
-import { getClient, getClients } from '../../services/clients';
+import { useDispatch } from 'react-redux';
+import { setUserData } from './../../redux/features/userSlice';
+import { getClient, getClients } from './../../services/clients';
 
 const columns = [
   { key: 'name', title: 'Name' },

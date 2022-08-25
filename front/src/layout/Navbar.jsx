@@ -1,7 +1,7 @@
 import { Button, Flex, Image, Stack, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import UserMenu from '../components/UserMenu';
-import useUser from '../hooks/useUser';
+import UserMenu from './../components/UserMenu';
+import useUser from './../hooks/useUser';
 import { useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
 const Navbar = () => {

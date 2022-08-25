@@ -1,24 +1,11 @@
 import React from 'react';
 import { Accordion, Flex, Text } from '@chakra-ui/react';
 import PetChip from './PetChip';
-import AddPet from '../pet/AddPet';
 import { getOwnerPets } from './../../../services/pets';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import EditPet from '../pet/EditPet';
-import useUser from '../../../hooks/useUser';
-
-const petEx = {
-  name: 'Firulais',
-  specie: 'Canine',
-  breed: 'Jack Russel',
-  sex: 'Male',
-  size: 'Mini',
-  birth: '16/03/18',
-  weight: '12',
-  note: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. ',
-  img: '/assets/dog.png',
-};
+import EditPet from './../pet/EditPet';
+import useUser from './../../../hooks/useUser';
 
 const PetsContainer = () => {
   const { user } = useUser();
