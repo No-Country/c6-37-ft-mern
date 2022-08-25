@@ -8,7 +8,7 @@ import Signup from './../../pages/signup/Signup';
 import Admin from './../../pages/admin/Admin';
 import PetShop from './../../pages/petshop/PetShop';
 import useUser from './../../hooks/useUser';
-import LoginPage from './../../pages/login/Login'
+import LoginPage from '../../pages/login/Login'
 
 const Routing = () => {
   const { isLogged, isAdmin } = useUser();
