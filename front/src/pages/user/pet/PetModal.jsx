@@ -1,6 +1,5 @@
 import {
   chakra,
-  Text,
   Button,
   Modal,
   ModalBody,
@@ -10,18 +9,15 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  Box,
   FormControl,
   FormLabel,
   Input,
-  FormHelperText,
   Select,
   Textarea,
   Flex,
   useToast,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import { BsPlus } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
 import useUser from './../../../hooks/useUser';
@@ -34,7 +30,7 @@ const breeds = {
 };
 const sizes = ['Small', 'Medium', 'Large'];
 
-const EditPet = ({ pet,refresh, setRefresh }) => {
+const EditPet = ({ pet, refresh, setRefresh }) => {
   const { user } = useUser();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -104,6 +100,7 @@ const EditPet = ({ pet,refresh, setRefresh }) => {
 
     refreshPets();
   };
+  
   const editPetData = async () => {
     await updatePet(newPet)
       .then(() => {
@@ -124,7 +121,7 @@ const EditPet = ({ pet,refresh, setRefresh }) => {
   };
 
   const refreshPets = () => {
-    setRefresh(refresh+1);
+    setRefresh(refresh + 1);
   };
 
   return (
@@ -162,7 +159,8 @@ const EditPet = ({ pet,refresh, setRefresh }) => {
             fontWeight="600"
             fontSize="1.7rem"
           >
-            EDIT PET
+            {pet ? 'EDIT PET' : 'ADD PET'}
+
           </ModalHeader>
 
           <ModalCloseButton />
@@ -173,6 +171,7 @@ const EditPet = ({ pet,refresh, setRefresh }) => {
               flexDirection="column"
               alignItems="center"
               justifyContent="center"
+              gap='20px'
               mx="20px"
             >
               <FormControl isRequired>
