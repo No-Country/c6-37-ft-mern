@@ -9,175 +9,12 @@ import { setPetData } from '../../redux/features/petSlice';
 import { useEffect } from 'react';
 import { getPet, getPets } from '../../services/pets';
 import { getClient } from '../../services/clients';
+import { setUserData } from '../../redux/features/userSlice';
 const columns = [
   { key: 'name', title: 'Name' },
   { key: 'owner', title: 'Owner' },
   { key: 'specie', title: 'Specie' },
   { key: 'breed', title: 'Breed' },
-];
-const rows = [
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
-  {
-    name: 'Firulais',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Jack Russell Terrier',
-  },
-  {
-    name: 'Toby',
-    owner: 'Gomez Smith',
-    specie: 'Cat',
-    breed: 'Persian',
-  },
-  {
-    name: 'Dana',
-    owner: 'Doe Gonzales',
-    specie: 'Dog',
-    breed: 'Labrador',
-  },
 ];
 
 const PetsList = () => {
@@ -193,9 +30,6 @@ const PetsList = () => {
     await getPet(pet._id).then((pet) => (petData = pet.data));
 
     await getClient(petData.owner).then((client) => (clientData = client.data));
-
-    console.log(petData);
-    console.log(clientData);
 
     setSelectedPet(petData);
     setSelectedClient(clientData);
@@ -294,3 +128,6 @@ const PetsList = () => {
 };
 
 export default PetsList;
+
+
+/*{"name":"Administrator","lastName":"","email":"","password":"","address":"","phoneNumber":"","isAdmin":true}*/

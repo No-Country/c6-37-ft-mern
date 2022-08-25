@@ -7,17 +7,27 @@ export const getPets = async () => {
   return resp;
 };
 
-export const getPet = async (_id ) => {
+export const getPet = async (_id) => {
   const resp = await axios.get(URL + _id);
   return resp;
 };
+
+export const getOwnerPets = async (email) => {
+  const resp = await axios.get(URL +'owner/'+ email);
+  return resp;
+}
 
 export const createPet = async (pet) => {
   const resp = await axios.post(URL, pet);
   return resp;
 };
 
-export const deletePet = async ({id}) => {
-  const resp = await axios.delete(URL + id);
+export const updatePet = async (pet) => {
+  const resp = await axios.put(URL + pet._id, pet);
+  return resp;
+};
+
+export const deletePet = async ( _id ) => {
+  const resp = await axios.delete(URL + _id);
   return resp;
 };

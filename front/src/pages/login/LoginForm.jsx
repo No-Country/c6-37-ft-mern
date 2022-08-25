@@ -1,29 +1,18 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
-  chakra,
-  Box,
-  Button,
-  ChakraProvider,
-  FormControl,
-  Heading,
-  Image,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
-import { Formik } from 'formik';
-import { MdOutlineEmail } from 'react-icons/md';
-import { RiLockPasswordLine } from 'react-icons/ri';
-import { Link as RouterLink } from 'react-router-dom';
-import InputChip from '../../components/InputChip';
-import * as Yup from 'yup';
-
-const textSchema = Yup.object().shape({
-  text: Yup.string().min(20, 'too short').required('required'),
-});
-
-const LoginForm = ({ handleChange, handleSubmitLogin }) => {
-  const form = useRef();
-
+    Box,
+    Button,
+    FormControl,
+    Heading,
+    Image,
+    Stack,
+    Text,
+  } from '@chakra-ui/react';
+  import { MdOutlineEmail } from 'react-icons/md';
+  import { RiLockPasswordLine } from 'react-icons/ri';
+  import { Link as RouterLink } from 'react-router-dom';
+  import InputChip from '../../components/InputChip';
+const LoginForm = ({handleChange, handleSubmit}) => {
   return (
     <Stack
       spacing="0px"
@@ -63,99 +52,45 @@ const LoginForm = ({ handleChange, handleSubmitLogin }) => {
           WELCOME BACK!
         </Heading>
 
-        <Formik
-          initialValues={{
-            email: '',
-            password: '',
-          }}
-          validate={(values) => {
-            let errors = {};
-
-            if (!values.email) {
-              errors.email = 'write a valid email';
-            } else if (
-              !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
-                values.email
-              )
-            ) {
-              errors.email =
-                'Email can only contain letters, numbers, periods, hyphens, and underscores.';
-            }
-
-            if (!values.password) {
-              errors.password = 'write a valid password';
-            } 
-            return errors;
-          }}
-          validationSchema={textSchema}
-
-          onSubmit={(values, {resetForm}) => {
-            resetForm()
-            console.log('hola');
-            // handleSubmitLogin()
-            values = initialValues
-          }}  
+        <FormControl
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          w="220px"
         >
-          {({
-            values,
-            handleSubmit,
-            handleChange,
-            handleBlur,
-            errors,
-            touched,
-          }) => (
-            <chakra.form ref={form} onSubmit={handleSubmit} userSelect='none'>
-              <FormControl
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                w="220px"
-              >
-                <InputChip
-                  type="email"
-                  name="email"
-                  id='email'
-                  placeholder="Email"
-                  onChange={handleChange}
-                  children={<MdOutlineEmail color="#718096" />}
-                  value={values.email}
-                  onBlur={handleBlur}
-                  width='220px'
-                />
-              </FormControl>
-                {touched.email && errors.email && <Text color='red.400'>{errors.email}</Text>}
-              <FormControl
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                w="220px"
-                mt="30px"
-              >
-                <InputChip
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                  children={<RiLockPasswordLine color="#718096" />}
-                  value={values.password}
-                  onBlur={handleBlur}
-                />
-              </FormControl>
-              {touched.password && errors.password && <Text color='red.400'>{errors.password}</Text>}
-              <Button
-                borderRadius="64"
-                mt="30px"
-                size="sm"
-                color="#0B8CBF"
-                type='submit'
-              >
-                Continue
-              </Button>
-              {/* {sent && <Text textAlign='center' color='green.400'>successfully sent!</Text>} */}
-            </chakra.form>
-          )}
-        </Formik>
+          <InputChip
+            type="text"
+            name="email"
+            placeholder="Email"
+            handleChange={handleChange}
+            children={<MdOutlineEmail color="#718096" />}
+          />
+        </FormControl>
+        <FormControl
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          w="220px"
+          mt="30px"
+        >
+          <InputChip
+            type="password"
+            name="password"
+            placeholder="Password"
+            handleChange={handleChange}
+            children={<RiLockPasswordLine color="#718096" />}
+          />
+        </FormControl>
+
+        <Button
+          borderRadius="64"
+          mt="30px"
+          size="sm"
+          color="#0B8CBF"
+          onClick={handleSubmit}
+        >
+          Continue
+        </Button>
 
         <Text mt="30px" color="#fff" fontWeight="300">
           Don't you have an account?

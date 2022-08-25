@@ -24,18 +24,20 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
-    // if (userInputs.email === '' || userInputs.password === '') {
-    //   toast({
-    //     title: 'Error',
-    //     description: 'Please fill all fields',
-    //     status: 'error',
-    //     duration: 9000,
-    //     position: 'bottom-right',
-    //     isClosable: true,
-    //   });
 
-    //   return;
-    // }
+    if (userInputs.email === '' || userInputs.password === '') {
+      toast({
+        title: 'Error',
+        description: 'Please fill all fields',
+        status: 'error',
+        duration: 9000,
+        position: 'bottom-right',
+        isClosable: true,
+      });
+
+      return;
+    }
+
 
     await getUser(userInputs)
       .then((res) => {
@@ -98,7 +100,7 @@ const Login = () => {
       margin="auto 0"
       pt="160px"
     >
-      <LoginForm handleChangeLogin={handleChange} handleSubmitLogin={handleSubmit} />
+      <LoginForm handleChange={handleChange} handleSubmit={handleSubmit} />
     </Flex>
   );
 };

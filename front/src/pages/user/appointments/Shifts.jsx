@@ -5,8 +5,8 @@ import { MdOutlinePets } from 'react-icons/md';
 const Shifts = (props) => {
   return (
 
-      <Flex justifyContent="flex-start" gap='12px'>
-            <MdOutlinePets fontWeight="bold" fontSize="5px" />
+      <Flex justifyContent="flex-start" gap='12px' alignItems='center'>
+            <MdOutlinePets fontWeight="bold" fontSize="18px" />
             <Text
               fontFamily="Anek Bangla, sans-serif"
               fontWeight="bold"
