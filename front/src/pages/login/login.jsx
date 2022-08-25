@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, useToast } from '@chakra-ui/react';
-import useUser from './../../hooks/useUser';
+import useUser from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LoginForm from './LoginForm';
-import { getUser, getUsers } from './../../services/users';
-import { getClient } from './../../services/clients';
+import { getUser, getUsers } from '../../services/users';
+import { getClient } from '../../services/clients';
 
 
 
