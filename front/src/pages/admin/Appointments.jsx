@@ -1,6 +1,6 @@
 import { Heading, Stack } from '@chakra-ui/react';
 import React from 'react';
-import DataTable from '../../components/table/dataTable';
+import DataTable from './../../components/table/dataTable';
 import SearchBar from './SearchBar';
 
 const columns = [

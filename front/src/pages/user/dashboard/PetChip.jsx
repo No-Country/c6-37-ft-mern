@@ -8,7 +8,6 @@ import {
   Flex,
   Grid,
   GridItem,
-  IconButton,
   Text,
 } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';

@@ -2,16 +2,12 @@ import React from 'react';
 import { MdEdit } from 'react-icons/md';
 import { FiTrash } from 'react-icons/fi';
 import { Box, Stack, useDisclosure } from '@chakra-ui/react';
-import { useSelector, useDispatch } from 'react-redux';
-import { delUserData, setEditable } from '../../redux/features/userSlice';
+import { useDispatch } from 'react-redux';
+import {  setEditable } from './../../redux/features/userSlice';
 import CustomModal from './CustomModal';
 
 const EditTool = () => {
   const dispatch = useDispatch();
-
-  // const handleDelete = () => {
-  //   dispatch(delUserData())
-  // }
 
   const handleEdit = () => {
     dispatch(setEditable());

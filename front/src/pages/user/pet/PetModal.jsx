@@ -20,8 +20,8 @@ import {
 import React, { useState } from 'react';
 import { BsPlus } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
-import useUser from '../../../hooks/useUser';
-import { createPet, updatePet } from '../../../services/pets';
+import useUser from './../../../hooks/useUser';
+import { createPet, updatePet } from './../../../services/pets';
 
 const species = ['Dog', 'Cat'];
 const breeds = {

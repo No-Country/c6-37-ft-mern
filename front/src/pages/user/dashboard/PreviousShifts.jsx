@@ -1,9 +1,7 @@
-import { Box, Button, Stack, Text, Link, Flex } from '@chakra-ui/react';
+import { Box,  Stack, Text, Link, Flex } from '@chakra-ui/react';
 import React from 'react';
-import { BsFillXCircleFill, BsPlus } from 'react-icons/bs';
-import { MdOutlinePets } from 'react-icons/md';
-import HistorialAppointment from '../appointments/HistorialAppointment';
-import Shifts from '../appointments/Shifts';
+import HistorialAppointment from './../appointments/HistorialAppointment';
+import Shifts from './../appointments/Shifts';
 
 function PreviousShifts() {
   return (

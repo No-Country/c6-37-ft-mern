@@ -1,4 +1,4 @@
-import { Heading, Stack } from '@chakra-ui/react';
+import {  Stack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Dashboard from './Dashboard';
 import ClientsList from './ClientsList';

@@ -14,7 +14,7 @@ let datos = [
 // sfc shortcut
 const Services = () => {
   return (
-    <Stack alignItems="center" justifyContent="center" w="1280px" gap="60px" py={20}>
+    <Stack alignItems="center" justifyContent="center" w="1280px" gap="60px" py={20} id='services'>
       <Stack>
         <Text
           fontSize="36px"

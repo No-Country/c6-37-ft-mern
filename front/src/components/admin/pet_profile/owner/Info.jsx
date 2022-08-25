@@ -7,16 +7,6 @@ function Info() {
 
   const state = useSelector(state => state.userData)
 
-
-  let owner = {
-    name: 'John',
-    lastName:'Doe',
-    phone:'+01 984 039 492',
-    email:'johndoe03@gmail.com',
-    address:'Contoso Ltd 215 E Tasman CA San Jose',
-    img:'https://bit.ly/kent-c-dodds'
-  }
-
   return (
     <Stack direction='row' gap='16'>
       <Avatar name={state.name} src={state.img} size='xl' />

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Accordion, Flex, Text } from '@chakra-ui/react';
 import PetChip from './PetChip';
-import AddPet from '../pet/AddPet';
 import { getOwnerPets } from './../../../services/pets';
 import { useEffect } from 'react';
 import { useState } from 'react';

@@ -1,6 +1,7 @@
 import { Box, Flex, VStack, Stack, Text, Heading } from '@chakra-ui/react'
 import { BsArrowDownCircle } from 'react-icons/bs'
 
+
 const Info = () => {
   return (
     <VStack gap='5' userSelect='none' h='720px' alignItems='center' justifyContent='center'>

@@ -1,8 +1,7 @@
-import { Avatar, Flex, HStack, Stack, Text, VStack } from '@chakra-ui/react'
+import { Avatar, HStack, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import PetProfileEdit from '../editable/PetProfileEdit'
-import DataCard from './DataCard'
+import PetProfileEdit from './../editable/PetProfileEdit'
 import DataContainer from './DataContainer'
 import EditToolPet from './EditToolPet'
 

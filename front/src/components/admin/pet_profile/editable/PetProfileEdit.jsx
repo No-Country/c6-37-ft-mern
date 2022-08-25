@@ -1,8 +1,8 @@
-import { Flex, Input, Stack, Text, usePinInputDescendant } from '@chakra-ui/react'
+import { Flex, Input, Stack, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { editPetData, setPetData } from '../../../../redux/features/petSlice'
-import ButtonsForm from '../../editable/ButtonsForm'
+import { editPetData, setPetData } from './../../../../redux/features/petSlice'
+import ButtonsForm from './../../editable/ButtonsForm'
 import EditCard from './EditCard'
 import {v4 as uuid} from 'uuid'
 

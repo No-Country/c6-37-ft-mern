@@ -14,7 +14,7 @@ import { MdOutlineEmail } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { MdPlace } from 'react-icons/md';
 import InputChip from './../../components/InputChip';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 const SignUpForm = ({handleChange, handleSubmit}) => {
   return (
