@@ -5,7 +5,7 @@ import AddPet from '../pet/AddPet';
 import { getOwnerPets } from './../../../services/pets';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import EditPet from '../pet/EditPet';
+import PetModal from '../pet/PetModal';
 import useUser from '../../../hooks/useUser';
 
 const petEx = {
@@ -26,13 +26,11 @@ const PetsContainer = () => {
   const [refresh, setRefresh] = useState(0);
 
   const getOwnerPetsData = async () => {
-
     await getOwnerPets(user.email).then((pets) => setPets(pets.data));
   };
 
   useEffect(() => {
     getOwnerPetsData();
-    console.log(refresh);
   }, [refresh]);
 
   return (
@@ -51,7 +49,7 @@ const PetsContainer = () => {
         >
           MY PETS
         </Text>
-        <EditPet email={'pepe@example.com'} />
+        <PetModal refresh={refresh} setRefresh={setRefresh} email={'pepe@example.com'} />
       </Flex>
       {pets.length > 0 ? (
         <Accordion allowToggle>
