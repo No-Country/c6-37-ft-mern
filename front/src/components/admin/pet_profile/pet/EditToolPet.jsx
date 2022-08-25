@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { FiTrash } from 'react-icons/fi';
 import { MdEdit } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
-import { delInfo, editInfo } from '../../../../redux/features/petSlice';
+import { delPetData, editPetData } from '../../../../redux/features/petSlice';
 import CustomModal from './../../CustomModal';
 
 function EditToolPet() {
@@ -12,12 +12,12 @@ function EditToolPet() {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(editInfo());
+    dispatch(editPetData());
   };
 
   const handleDel = (e) => {
     let empty = {};
-    dispatch(delInfo(empty));
+    dispatch(delPetData(empty));
   };
 
 

@@ -6,11 +6,11 @@ import useUser from '../../hooks/useUser';
 import CounterChip from './CounterChip';
 
 const columns = [
-  { key: '1', title: 'Consult' },
-  { key: '2', title: 'Client' },
-  { key: '3', title: 'Pet' },
-  { key: '4', title: 'Time' },
-  { key: '5', title: 'Day' },
+  { key: 'consult', title: 'Consult' },
+  { key: 'client', title: 'Client' },
+  { key: 'pet', title: 'Pet' },
+  { key: 'hour', title: 'Hour' },
+  { key: 'day', title: 'Day' },
 ];
 const rows = [
   {

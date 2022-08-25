@@ -31,9 +31,9 @@ export const createCliente = async (req, res) => {
 }
 
 export const deleteCliente = async (req, res) => {
-    const {email} = req.params;
+    const {_id} = req.params;
     try {
-        await clienteModel.deleteOne({email});
+        await clienteModel.deleteOne({_id});
         res.status(200).json({message: 'Deleted'});
     } catch (error) {
         res.status(404).json({message: error.message});

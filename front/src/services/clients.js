@@ -7,8 +7,8 @@ export const getClients = async () => {
     return resp;
 };
 
-export const getClient = async ({usuario}) => {
-  const resp = await axios.get(URL + usuario);
+export const getClient = async (email) => {
+  const resp = await axios.get(URL + email);
   return resp;
 };
 

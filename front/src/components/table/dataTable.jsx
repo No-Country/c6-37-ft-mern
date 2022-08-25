@@ -13,11 +13,6 @@ import {
 import React from 'react';
 
 const DataTable = ({ title, columns, rows, handleSelect }) => {
-
-  function handleClick(e) {
-    console.log(e);
-  }
-
   return (
     <Stack>
       {title && (
@@ -40,24 +35,26 @@ const DataTable = ({ title, columns, rows, handleSelect }) => {
                 key={index}
                 cursor="pointer"
                 _hover={{ bg: '#EEEEEE' }}
-                onClick={
-                  ()=>handleSelect(row)
-                }
+                onClick={() => handleSelect(row)}
               >
-                {/* RECORRE CADA OBJETO, COMO SI FUERA UN ARRAY, ASI SE CONVIERTE EN UNA TABLA DINAMICA */}
-                {Object.keys(row).map((i) => (
-                  <Td key={i}>
-                    <Text
-                      fontFamily="Anek Bangla, sans-serif"
-                      fontWeight="bold"
-                      textOverflow="ellipsis"
-                      overflow="hidden"
-                      maxW="160px"
-                    >
-                      {row[i]}
-                    </Text>
-                  </Td>
-                ))}
+                {columns.map((column) =>
+                  Object.keys(row).map(
+                    (i) =>
+                      i === column.key && (
+                        <Td key={i}>
+                          <Text
+                            fontFamily="Anek Bangla, sans-serif"
+                            fontWeight="bold"
+                            textOverflow="ellipsis"
+                            overflow="hidden"
+                            maxW="160px"
+                          >
+                            {row[i]}
+                          </Text>
+                        </Td>
+                      )
+                  )
+                )}
               </Tr>
             ))}
           </Tbody>

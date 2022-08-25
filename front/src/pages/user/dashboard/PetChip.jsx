@@ -13,8 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 import EditPet from '../pet/EditPet';
+import { useEffect } from 'react';
+import DeletePetButton from './DeletePetButton';
 
-const PetChip = ({ pet }) => {
+const PetChip = ({ pet,refresh, setRefresh }) => {
   return (
     <AccordionItem>
       <AccordionButton>
@@ -124,19 +126,12 @@ const PetChip = ({ pet }) => {
               </Text>
             </Flex>
           </GridItem>
-          <GridItem colSpan={2} justifySelf="center">
-            <EditPet />
+          <GridItem colSpan={2} justifySelf="center" alignSelf='center'>
+            <EditPet pet={pet} refresh={refresh} setRefresh={setRefresh} />
           </GridItem>
-          <IconButton
-            icon={<MdDelete fontSize="18px" />}
-            size="sm"
-            borderRadius="full"
-            colorScheme="red"
-            color="white"
-            position="absolute"
-            bottom="17px"
-            right="8px"
-          />
+
+          <DeletePetButton pet={pet} refresh={refresh} setRefresh={setRefresh} />
+          
         </Grid>
       </AccordionPanel>
     </AccordionItem>

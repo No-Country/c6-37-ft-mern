@@ -4,8 +4,10 @@ import useUser from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LoginForm from './LoginForm';
-import { getUser } from './../../services/users';
-import { getClient } from './../../services/clients';
+import { getUser, getUsers } from '../../services/users';
+import { getClient } from '../../services/clients';
+
+
 
 const Login = () => {
   const toast = useToast();
@@ -22,6 +24,7 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
+
     if (userInputs.email === '' || userInputs.password === '') {
       toast({
         title: 'Error',
@@ -35,8 +38,10 @@ const Login = () => {
       return;
     }
 
+
     await getUser(userInputs)
       .then((res) => {
+        
         setUser(res.data);
         toast({
           title: `Welcome.`,
@@ -59,7 +64,7 @@ const Login = () => {
   };
 
   const getClientData = async () => {
-    await getClient(user)
+    await getClient(user.usuario)
       .then((res) => {
         login(res.data);
       })
@@ -83,6 +88,10 @@ const Login = () => {
     isLogged && (isAdmin ? navigate('/admin') : navigate('/dashboard'));
     user && (user.isAdmin ? createProfile() : getClientData());
   }, [isLogged, user]);
+
+  useEffect(() => {
+    getUsers()
+  }, [])
 
   return (
     <Flex

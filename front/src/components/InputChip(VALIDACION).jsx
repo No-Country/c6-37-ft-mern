@@ -12,12 +12,15 @@ const InputChip = (props) => {
       <Input
         type={props.type}
         name={props.name}
+        id= {props.id}
         h="30px"
         bg="#ffffff"
         borderRadius="full"
         placeholder={props.placeholder}
         fontFamily="Anek Bangla, sans-serif"
-        onChange={props.handleChange}
+        onChange={props.onChange}
+        onBlur={props.onBlur}
+        value={props.value}
       />
     </InputGroup>
   );

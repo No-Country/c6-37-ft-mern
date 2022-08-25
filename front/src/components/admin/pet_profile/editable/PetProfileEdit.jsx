@@ -1,7 +1,7 @@
 import { Flex, Input, Stack, Text, usePinInputDescendant } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { editInfo, updateInfo } from '../../../../redux/features/petSlice'
+import { editPetData, setPetData } from '../../../../redux/features/petSlice'
 import ButtonsForm from '../../editable/ButtonsForm'
 import EditCard from './EditCard'
 import {v4 as uuid} from 'uuid'
@@ -37,11 +37,11 @@ function PetProfileEdit() {
 
 
   const handleCancel = () => {
-    dispatch(editInfo())
+    dispatch(editPetData())
   }
 
   const handleSubmit = () => {
-    dispatch(updateInfo(data))
+    dispatch(setPetData(data))
   }
 
   return (

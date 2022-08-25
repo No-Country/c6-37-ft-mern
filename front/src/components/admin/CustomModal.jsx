@@ -17,7 +17,7 @@ function CustomModal(props) {
             <Button variant='ghost'mr={3} onClick={props.onClose}>
               {props.cancel}
             </Button>
-            <Button colorScheme='blue' >{props.confirm}</Button>
+            <Button colorScheme='blue' onClick={props.onClick}>{props.confirm}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
