@@ -4,11 +4,11 @@ import PrivateRoute from './../../components/PrivateRoute';
 import Landing from './../../pages/landing/Landing';
 import NoMatchRoute from './../../pages/noMatchRoute/NoMatchRoute';
 import Dashboard from './../../pages/user/dashboard/Dashboard';
-import Login from '../../pages/login/Login';
-import Signup from '../../pages/signup/Signup';
-import Admin from '../../pages/admin/Admin';
-import PetShop from '../../pages/petshop/PetShop';
-import useUser from '../../hooks/useUser';
+import Login from './../../pages/login/Login';
+import Signup from './../../pages/signup/Signup';
+import Admin from './../../pages/admin/Admin';
+import PetShop from './../../pages/petshop/PetShop';
+import useUser from './../../hooks/useUser';
 
 const Routing = () => {
   const { isLogged, isAdmin } = useUser();
