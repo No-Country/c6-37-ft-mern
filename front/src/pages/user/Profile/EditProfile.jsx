@@ -17,22 +17,65 @@ import {
   IconButton,
   Avatar,
   useToast,
+  Flex,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import useUser from '../../../hooks/useUser';
+import { updateClient } from '../../../services/clients';
 
 const EditProfile = () => {
-  const { user } = useUser();
+  const { user, login } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const [newUser, setNewUser] = useState({
-    name: '',
-    lastName: '',
-    phoneNumber: '',
-    email: '',
-    address: '',
-  });
+  const [newUser, setNewUser] = useState(user);
+
+  const handleChange = (e) => {
+    setNewUser({ ...newUser, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    if (
+      !!!newUser.name ||
+      !!!newUser.lastName ||
+      !!!newUser.phoneNumber ||
+      !!!newUser.email ||
+      !!!newUser.address
+    ) {
+      toast({
+        title: 'Error',
+        description: 'Please fill all required fields',
+        status: 'error',
+        duration: 9000,
+        position: 'bottom-right',
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    createUserData();
+  };
+
+  const createUserData = async () => {
+    await updateClient(newUser)
+      .then((res) => {
+        login(res.data.updatedClient);
+
+        toast({
+          title: 'Success',
+          description: 'User Updated successfully',
+          status: 'success',
+          duration: 6000,
+          position: 'bottom-right',
+          isClosable: true,
+        });
+      })
+      .then(() => {
+        onClose();
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -61,13 +104,11 @@ const EditProfile = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody display="flex" justifyContent="center">
-            <FormControl w="90%" fontFamily="Anek Bangla, sans-serif">
-              <Box display="flex" justifyContent="center">
-                <Avatar size="lg"></Avatar>
-              </Box>
+            <Flex direction="column" alignItems="center" gap="20px">
+              <Avatar size="lg" />
 
-              <Box w="calc(100%/2 -10px)" display="flex" gap="5px" mt="25px">
-                <Box fontFamily="Anek Bangla, sans-serif">
+              <Flex gap="15px">
+                <FormControl>
                   <FormLabel
                     fontFamily="Anek Bangla, sans-serif"
                     fontSize="1.1rem"
@@ -78,13 +119,16 @@ const EditProfile = () => {
                   <Input
                     borderRadius="5px"
                     size="sm"
-                    w="100%"
-                    type="Text"
-                    placeholder="John"
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    value={newUser.name}
+                    onChange={handleChange}
+                    fontFamily="Anek Bangla, sans-serif"
                   />
-                </Box>
+                </FormControl>
 
-                <Box fontFamily="Anek Bangla, sans-serif">
+                <FormControl>
                   <FormLabel
                     fontFamily="Anek Bangla, sans-serif"
                     fontSize="1.1rem"
@@ -95,15 +139,18 @@ const EditProfile = () => {
                   <Input
                     borderRadius="5px"
                     size="sm"
-                    w="100%"
-                    type="Text"
-                    placeholder="Doe"
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    fontFamily="Anek Bangla, sans-serif"
+                    value={newUser.lastName}
+                    onChange={handleChange}
                   />
-                </Box>
-              </Box>
+                </FormControl>
+              </Flex>
 
-              <Box w="calc(100%/2 -10px)" display="flex" gap="5px" mt="15px">
-                <Box fontFamily="Anek Bangla, sans-serif">
+              <Flex gap="15px">
+                <FormControl>
                   <FormLabel
                     fontFamily="Anek Bangla, sans-serif"
                     fontSize="1.1rem"
@@ -114,13 +161,16 @@ const EditProfile = () => {
                   <Input
                     borderRadius="5px"
                     size="sm"
-                    w="100%"
                     type="tel"
-                    placeholder="+01 964 039 492"
+                    placeholder="+01 123 456 789"
+                    name="phoneNumber"
+                    fontFamily="Anek Bangla, sans-serif"
+                    value={newUser.phoneNumber}
+                    onChange={handleChange}
                   />
-                </Box>
+                </FormControl>
 
-                <Box fontFamily="Anek Bangla, sans-serif">
+                <FormControl>
                   <FormLabel
                     fontFamily="Anek Bangla, sans-serif"
                     fontSize="1.1rem"
@@ -131,31 +181,38 @@ const EditProfile = () => {
                   <Input
                     borderRadius="5px"
                     size="sm"
-                    w="100%"
-                    type="Text"
+                    type="text"
+                    name="email"
                     placeholder="johndoe03@mail.com"
+                    fontFamily="Anek Bangla, sans-serif"
+                    value={newUser.email}
+                    onChange={handleChange}
+                    isDisabled
                   />
-                </Box>
-              </Box>
-
-              <FormLabel
-                mt="15px"
-                fontFamily="Anek Bangla, sans-serif"
-                fontSize="1.1rem"
-                fontWeight="600"
-              >
-                Address
-              </FormLabel>
-              <Input
-                borderRadius="5px"
-                size="sm"
-                w="100%"
-                type="Text"
-                placeholder="Contoso Ltd 215 E Tasman CA San Jose"
-              />
-            </FormControl>
+                </FormControl>
+              </Flex>
+              <FormControl>
+                <FormLabel
+                  fontFamily="Anek Bangla, sans-serif"
+                  fontSize="1.1rem"
+                  fontWeight="600"
+                >
+                  Address
+                </FormLabel>
+                <Input
+                  borderRadius="5px"
+                  size="sm"
+                  type="text"
+                  name="address"
+                  placeholder="Contoso Ltd 215 E Tasman CA San Jose"
+                  fontFamily="Anek Bangla, sans-serif"
+                  value={newUser.address}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </Flex>
           </ModalBody>
-          <ModalFooter justifyContent="center" gap="5px" my="10px">
+          <ModalFooter justifyContent="center" gap="15px" my="10px">
             <Button
               fontFamily="Anek Bangla, sans-serif"
               fontSize="0.8rem"
@@ -176,7 +233,7 @@ const EditProfile = () => {
               size="xs"
               borderRadius="full"
               w="90px"
-              onClick={onClose}
+              onClick={handleSubmit}
             >
               Continue
             </Button>
