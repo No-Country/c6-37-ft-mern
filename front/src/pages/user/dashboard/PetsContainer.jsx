@@ -25,7 +25,9 @@ const PetsContainer = () => {
   const [refresh, setRefresh] = useState(0);
 
   const getOwnerPetsData = async () => {
-    await getOwnerPets(user.email).then((pets) => setPets(pets.data));
+    await getOwnerPets(user.email)
+      .then((pets) => setPets(pets.data))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -48,12 +50,21 @@ const PetsContainer = () => {
         >
           MY PETS
         </Text>
-        <PetModal refresh={refresh} setRefresh={setRefresh} email={'pepe@example.com'} />
+        <PetModal
+          refresh={refresh}
+          setRefresh={setRefresh}
+          email={'pepe@example.com'}
+        />
       </Flex>
       {pets.length > 0 ? (
         <Accordion allowToggle>
           {pets.map((pet) => (
-            <PetChip key={pet.name} pet={pet} refresh={refresh} setRefresh={setRefresh} />
+            <PetChip
+              key={pet.name}
+              pet={pet}
+              refresh={refresh}
+              setRefresh={setRefresh}
+            />
           ))}
         </Accordion>
       ) : (

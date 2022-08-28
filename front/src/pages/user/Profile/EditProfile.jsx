@@ -8,12 +8,9 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  Box,
   FormControl,
   FormLabel,
   Input,
-  Select,
-  Textarea,
   IconButton,
   Avatar,
   useToast,
@@ -54,10 +51,10 @@ const EditProfile = () => {
       return;
     }
 
-    createUserData();
+    updateUserData();
   };
 
-  const createUserData = async () => {
+  const updateUserData = async () => {
     await updateClient(newUser)
       .then((res) => {
         login(res.data.updatedClient);
