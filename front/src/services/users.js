@@ -24,7 +24,7 @@ export const createUser = async (user) => {
   return resp;
 };
 
-export const deleteUser = async (user) => {
-  const resp = await axios.delete(URL + user.usuario);
+export const deleteUser = async (usuario) => {
+  const resp = await axios.delete(URL + usuario);
   return resp;
 };

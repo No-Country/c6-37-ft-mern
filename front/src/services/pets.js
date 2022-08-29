@@ -31,3 +31,8 @@ export const deletePet = async ( _id ) => {
   const resp = await axios.delete(URL + _id);
   return resp;
 };
+
+export const deleteClientPets = async ( owner ) => {
+  const resp = await axios.delete(URL+'owner/' + owner);
+  return resp;
+};

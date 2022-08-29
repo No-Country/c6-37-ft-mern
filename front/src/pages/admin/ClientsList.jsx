@@ -5,8 +5,8 @@ import { FiArrowLeft } from 'react-icons/fi';
 import SearchBar from './SearchBar';
 import ClientProfile from './ClientProfile';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setUserData } from './../../redux/features/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { delUserData, setUserData } from './../../redux/features/userSlice';
 import { getClient, getClients } from './../../services/clients';
 
 const columns = [
@@ -17,21 +17,17 @@ const columns = [
 ];
 
 const ClientsList = () => {
-  const [selectedClient, setSelectedClient] = useState(null);
+  const state = useSelector((state) => state.userData);
   const [rows, setRows] = useState([]);
   const dispatch = useDispatch();
 
-  const handleSelect =  (client) => {
-
-    setSelectedClient(client);
-
+  const handleSelect = (client) => {
+    dispatch(setUserData(client));
   };
 
-  useEffect(() => {
-
-    selectedClient && dispatch(setUserData(selectedClient));
-
-  },[selectedClient])
+  const handleBack = () => {
+    dispatch(delUserData());
+  };
 
   useEffect(() => {
     getData();
@@ -40,10 +36,10 @@ const ClientsList = () => {
   const getData = async () => {
     let array = [];
 
-    await getClients().then((res) => {
+    await getClients()
+      .then((res) => {
         res.data.map((client) => {
-          client.name &&
-            array.push(client);
+          client.name && array.push(client);
         });
         setRows(array);
       })
@@ -54,7 +50,7 @@ const ClientsList = () => {
 
   return (
     <Stack>
-      {selectedClient ? (
+      {state.name !== '' ? (
         <>
           <Button
             variantColor="blue"
@@ -63,7 +59,7 @@ const ClientsList = () => {
             mt="20px"
             w="100px"
             leftIcon={<FiArrowLeft />}
-            onClick={() => setSelectedClient(null)}
+            onClick={() => handleBack()}
           >
             Back
           </Button>
@@ -80,15 +76,12 @@ const ClientsList = () => {
           >
             <SearchBar search={['name', 'phone', 'address']} />
 
-            {rows.length > 0 ? (
-              <DataTable
-                columns={columns}
-                rows={rows}
-                handleSelect={(client) => handleSelect(client)}
-              />
-            ) : (
-              <Text>Loading data...</Text>
-            )}
+            <DataTable
+              columns={columns}
+              rows={rows}
+              handleSelect={(client) => handleSelect(client)}
+              isClickable={true}
+            />
           </Stack>
         </>
       )}

@@ -4,11 +4,11 @@ import DataTable from './../../components/table/dataTable';
 import SearchBar from './SearchBar';
 
 const columns = [
-  { key: '1', title: 'Consult' },
-  { key: '2', title: 'Client' },
-  { key: '3', title: 'Pet' },
-  { key: '4', title: 'Hour' },
-  { key: '5', title: 'Day' },
+  { key: 'type', title: 'Consult' },
+  { key: 'client', title: 'Client' },
+  { key: 'pet', title: 'Pet' },
+  { key: 'time', title: 'Time' },
+  { key: 'day', title: 'Day' },
 ];
 const rows = [
   {
@@ -104,7 +104,7 @@ const Appointments = () => {
 
       <Stack px={8} py={6} boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)">
         <SearchBar search={['consult', 'client', 'pet']} />
-        <DataTable columns={columns} rows={rows} />
+        <DataTable columns={columns} rows={rows} isClickable={false} />
       </Stack>
     </Stack>
   );

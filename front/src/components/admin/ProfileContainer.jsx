@@ -10,17 +10,17 @@ function ProfileContainer() {
   const state = useSelector(state => state.userData)
 
   return (
-    <Stack direction="row" justifyContent="space-around" w="866px">
-      <Stack direction="row">
+    <Stack direction="row" justifyContent="center" gap='20' px='10'>
+      <Stack direction="row" gap='6'>
         <Avatar size="xl" src={state.imgUrl} name={state.name} />
 
-        <Stack px="6">
-          <Flex direction="row">
+        <Stack gap='2'>
+          <Flex direction="row" gap='6'>
             <DatosCard title="Name" text={state.name} />
             <DatosCard title="Last Name" text={state.lastName} />
           </Flex>
 
-          <Flex direction="row">
+          <Flex direction="row" gap='6'>
             <DatosCard title="Phone Number" text={state.phoneNumber} />
             <DatosCard title="Email" text={state.email} />
           </Flex>

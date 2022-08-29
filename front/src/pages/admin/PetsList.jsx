@@ -116,6 +116,7 @@ const PetsList = () => {
                 columns={columns}
                 rows={rows}
                 handleSelect={(pet) => handleSelect(pet)}
+                isClickable={true}
               />
             ) : (
               <Text>Loading data...</Text>

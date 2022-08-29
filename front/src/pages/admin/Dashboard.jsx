@@ -2,132 +2,18 @@ import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { getAppointments } from '../../services/appointments';
-import { getClients } from '../../services/clients';
+import { getClient, getClients } from '../../services/clients';
 import { getPets } from '../../services/pets';
 import DataTable from './../../components/table/dataTable';
 import useUser from './../../hooks/useUser';
 import CounterChip from './CounterChip';
 
 const columns = [
-  { key: 'consult', title: 'Consult' },
+  { key: 'type', title: 'Consult' },
   { key: 'client', title: 'Client' },
   { key: 'pet', title: 'Pet' },
-  { key: 'hour', title: 'Hour' },
+  { key: 'time', title: 'Time' },
   { key: 'day', title: 'Day' },
-];
-const rows = [
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
-  {
-    consult: 'grooming',
-    client: 'Maria Antonieta',
-    pet: 'Firulais',
-    hour: '03:30pm',
-    day: '16/08/22',
-  },
 ];
 
 const Dashboard = () => {
@@ -149,33 +35,32 @@ const Dashboard = () => {
           date === now && citas.push(data);
         });
       })
-      .then(() => setAppointments(citas))
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setAppointments(citas);
+  };
+
+  const getClientsData = async () => {
+    await getClients()
+      .then((res) => {
+        setClients(res.data);
+      })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const getClientsData = async ()=> {
-
-    await getClients().then((res) => {
-      setClients(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  }
-
-  const getPetsData = async ()=> {
-
-    await getPets().then((res) => {
-      setPets(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  }
+  const getPetsData = async () => {
+    await getPets()
+      .then((res) => {
+        setPets(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     getAppointmentsData();
@@ -183,15 +68,16 @@ const Dashboard = () => {
     getPetsData();
   }, []);
 
-  const getChipData = async () => {};
-
   return (
     <Stack gap="48px">
       <Heading>Welcome</Heading>
       <Stack>
         <Grid templateColumns="repeat(3, 1fr)" gap="16px">
           <GridItem>
-            <CounterChip title="Today Apointments" count={appointments.length} />
+            <CounterChip
+              title="Today Apointments"
+              count={appointments.length}
+            />
           </GridItem>
           <GridItem>
             <CounterChip title="Registered Clients" count={clients.length} />
@@ -202,7 +88,12 @@ const Dashboard = () => {
         </Grid>
       </Stack>
       <Stack px={8} py={6} boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)">
-        <DataTable title={'Today Appointments'} columns={columns} rows={rows} />
+        <DataTable
+          title={'Today Appointments'}
+          columns={columns}
+          rows={appointments}
+          isClickable={false}
+        />
       </Stack>
     </Stack>
   );

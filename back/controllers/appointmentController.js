@@ -59,3 +59,25 @@ export const deleteAppointment = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const deleteClientAppointments = async (req, res) => {
+  const { client } = req.params;
+  try {
+    await appointmentModel.deleteMany({ client });
+    res.status(200).json({ message: 'Deleted' });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const deletePetAppointments = async (req, res) => {
+  const { pet } = req.params;
+  try {
+    await appointmentModel.deleteMany({ pet });
+    res.status(200).json({ message: 'Deleted' });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+

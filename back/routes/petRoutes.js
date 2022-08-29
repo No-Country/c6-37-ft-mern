@@ -6,6 +6,7 @@ import {
   createPet,
   deletePet,
   updatePet,
+  deleteClientPets,
 } from '../controllers/petController.js';
 
 const router = express.Router();
@@ -16,5 +17,6 @@ router.get('/owner/:owner', getOwnerPets);
 router.post('/', createPet);
 router.put('/:_id', updatePet);
 router.delete('/:_id', deletePet);
+router.delete('/owner/:owner', deleteClientPets);
 
 export default router;

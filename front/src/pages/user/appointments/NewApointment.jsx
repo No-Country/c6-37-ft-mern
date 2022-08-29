@@ -37,7 +37,7 @@ const NewAppointment = ({ refreshShifts }) => {
     day: '',
     time: '',
     pet: {},
-    client: user._id,
+    client: user.email,
   });
   const [consultList, setConsultList] = useState([]);
   const now = new Date().toISOString().substring(0, 10);

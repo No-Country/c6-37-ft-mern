@@ -15,11 +15,12 @@ function PreviousShifts() {
   const getAppointmentsData = async () => {
     let citas = [];
     let now = new Date();
-    await getClientAppointments(user._id)
+
+    await getClientAppointments(user.email)
       .then((res) => {
         res.data.map((data) => {
-          let date = new Date(data.day +' '+data.time);
-          (date) < now && citas.push(data);
+          let date = new Date(data.day + ' ' + data.time);
+          date < now && citas.push(data);
         });
       })
       .then(() => setConsultsData(citas))

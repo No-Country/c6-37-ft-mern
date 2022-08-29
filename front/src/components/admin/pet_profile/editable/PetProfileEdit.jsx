@@ -1,77 +1,112 @@
-import { Flex, Input, Stack, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { editPetData, setPetData } from './../../../../redux/features/petSlice'
-import ButtonsForm from './../../editable/ButtonsForm'
-import EditCard from './EditCard'
-import {v4 as uuid} from 'uuid'
-
+import { Flex, Input, Stack, Text, useToast } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { editPetData, setPetData } from './../../../../redux/features/petSlice';
+import ButtonsForm from './../../editable/ButtonsForm';
+import EditCard from './EditCard';
 
 function PetProfileEdit() {
-
-  
-  const [data, setData] = useState({
-    id:'',
-    name:'',
-    specie:'',
-    size:'',
-    breed:'',
-    birth:'',
-    sex:'',
-    weight:'',
-    imgUrl:'',
-    note:'',
-    editable: false,
-  })
-  
-  const petData = useSelector(state => state.petData)
-  const dispatch = useDispatch()
+  const toast = useToast();
+  const petData = useSelector((state) => state.petData);
+  const dispatch = useDispatch();
+  const [data, setData] = useState(petData);
 
   const handleChange = (e) => {
     setData({
       ...data,
-      id: uuid(),
-      [e.target.name]: e.target.value
-    })
-  }
-
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleCancel = () => {
-    dispatch(editPetData())
-  }
+    dispatch(editPetData());
+  };
 
   const handleSubmit = () => {
-    dispatch(setPetData(data))
-  }
+    dispatch(setPetData(data));
+  };
 
   return (
-    
-      <>
-        <Stack direction='row' justifyContent='space-between' alignItems='center' pt='16'>
-          <Flex direction='column'>
-            <EditCard handleChange={handleChange} data={petData.name} label='name'/>
-            <EditCard handleChange={handleChange} label='specie' data={petData.specie} />
-            <EditCard handleChange={handleChange} label='size' data={petData.size} />
-          </Flex>
-          <Flex direction='column'>
-            <EditCard handleChange={handleChange} label='breed' data={petData.breed} />
-            <EditCard handleChange={handleChange} label='birth' data={petData.birth} />
-          </Flex>
-          <Flex direction='column'>
-            <EditCard handleChange={handleChange} label='sex' data={petData.sex} />
-            <EditCard handleChange={handleChange} label='weight' data={petData.weight} />
-          </Flex>
-        </Stack>
+    <>
+      <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
+        <Flex direction="column" gap="5">
+          <EditCard
+            handleChange={handleChange}
+            data={data.name}
+            title="name"
+            value={data.name}
+          />
+          <EditCard
+            handleChange={handleChange}
+            title="specie"
+            data={data.specie}
+            value={data.specie}
+          />
+          <EditCard
+            handleChange={handleChange}
+            title="size"
+            data={data.size}
+            value={data.size}
+          />
+        </Flex>
+        <Flex direction="column" gap="5">
+          <EditCard
+            handleChange={handleChange}
+            title="breed"
+            data={data.breed}
+            value={data.breed}
+          />
+          <EditCard
+            handleChange={handleChange}
+            title="birth"
+            data={data.birth}
+            value={data.birth}
+          />
+        </Flex>
+        <Flex direction="column" gap="5">
+          <EditCard
+            handleChange={handleChange}
+            title="sex"
+            data={data.sex}
+            value={data.sex}
+          />
+          <EditCard
+            handleChange={handleChange}
+            title="weight"
+            data={data.weight}
+            value={data.weight}
+          />
+        </Flex>
+      </Stack>
 
-        <Stack>
-          <Text fontWeight='bold' textTransform='capitalize' fontSize='14px' fontFamily='Anek Bangla, sans-serif' >note:</Text>
-          <Input onChange={handleChange} fontSize='15px' fontWeight='semibold' _placeholder={{fontWeight:'light'}} placeholder={petData.note ? petData.note : 'note'} name='note' />
-        </Stack>
+      <Stack>
+        <Text
+          fontWeight="bold"
+          textTransform="capitalize"
+          fontSize="14px"
+          fontFamily="Anek Bangla, sans-serif"
+        >
+          note:
+        </Text>
+        <Input
+          w="100%"
+          h="30px"
+          variant="unstyled"
+        shadow="lg"
+        px="5"
+          onChange={handleChange}
+          fontSize="15px"
+          fontWeight="semibold"
+          _placeholder={{ fontWeight: 'light' }}
+          placeholder={petData.note ? petData.note : 'note'}
+          name="note"
+          value={data.note}
+        />
+      </Stack>
 
-        <ButtonsForm handleCancel={handleCancel} submit={handleSubmit} />
-      </>
-    
-  )
+      <ButtonsForm handleCancel={handleCancel} submit={handleSubmit} />
+    </>
+  );
 }
 
-export default PetProfileEdit
+export default PetProfileEdit;
