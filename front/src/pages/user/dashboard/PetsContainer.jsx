@@ -4,8 +4,20 @@ import PetChip from './PetChip';
 import { getOwnerPets } from './../../../services/pets';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import EditPet from './../pet/EditPet';
-import useUser from './../../../hooks/useUser';
+import PetModal from '../pet/PetModal';
+import useUser from '../../../hooks/useUser';
+
+const petEx = {
+  name: 'Firulais',
+  specie: 'Canine',
+  breed: 'Jack Russel',
+  sex: 'Male',
+  size: 'Mini',
+  birth: '16/03/18',
+  weight: '12',
+  note: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. ',
+  img: '/assets/dog.png',
+};
 
 const PetsContainer = () => {
   const { user } = useUser();
@@ -13,13 +25,13 @@ const PetsContainer = () => {
   const [refresh, setRefresh] = useState(0);
 
   const getOwnerPetsData = async () => {
-
-    await getOwnerPets(user.email).then((pets) => setPets(pets.data));
+    await getOwnerPets(user.email)
+      .then((pets) => setPets(pets.data))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     getOwnerPetsData();
-    console.log(refresh);
   }, [refresh]);
 
   return (
@@ -38,12 +50,21 @@ const PetsContainer = () => {
         >
           MY PETS
         </Text>
-        <EditPet email={'pepe@example.com'} />
+        <PetModal
+          refresh={refresh}
+          setRefresh={setRefresh}
+          email={'pepe@example.com'}
+        />
       </Flex>
       {pets.length > 0 ? (
         <Accordion allowToggle>
           {pets.map((pet) => (
-            <PetChip key={pet.name} pet={pet} refresh={refresh} setRefresh={setRefresh} />
+            <PetChip
+              key={pet.name}
+              pet={pet}
+              refresh={refresh}
+              setRefresh={setRefresh}
+            />
           ))}
         </Accordion>
       ) : (

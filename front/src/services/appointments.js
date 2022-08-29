@@ -7,8 +7,18 @@ export const getAppointments = async () => {
   return resp;
 };
 
-export const getAppointment = async ({ id }) => {
-  const resp = await axios.post(URL, { _id: id });
+export const getAppointment = async (_id) => {
+  const resp = await axios.get(URL, { _id: _id });
+  return resp;
+};
+
+export const getPetAppointments = async (_id) => {
+  const resp = await axios.get(URL + 'pet/' + _id);
+  return resp;
+};
+
+export const getClientAppointments = async (_id) => {
+  const resp = await axios.get(URL + 'client/' + _id);
   return resp;
 };
 
@@ -17,7 +27,7 @@ export const createAppointment = async (appointment) => {
   return resp;
 };
 
-export const deleteAppointment = async ({id}) => {
-  const resp = await axios.delete(URL + id);
+export const deleteAppointment = async (_id) => {
+  const resp = await axios.delete(URL + _id);
   return resp;
 };
