@@ -4,6 +4,8 @@ import UserMenu from './../components/UserMenu';
 import useUser from './../hooks/useUser';
 import { useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion'
+
 const Navbar = () => {
   const { isLogged } = useUser();
   const { scrollY } = useScroll();
@@ -38,6 +40,10 @@ const Navbar = () => {
       </Flex>
 
       <Flex gap={10}>
+      <motion.div
+      whileHover={{ scale: [null, 1.1, 1.1] }}
+      transition={{ duration: 0.3 }}
+      whileTap={{ scale: 0.8 }}>
         <Text
           as={RouterLink}
           to="/"
@@ -46,6 +52,12 @@ const Navbar = () => {
         >
           home
         </Text>
+        </motion.div>
+
+        <motion.div
+      whileHover={{ scale: [null, 1.1, 1.1] }}
+      transition={{ duration: 0.3 }}
+      whileTap={{ scale: 0.8 }}>
         <Text
           as={RouterLink}
           to="/home"
@@ -53,7 +65,12 @@ const Navbar = () => {
           color={scroll ? 'white' : '#035AA6'}
         >
           services
-        </Text>
+        </Text></motion.div>
+
+        <motion.div
+      whileHover={{ scale: [null, 1.1, 1.1] }}
+      transition={{ duration: 0.3 }}
+      whileTap={{ scale: 0.8 }}>
         <Text
           as={RouterLink}
           to="/petshop"
@@ -61,7 +78,12 @@ const Navbar = () => {
           color={scroll ? 'white' : '#035AA6'}
         >
           shop
-        </Text>
+        </Text></motion.div>
+
+        <motion.div
+      whileHover={{ scale: [null, 1.1, 1.1] }}
+      transition={{ duration: 0.3 }}
+      whileTap={{ scale: 0.8 }}>
         <Text
           as={RouterLink}
           to="/dashboard"
@@ -69,7 +91,12 @@ const Navbar = () => {
           color={scroll ? 'white' : '#035AA6'}
         >
           booking
-        </Text>
+        </Text></motion.div>
+
+        <motion.div
+      whileHover={{ scale: [null, 1.1, 1.1] }}
+      transition={{ duration: 0.3 }}
+      whileTap={{ scale: 0.8 }}>
         <Text
           as={RouterLink}
           to="/"
@@ -77,11 +104,14 @@ const Navbar = () => {
           color={scroll ? 'white' : '#035AA6'}
         >
           contact
-        </Text>
+        </Text></motion.div>
+        
       </Flex>
 
       {!isLogged ? (
         <Flex gap="5" alignItems="center">
+          <motion.div
+          whileTap={{ scale: 0.8 }}>
           <Button
             as={RouterLink}
             to="/login"
@@ -92,6 +122,10 @@ const Navbar = () => {
           >
             Login
           </Button>
+          </motion.div>
+
+          <motion.div
+          whileTap={{ scale: 0.8 }}>
           <Button
             as={RouterLink}
             to="/signup"
@@ -101,6 +135,7 @@ const Navbar = () => {
           >
             Sign Up
           </Button>
+          </motion.div>
         </Flex>
       ) : (
         <UserMenu />

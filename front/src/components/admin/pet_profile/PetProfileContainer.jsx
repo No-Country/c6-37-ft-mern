@@ -6,7 +6,7 @@ import PetProfile from './pet/PetProfile'
 function PetProfileContainer() {
   return (
     <Stack alignItems='center' justifyContent='center'>
-      <VStack w='932px' gap='10' boxShadow='dark-lg' py='10'>
+      <VStack boxShadow='0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)' gap='10' p='10'>
         <PetProfile />
         <OwnerCont />
         <ScrollAppointments />

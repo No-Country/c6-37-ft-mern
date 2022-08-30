@@ -4,10 +4,21 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { FiTrash } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { delUserData, setEditable } from "../../../redux/features/userSlice";
 import  CustomModal  from "./../CustomModal";
 
 const DeleteIcon = () => {
+  const dispatch = useDispatch();
 
+  const handleDelete = () => {
+
+    dispatch(delUserData());
+    // dispatch(setEditable());
+
+    onClose();
+
+  }
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);
@@ -39,6 +50,7 @@ const DeleteIcon = () => {
         text={"Do you really want to delete this client?"}
         cancel={"Cancel"}
         confirm={"Delete"}
+        onClick={handleDelete}
       />
     </>
   );

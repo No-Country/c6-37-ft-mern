@@ -1,10 +1,4 @@
-import {
-  Stack,
-  Text,
-  Flex,
-  useToast,
-  Center,
-} from '@chakra-ui/react';
+import { Stack, Text, Flex, useToast, Center } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import useUser from '../../../hooks/useUser';
@@ -26,12 +20,13 @@ function NextShifts() {
   const getAppointmentsData = async () => {
     let citas = [];
     let now = new Date();
-    await getClientAppointments(user._id).then((res) => {
-      res.data.map((data) => {
-        let date = new Date(data.day +' '+data.time);
-        (date) >= now && citas.push(data);
-      });
-    })
+    await getClientAppointments(user.email)
+      .then((res) => {
+        res.data.map((data) => {
+          let date = new Date(data.day + ' ' + data.time);
+          date >= now && citas.push(data);
+        });
+      })
       .then(() => setConsultsData(citas))
       .catch((err) => console.log(err));
   };

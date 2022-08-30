@@ -61,7 +61,7 @@ const HistorialAppointment = ({ consultsData }) => {
                   />
                 ))
               ) : (
-                <Center>
+                <Center h='100%'>
                   <Text opacity="0.5">
                     You shifts historial is already empty
                   </Text>
