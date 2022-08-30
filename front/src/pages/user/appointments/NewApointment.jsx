@@ -120,7 +120,7 @@ const NewAppointment = ({ refreshShifts }) => {
 
   useEffect(() => {
     getPetsData();
-  }, []);
+  }, [pets]);
 
   return (
     <>
