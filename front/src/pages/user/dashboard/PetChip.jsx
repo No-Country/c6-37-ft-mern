@@ -8,11 +8,10 @@ import {
   Flex,
   Grid,
   GridItem,
-  IconButton,
   Text,
 } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
-import EditPet from '../pet/EditPet';
+import PetModal from '../pet/PetModal';
 import { useEffect } from 'react';
 import DeletePetButton from './DeletePetButton';
 
@@ -127,7 +126,7 @@ const PetChip = ({ pet,refresh, setRefresh }) => {
             </Flex>
           </GridItem>
           <GridItem colSpan={2} justifySelf="center" alignSelf='center'>
-            <EditPet pet={pet} refresh={refresh} setRefresh={setRefresh} />
+            <PetModal pet={pet} refresh={refresh} setRefresh={setRefresh} />
           </GridItem>
 
           <DeletePetButton pet={pet} refresh={refresh} setRefresh={setRefresh} />

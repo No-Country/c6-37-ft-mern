@@ -1,76 +1,136 @@
-import { Avatar, Flex, Input, Stack, Text } from '@chakra-ui/react'
-import EditCard from './EditCard'
-import DeleteIcon from './DeleteIcon'
-import { useState } from 'react'
-import ButtonsForm from './ButtonsForm'
-import { useDispatch, useSelector } from 'react-redux'
-import { setEditable, setUserData } from '../../../redux/features/userSlice'
-import { v4 as uuid } from 'uuid'
+import { Avatar, Flex, Input, Stack, Text, useToast } from '@chakra-ui/react';
+import EditCard from './EditCard';
+import DeleteIcon from './DeleteIcon';
+import { useState } from 'react';
+import ButtonsForm from './ButtonsForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEditable, setUserData } from './../../../redux/features/userSlice';
+import { updateClient } from '../../../services/clients';
 
 function EditableProfile() {
+  const toast = useToast();
+  const obj = useSelector((state) => state.userData);
+  const [userInfo, setUserInfo] = useState(obj);
 
-
-  const [userInfo, setUserInfo] = useState(
-    {
-      id:'',
-      name: '',
-      lastName: '',
-      phone:'',
-      email: '',
-      address:'',
-    }
-  )
-
-  // const obj = JSON.parse(localStorage.getItem('user'))
-  const obj = useSelector(state => state.userData)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setUserInfo({
       ...userInfo,
-      id: uuid(),
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  const handleSubmit = () => {
-    dispatch(setUserData(userInfo))
-  }
+  const handleSubmit = async () => {
+    dispatch(setUserData(userInfo));
 
+    await updateClient(userInfo)
+      .then(() =>
+        toast({
+          title: 'Success',
+          description: 'User Updated successfully',
+          status: 'success',
+          duration: 6000,
+          position: 'bottom-right',
+          isClosable: true,
+        })
+      )
+      .catch((err) => console.log(err));
+  };
 
   const handleCancel = () => {
-    dispatch(setEditable())
-  }
+    dispatch(setEditable());
+  };
 
-  
   return (
-    <Stack direction='row' justifyContent='space-around' w='866px'>
+    <Stack direction="row" justifyContent="center" gap="20" px="10">
+      <Stack direction="row" gap="6">
+        <Avatar size="xl" name={`${userInfo.name}`} />
 
-      <Stack direction='row'>
-        <Avatar size='xl' name={`${userInfo.name}`}/>
-        
-        <Stack px='6' gap={4}>
-          <Flex direction='row' gap={10} >
-            <EditCard title='Name' name='name' handleChange={handleChange} logic={obj.name ? `${obj.name}` : `write your ${obj.name}`} />
-            <EditCard title='Last Name' name='lastName' handleChange={handleChange} logic={obj.lastName ? `${obj.lastName}` : `write your ${obj.lastName}`}/>
+        <Stack gap="2">
+          <Flex direction="row" gap="6">
+            <EditCard
+              title="Name"
+              name="name"
+              handleChange={handleChange}
+              logic={
+                userInfo.name
+                  ? `${userInfo.name}`
+                  : `write your ${userInfo.name}`
+              }
+              value={userInfo.name}
+            />
+            <EditCard
+              title="Last Name"
+              name="lastName"
+              handleChange={handleChange}
+              logic={
+                userInfo.lastName
+                  ? `${userInfo.lastName}`
+                  : `write your ${userInfo.lastName}`
+              }
+              value={userInfo.lastName}
+            />
           </Flex>
 
-          <Flex direction='row' gap={10} >
-            <EditCard title='Phone Number' name='phone' handleChange={handleChange} logic={obj.phone ? `${obj.phone}` : `write your ${obj.phone}`}/>
-            <EditCard title='Email' name='email' handleChange={handleChange} logic={obj.email ? `${obj.email}` : `write your ${obj.email}`} />
+          <Flex direction="row" gap="6">
+            <EditCard
+              title="Phone Number"
+              name="phoneNumber"
+              handleChange={handleChange}
+              logic={
+                userInfo.phoneNumber
+                  ? `${userInfo.phoneNumber}`
+                  : `write your ${userInfo.phoneNumber}`
+              }
+              value={userInfo.phoneNumber}
+            />
+            <EditCard
+              title="Email"
+              name="email"
+              handleChange={handleChange}
+              logic={
+                userInfo.email
+                  ? `${userInfo.email}`
+                  : `write your ${userInfo.email}`
+              }
+              value={userInfo.email}
+              isDisable={true}
+            />
           </Flex>
 
-          <Flex direction='column'>
-            <Text fontSize='14px' fontWeight='bold' fontFamily='Anek Bangla, sans-serif'>Address:</Text>
-            <Input placeholder={obj.address ? `${obj.address}` : `write your ${obj.address}`} px='5' name='address' onChange={handleChange} variant='unstyled' shadow='lg' maxW='490px' h='30px' rounded={0} _placeholder={{fontSize: '12px'}} />
+          <Flex direction="column">
+            <Text
+              fontSize="14px"
+              fontWeight="bold"
+              fontFamily="Anek Bangla, sans-serif"
+            >
+              Address:
+            </Text>
+            <Input
+              placeholder={
+                userInfo.address
+                  ? `${userInfo.address}`
+                  : `write your ${userInfo.address}`
+              }
+              px="5"
+              name="address"
+              onChange={handleChange}
+              variant="unstyled"
+              shadow="lg"
+              h="30px"
+              rounded={0}
+              _placeholder={{ fontSize: '12px' }}
+              value={userInfo.address}
+            />
           </Flex>
-          <ButtonsForm handleCancel={handleCancel}  submit={handleSubmit} />
+          <ButtonsForm handleCancel={handleCancel} submit={handleSubmit} />
         </Stack>
       </Stack>
 
       <DeleteIcon />
     </Stack>
-  )
+  );
 }
 
-export default EditableProfile
+export default EditableProfile;

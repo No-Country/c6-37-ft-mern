@@ -1,6 +1,6 @@
 import { Stack } from '@chakra-ui/react'
 import React from 'react'
-import UserProfileContainer from '../../components/admin/UserProfileContainer'
+import UserProfileContainer from './../../components/admin/UserProfileContainer'
 
 function ClientProfile() {
   return (

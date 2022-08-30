@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
 import useUser from './../../../hooks/useUser';
-import EditProfile from '../Profile/EditProfile';
+import EditProfile from './../Profile/EditProfile';
 import { AiFillPhone } from 'react-icons/ai';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 

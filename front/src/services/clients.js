@@ -24,8 +24,8 @@ export const updateClient = async (client) => {
   return resp;
 }
 
-export const deleteClient = async (client) => {
-  const resp = await axios.delete(URL + client.email);
+export const deleteClient = async (email) => {
+  const resp = await axios.delete(URL + email);
   return resp;
 }
 

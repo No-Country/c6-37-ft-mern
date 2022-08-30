@@ -1,102 +1,113 @@
+import { Stack, Text, Flex, useToast, Center } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import useUser from '../../../hooks/useUser';
 import {
-  Box,
-  Button,
-  Stack,
-  Text,
-  Link,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-} from "@chakra-ui/react";
-import React from "react";
-import { BsFillXCircleFill, BsPlus } from "react-icons/bs";
-import { MdOutlinePets } from "react-icons/md";
-import NewAppointment from "../appointments/NewApointment";
-import Shifts from "../appointments/Shifts";
-
+  deleteAppointment,
+  getClientAppointments,
+} from '../../../services/appointments';
+import { getPet } from '../../../services/pets';
+import DateShift from '../appointments/DateShift';
+import NewAppointment from './../appointments/NewApointment';
 
 function NextShifts() {
+  const toast = useToast();
+  const { user } = useUser();
+  const [consults, setConsults] = useState([]);
+  const [consultsData, setConsultsData] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
+  const getAppointmentsData = async () => {
+    let citas = [];
+    let now = new Date();
+    await getClientAppointments(user.email)
+      .then((res) => {
+        res.data.map((data) => {
+          let date = new Date(data.day + ' ' + data.time);
+          date >= now && citas.push(data);
+        });
+      })
+      .then(() => setConsultsData(citas))
+      .catch((err) => console.log(err));
+  };
+
+  const getPetData = async (consult) => {
+    await getPet(consult.pet).then((res) => {
+      consult.pet = res.data;
+      setConsults([...consults, consult]);
+    });
+  };
+
+  const deleteShiftData = async (selectedConsult) => {
+    await deleteAppointment(selectedConsult._id)
+      .then(() => {
+        toast({
+          title: 'Success',
+          description: 'Appointment deleted successfully',
+          status: 'success',
+          duration: 6000,
+          position: 'bottom-right',
+          isClosable: true,
+        });
+      })
+      .then(refreshShifts())
+      .catch((err) => console.log(err));
+  };
+
+  const refreshShifts = () => {
+    setRefresh(refresh + 1);
+  };
+
+  useEffect(() => {
+    consultsData.map((consult) => getPetData(consult));
+  }, [consultsData]);
+
+  useEffect(() => {
+    getAppointmentsData();
+  }, [refresh]);
 
   return (
-    <>
-      <Stack w="100%" p="20px" paddingY="20px">
-        <Box display="flex" justifyContent="center" p="5px">
-          <Text
-            fontFamily="Anek Bangla, sans-serif"
-            color="#0B8CBF"
-            fontWeight="600"
-            fontSize="1.7rem"
-          >
-            NEXT SHIFTS
-          </Text>
-        </Box>
+    <Stack py="20px">
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        gap="10px"
+      >
+        <Text
+          fontFamily="Anek Bangla, sans-serif"
+          color="#0B8CBF"
+          fontWeight="600"
+          fontSize="1.7rem"
+        >
+          NEXT SHIFTS
+        </Text>
 
-        <Box display="flex" w="100%">
-          <Box >
-          <Shifts 
-            type='Grooming'
-            hour='02:00pm'
-            date='01/10/22'/>
-          </Box>
-
-          <Box marginLeft="auto" display="flex">
-            <BsFillXCircleFill
-              color="#0B8CBF"
-              fontSize="1.2rem"
-              fontWeight="bold"
-            />
-            <Link>
-              <Text
-                fontFamily="Anek Bangla, sans-serif"
-                marginLeft="5px"
-                color="#0B8CBF"
-                fontSize="0.9rem"
-                fontWeight="bold"
-              >
-                Cancel
+        <Flex direction="column" w="100%">
+          {consultsData.length > 0 ? (
+            consultsData.map((consult, index) => (
+              <DateShift
+                key={index}
+                consult={consult}
+                isDeleteable={true}
+                haveDeleteModal={true}
+                deleteShiftData={(selectedConsult) =>
+                  deleteShiftData(selectedConsult)
+                }
+              />
+            ))
+          ) : (
+            <Center>
+              <Text opacity="0.5">
+                You don't have shifts. please create one
               </Text>
-            </Link>
-          </Box>
-        </Box>
+            </Center>
+          )}
+        </Flex>
 
-        <Box display="flex" w="100%">
-          <Box >
-            <Shifts 
-            type='Grooming'
-            hour='02:00pm'
-            date='01/10/22'/>
-          </Box>
-
-          <Box marginLeft="auto" display="flex">
-            <BsFillXCircleFill
-              color="#0B8CBF"
-              fontSize="1.2rem"
-              fontWeight="bold"
-            />
-            <Link>
-              <Text
-                fontFamily="Anek Bangla, sans-serif"
-                marginLeft="5px"
-                color="#0B8CBF"
-                fontSize="0.9rem"
-                fontWeight="bold"
-              >
-                Cancel
-              </Text>
-            </Link>
-          </Box>
-        </Box>
-
-        <Box display="flex" justifyContent="center">
-        <NewAppointment/>
-        </Box>
-      </Stack>
-      
-    </>
+        <NewAppointment refreshShifts={refreshShifts} />
+      </Flex>
+    </Stack>
   );
 }
 

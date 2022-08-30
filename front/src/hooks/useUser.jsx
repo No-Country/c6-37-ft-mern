@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useUserContext } from '../context/UserContext';
+import { useUserContext } from './../context/UserContext';
 
 const useUser = () => {
   const { user, setUser } = useUserContext();

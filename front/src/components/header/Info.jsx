@@ -1,5 +1,6 @@
 import { Box, Flex, VStack, Stack, Text, Heading } from '@chakra-ui/react'
 import { BsArrowDownCircle } from 'react-icons/bs'
+import { motion } from 'framer-motion'
 
 const Info = () => {
   return (
@@ -12,15 +13,17 @@ const Info = () => {
       </Flex>
 
       <Box w='370px' >
-        <Text textAlign='center' fontWeight='500' fontSize='16px'>Lorem ipsu is simply dummy text of the printing and typesetting industry. lorem ipsu has</Text>
+        <Text fontFamily='Anek Bangla' textAlign='center' fontWeight='500' fontSize='16px'>We care about pets. That's why our mission is to provide the best quality services to keep your pets healthy and happy</Text>
       </Box>
-
+      <motion.div
+      whileTap={{ scale: 0.8 }}>
       <Stack as='button' w='192px' h='48px' borderRadius='50' bg='#035AA6' alignItems='center' direction='row' justifyContent='center' color='#fff' gap='4' cursor='pointer'>
         <Text fontSize='22px' >See more</Text>
         <Box fontSize='26px'>
           <BsArrowDownCircle />
         </Box>
       </Stack>
+      </motion.div>
     </VStack>
   )
 }

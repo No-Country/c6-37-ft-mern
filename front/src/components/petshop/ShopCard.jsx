@@ -3,7 +3,7 @@ import { AiOutlineLine } from 'react-icons/ai'
 
 const ShopCard = (props) => {
   return (
-    <VStack h='450px' w='300px' bg='#fff' borderRadius={20} justifyContent='center' spacing='0px' pb='5'>
+    <VStack cursor='pointer' h='450px' w='300px' bg='#fff' borderRadius={20} justifyContent='center' spacing='0px' pb='5'>
       <Image src={props.src} alt='product image' maxW='262px' h='170px' objectFit='contain' />
 
       <HStack fontSize='50px'>
@@ -22,9 +22,9 @@ const ShopCard = (props) => {
         </HStack>
 
         <VStack lineHeight='25px' fontSize='24px' fontWeight='500' alignItems='center'>
-          <Text>{props.text1}</Text>
-          <Text>{props.text2}</Text>
-          <Text>{props.text3}</Text>
+          <Text fontWeight='700' fontFamily='Anek Bangla'>{props.text1}</Text>
+          <Text  fontFamily='Anek Bangla'>{props.text2}</Text>
+          <Text fontFamily='Anek Bangla'>{props.text3}</Text>
         </VStack>
 
       </VStack>

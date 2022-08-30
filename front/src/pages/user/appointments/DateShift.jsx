@@ -1,41 +1,92 @@
-import React from 'react';
-import { Box, Avatar, Text, Divider } from '@chakra-ui/react';
+import React, { useRef } from 'react';
+import {
+  Avatar,
+  Text,
+  Divider,
+  Flex,
+  IconButton,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { HiMinusCircle } from 'react-icons/hi';
+import CustomModal from '../../../components/admin/CustomModal';
 
-const DateShift = (props) => {
+const DateShift = ({ consult, deleteShiftData, haveDeleteModal, isDeleteable }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const finalRef = useRef(null);
+
+  const handleDelete = (consult) => {
+    deleteShiftData(consult);
+    onClose();
+  };
+
   return (
     <>
-      <Box overflow="hidden" display="flex" paddingX="15px" paddingY="4px">
-        <Avatar size="xs" />
+      <Flex
+        paddingX="15px"
+        paddingY="4px"
+        alignItems="center"
+        justifyContent="space-between"
+        gap="20px"
+      >
+        <Flex gap="10px" alignItems="center" flex="1">
+          <Avatar size="xs" name={consult.pet.name} />
+          <Text
+            fontSize="14px"
+            fontWeight="bold"
+            fontFamily="Anek Bangla, sans-serif"
+          >
+            {consult.pet.name}
+          </Text>
+        </Flex>
         <Text
-          w="170px"
-          marginLeft="10px"
-          fontSize="1rem"
+          fontSize="14px"
           fontWeight="bold"
           fontFamily="Anek Bangla, sans-serif"
+          flex="1"
         >
-          {props.name}
+          {consult.type}
         </Text>
-        <Text
-          w="120px"
-          marginLeft="10px"
-          fontSize="1rem"
-          fontWeight="bold"
-          fontFamily="Anek Bangla, sans-serif"
-        >
-          Day: {props.date}
-        </Text>
-        <Text
-          w="105px"
-          marginLeft="10px"
-          fontSize="1rem"
-          fontWeight="bold"
-          fontFamily="Anek Bangla, sans-serif"
-        >
-          Hour: {props.hour}
-        </Text>
-        <HiMinusCircle fontSize="23px" color="#DC3545" cursor="pointer" />
-      </Box>
+        <Flex gap="15px" alignItems="center">
+          <Text
+            fontSize="14px"
+            fontWeight="bold"
+            fontFamily="Anek Bangla, sans-serif"
+          >
+            {consult.day.split('-').reverse().join('/')}
+          </Text>
+          <Text
+            fontSize="14px"
+            fontWeight="bold"
+            fontFamily="Anek Bangla, sans-serif"
+          >
+            {consult.time}
+          </Text>
+        </Flex>
+
+        {isDeleteable && (
+          <IconButton
+            aria-label="Delete Consult"
+            icon={<HiMinusCircle fontSize="22px" color="#DC3545" />}
+            size="xs"
+            bgColor="transparent"
+            color="white"
+            borderRadius="full"
+            onClick={haveDeleteModal ? onOpen : () => handleDelete(consult)}
+          />
+        )}
+        {haveDeleteModal && (
+          <CustomModal
+            finalFocusRef={finalRef}
+            isOpen={isOpen}
+            onClose={onClose}
+            title={'Delete Pet'}
+            text={'Do you really want to delete this appointment?'}
+            cancel={'Cancel'}
+            confirm={'Delete'}
+            onClick={() => handleDelete(consult)}
+          />
+        )}
+      </Flex>
       <Divider />
     </>
   );

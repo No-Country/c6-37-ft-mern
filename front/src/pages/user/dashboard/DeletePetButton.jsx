@@ -1,8 +1,8 @@
 import { IconButton, useDisclosure, useToast } from '@chakra-ui/react';
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useRef } from 'react';
 import { MdDelete } from 'react-icons/md';
-import CustomModal from '../../../components/admin/CustomModal';
-import { deletePet } from '../../../services/pets';
+import CustomModal from './../../../components/admin/CustomModal';
+import { deletePet } from './../../../services/pets';
 
 const DeletePetButton = ({ pet, refresh, setRefresh }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

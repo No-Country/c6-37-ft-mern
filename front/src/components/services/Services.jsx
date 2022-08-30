@@ -1,7 +1,10 @@
 import React from 'react';
 import GridChip from './GridChip';
 import { Stack, Text } from '@chakra-ui/react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+AOS.init();
 let datos = [
   {id: 1, img: '/assets/bath_icono.png', text: 'SPA AND GROOMING' },
   {id: 2, img: '/assets/cat_icono.png', text: 'CAT SPECIALISTS' },
@@ -14,7 +17,8 @@ let datos = [
 // sfc shortcut
 const Services = () => {
   return (
-    <Stack alignItems="center" justifyContent="center" w="1280px" gap="60px" py={20}>
+    <div data-aos='zoom-in-up'>
+    <Stack alignItems="center" justifyContent="center" w="1280px" gap="60px" py={20} id='services'>
       <Stack>
         <Text
           fontSize="36px"
@@ -33,6 +37,7 @@ const Services = () => {
         heightChip="150px"
       />
     </Stack>
+    </div>
   );
 };
 

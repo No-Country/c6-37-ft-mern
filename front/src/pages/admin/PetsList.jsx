@@ -1,15 +1,15 @@
 import { Button, Heading, Stack, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-import DataTable from '../../components/table/dataTable';
+import DataTable from './../../components/table/dataTable';
 import SearchBar from './SearchBar';
 import PetProfileContainer from './../../components/admin/pet_profile/PetProfileContainer';
 import { useDispatch } from 'react-redux';
-import { setPetData } from '../../redux/features/petSlice';
+import { setPetData } from './../../redux/features/petSlice';
 import { useEffect } from 'react';
-import { getPet, getPets } from '../../services/pets';
-import { getClient } from '../../services/clients';
-import { setUserData } from '../../redux/features/userSlice';
+import { getPet, getPets } from './../../services/pets';
+import { getClient } from './../../services/clients';
+import { setUserData } from './../../redux/features/userSlice';
 const columns = [
   { key: 'name', title: 'Name' },
   { key: 'owner', title: 'Owner' },
@@ -116,6 +116,7 @@ const PetsList = () => {
                 columns={columns}
                 rows={rows}
                 handleSelect={(pet) => handleSelect(pet)}
+                isClickable={true}
               />
             ) : (
               <Text>Loading data...</Text>

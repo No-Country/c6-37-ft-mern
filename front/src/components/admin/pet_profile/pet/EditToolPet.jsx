@@ -2,8 +2,8 @@ import { Box, Stack, useDisclosure } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { FiTrash } from 'react-icons/fi';
 import { MdEdit } from 'react-icons/md';
-import { useSelector, useDispatch } from 'react-redux';
-import { delPetData, editPetData } from '../../../../redux/features/petSlice';
+import { useDispatch } from 'react-redux';
+import { editPetData } from './../../../../redux/features/petSlice';
 import CustomModal from './../../CustomModal';
 
 function EditToolPet() {
@@ -13,11 +13,6 @@ function EditToolPet() {
 
   const handleClick = () => {
     dispatch(editPetData());
-  };
-
-  const handleDel = (e) => {
-    let empty = {};
-    dispatch(delPetData(empty));
   };
 
 

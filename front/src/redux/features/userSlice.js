@@ -18,13 +18,21 @@ export const userDataSlice = createSlice({
       const { name, lastName, email, address, phoneNumber } = action.payload;
       state.name = name;
       state.lastName = lastName;
+      state.phoneNumber = phoneNumber;
       state.email = email;
       state.address = address;
-      state.phoneNumber = phoneNumber;
       state.editable = false;
     },
     delUserData: (state) => {
-      // consulta la db
+      const { name, lastName, email, address, phoneNumber } = initialState;
+      state.name = name;
+      state.lastName = lastName;
+      state.phoneNumber = phoneNumber;
+      state.email = email;
+      state.address = address;
+      state.editable = false;
+      // state = {...state, ...initialState}
+      console.log(state);
     },
     setEditable: (state) => {
       state.editable = !state.editable;
