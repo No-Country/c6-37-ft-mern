@@ -1,29 +1,28 @@
 import { Stack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import appointmentsHook from '../../services/appointmentsHook';
-import DataTable from '../table/dataTable';
+import DataTable from '../../../table/dataTable';
+import appointmentsHook from '../../../../services/appointmentsHook';
 
 const columns = [
   { key: 'type', title: 'Consult' },
-  { key: 'pet', title: 'Pet' },
   { key: 'time', title: 'Time' },
   { key: 'day', title: 'Day' },
 ];
-function ScrollAppointments() {
-  const { appointmentWithPet, getClientAppointments } = appointmentsHook();
-  const state = useSelector((state) => state.userData);
+function PetAppointments() {
+  const {getPetAppointments} = appointmentsHook();
+  const state = useSelector((state) => state.petData);
   const [rows, setRows] = useState([]);
 
-  useEffect(()=>{
-
-    getClientAppointments(state.email);
-
-  },[])
+  const getPetAppointmentsData = async () => {
+    await getPetAppointments(state._id)
+      .then((res) => setRows(res.data))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
-    appointmentWithPet.length && setRows(appointmentWithPet);
-  }, [appointmentWithPet]);
+    state._id && getPetAppointmentsData();
+  }, [state]);
 
   return (
     <Stack width="100%">
@@ -39,4 +38,4 @@ function ScrollAppointments() {
   );
 }
 
-export default ScrollAppointments;
+export default PetAppointments;

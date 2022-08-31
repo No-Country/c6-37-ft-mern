@@ -128,7 +128,6 @@ function EditableProfile() {
         </Stack>
       </Stack>
 
-      <DeleteIcon />
     </Stack>
   );
 }

@@ -2,15 +2,14 @@ import { Stack, Text, Flex, useToast, Center } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import useUser from '../../../hooks/useUser';
-import {
-  deleteAppointment,
-  getClientAppointments,
-} from '../../../services/appointments';
-import { getPet } from '../../../services/pets';
+import appointmentsHook from '../../../services/appointmentsHook';
+import petsHook from '../../../services/petsHook';
 import DateShift from '../appointments/DateShift';
 import NewAppointment from './../appointments/NewApointment';
 
 function NextShifts() {
+  const { deleteAppointment, getClientAppointments } = appointmentsHook();
+  const { getPet } = petsHook();
   const toast = useToast();
   const { user } = useUser();
   const [consults, setConsults] = useState([]);
@@ -24,7 +23,9 @@ function NextShifts() {
       .then((res) => {
         res.data.map((data) => {
           let date = new Date(data.day + ' ' + data.time);
+          // date >= now && setConsultsData(consultsData.concat(data))
           date >= now && citas.push(data);
+          console.log(data);
         });
       })
       .then(() => setConsultsData(citas))
@@ -59,11 +60,13 @@ function NextShifts() {
   };
 
   useEffect(() => {
-    consultsData.map((consult) => getPetData(consult));
+    // consultsData.map((consult) => getPetData(consult));
+    console.log(consultsData);
   }, [consultsData]);
 
   useEffect(() => {
     getAppointmentsData();
+    console.log('entro');
   }, [refresh]);
 
   return (
@@ -105,7 +108,7 @@ function NextShifts() {
           )}
         </Flex>
 
-        <NewAppointment refreshShifts={refreshShifts} />
+        <NewAppointment refreshShifts={() => refreshShifts()} />
       </Flex>
     </Stack>
   );

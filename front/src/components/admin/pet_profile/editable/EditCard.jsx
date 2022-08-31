@@ -13,7 +13,7 @@ function EditCard(props) {
         {props.title}
       </Text>
       <Input
-        maxW="200px"
+        maxW="160px"
         h="30px"
         px="5"
         fontSize="14px"

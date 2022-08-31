@@ -15,7 +15,7 @@ import PetModal from '../pet/PetModal';
 import { useEffect } from 'react';
 import DeletePetButton from './DeletePetButton';
 
-const PetChip = ({ pet,refresh, setRefresh }) => {
+const PetChip = ({ pet,refreshPets }) => {
   return (
     <AccordionItem>
       <AccordionButton>
@@ -126,10 +126,10 @@ const PetChip = ({ pet,refresh, setRefresh }) => {
             </Flex>
           </GridItem>
           <GridItem colSpan={2} justifySelf="center" alignSelf='center'>
-            <PetModal pet={pet} refresh={refresh} setRefresh={setRefresh} />
+            <PetModal pet={pet} refreshPets={()=>refreshPets()} />
           </GridItem>
 
-          <DeletePetButton pet={pet} refresh={refresh} setRefresh={setRefresh} />
+          <DeletePetButton pet={pet} refreshPets={()=>refreshPets()} />
           
         </Grid>
       </AccordionPanel>

@@ -1,9 +1,9 @@
 import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { getAppointments } from '../../services/appointments';
+import appointmentsHook from '../../services/appointmentsHook';
 import { getClient, getClients } from '../../services/clients';
-import { getPets } from '../../services/pets';
+import petsHook from '../../services/petsHook';
 import DataTable from './../../components/table/dataTable';
 import useUser from './../../hooks/useUser';
 import CounterChip from './CounterChip';
@@ -17,29 +17,26 @@ const columns = [
 ];
 
 const Dashboard = () => {
-  const { user } = useUser();
+  const {getPets, pets} = petsHook(); 
+  const { appointmentWithClients, getAppointments } = appointmentsHook();
   const [appointments, setAppointments] = useState([]);
   const [clients, setClients] = useState([]);
-  const [pets, setPets] = useState([]);
 
   const getAppointmentsData = async () => {
-    let citas = [];
+    let citas = appointmentWithClients;
+    let citasFiltradas= [];
     let now = new Date().toISOString().substring(0, 10);
 
-    await getAppointments()
-      .then((res) => {
-        res.data.map((data) => {
-          let date = new Date(data.day + ' ' + data.time)
-            .toISOString()
-            .substring(0, 10);
-          date === now && citas.push(data);
-        });
+     await Promise.all(
+      citas.map(async (cita) => {
+        let date = new Date(cita.day + ' ' + cita.time)
+          .toISOString()
+          .substring(0, 10);
+         date === now && citasFiltradas.push(cita);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    );
 
-    setAppointments(citas);
+    setAppointments(citasFiltradas);
   };
 
   const getClientsData = async () => {
@@ -52,21 +49,15 @@ const Dashboard = () => {
       });
   };
 
-  const getPetsData = async () => {
-    await getPets()
-      .then((res) => {
-        setPets(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  useEffect(() => {
+    getAppointments();
+    getClientsData();
+    getPets();
+  }, []);
 
   useEffect(() => {
-    getAppointmentsData();
-    getClientsData();
-    getPetsData();
-  }, []);
+    appointmentWithClients.length > 0 && getAppointmentsData();
+  }, [appointmentWithClients]);
 
   return (
     <Stack gap="48px">

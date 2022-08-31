@@ -1,18 +1,9 @@
 import {
-  Heading,
   Stack,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getOwnerPets } from './../../services/pets';
+import petsHook from './../../services/petsHook';
 import DataTable from './../table/dataTable';
 
 const columns = [
@@ -22,6 +13,7 @@ const columns = [
 ];
 
 const ScrollContainer = () => {
+  const {getOwnerPets} = petsHook();
   const state = useSelector((state) => state.userData);
   const [rows, setRows] = useState([]);
 

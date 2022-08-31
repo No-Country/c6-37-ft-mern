@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Dashboard from './Dashboard';
 import ClientsList from './ClientsList';
 import PetsList from './PetsList';
-import Appointments from './Appointments';
+import Appointments from './AppointmentsList';
 import Menu from './menu';
 
 const Admin = () => {
