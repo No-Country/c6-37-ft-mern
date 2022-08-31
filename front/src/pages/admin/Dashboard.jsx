@@ -17,24 +17,24 @@ const columns = [
 ];
 
 const Dashboard = () => {
-  const {getPets, pets} = petsHook(); 
+  const { getPets, pets } = petsHook();
   const { appointmentWithClients, getAppointments } = appointmentsHook();
   const [appointments, setAppointments] = useState([]);
   const [clients, setClients] = useState([]);
 
   const getAppointmentsData = async () => {
     let citas = appointmentWithClients;
-    let citasFiltradas= [];
+    let citasFiltradas = [];
     let now = new Date().toISOString().substring(0, 10);
 
-     await Promise.all(
+    await Promise.all(
       citas.map(async (cita) => {
         let date = new Date(cita.day + ' ' + cita.time)
           .toISOString()
           .substring(0, 10);
-         date === now && citasFiltradas.push(cita);
+        date === now && citasFiltradas.push(cita);
       })
-    );
+    ).catch((err) => console.log(err));
 
     setAppointments(citasFiltradas);
   };

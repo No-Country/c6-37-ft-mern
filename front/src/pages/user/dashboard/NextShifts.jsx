@@ -8,7 +8,8 @@ import DateShift from '../appointments/DateShift';
 import NewAppointment from './../appointments/NewApointment';
 
 function NextShifts() {
-  const { deleteAppointment, getClientAppointments } = appointmentsHook();
+  const { deleteAppointment, getClientAppointments, appointmentWithPet } =
+    appointmentsHook();
   const { getPet } = petsHook();
   const toast = useToast();
   const { user } = useUser();
@@ -17,26 +18,19 @@ function NextShifts() {
   const [refresh, setRefresh] = useState(0);
 
   const getAppointmentsData = async () => {
-    let citas = [];
+    let citas = appointmentWithPet;
+    let citasFiltradas = [];
     let now = new Date();
-    await getClientAppointments(user.email)
-      .then((res) => {
-        res.data.map((data) => {
-          let date = new Date(data.day + ' ' + data.time);
-          // date >= now && setConsultsData(consultsData.concat(data))
-          date >= now && citas.push(data);
-          console.log(data);
-        });
-      })
-      .then(() => setConsultsData(citas))
-      .catch((err) => console.log(err));
-  };
 
-  const getPetData = async (consult) => {
-    await getPet(consult.pet).then((res) => {
-      consult.pet = res.data;
-      setConsults([...consults, consult]);
-    });
+    await Promise.all(
+      citas.map(async (cita) => {
+        let date = new Date(cita.day + ' ' + cita.time);
+        date >= now && citasFiltradas.push(cita);
+      })
+    ).catch((err) => console.log(err));
+
+    setConsultsData(citasFiltradas);
+
   };
 
   const deleteShiftData = async (selectedConsult) => {
@@ -60,14 +54,14 @@ function NextShifts() {
   };
 
   useEffect(() => {
-    // consultsData.map((consult) => getPetData(consult));
-    console.log(consultsData);
-  }, [consultsData]);
+    getClientAppointments(user.email);
+  }, []);
 
   useEffect(() => {
-    getAppointmentsData();
-    console.log('entro');
-  }, [refresh]);
+    appointmentWithPet.length > 0 && getAppointmentsData();
+    console.log(appointmentWithPet);
+  }, [appointmentWithPet]);
+
 
   return (
     <Stack py="20px">

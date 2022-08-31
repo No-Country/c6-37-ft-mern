@@ -7,41 +7,35 @@ import DateShift from '../appointments/DateShift';
 import HistorialAppointment from './../appointments/HistorialAppointment';
 
 function PreviousShifts() {
-  const {getClientAppointments} = appointmentsHook();
+  const {getClientAppointments,appointmentWithPet} = appointmentsHook();
   const { getPet } = petsHook();
   const { user } = useUser();
   const [consults, setConsults] = useState([]);
   const [consultsData, setConsultsData] = useState([]);
 
   const getAppointmentsData = async () => {
-    let citas = [];
+    let citas = appointmentWithPet;
+    let citasFiltradas = [];
     let now = new Date();
 
-    await getClientAppointments(user.email)
-      .then((res) => {
-        res.data.map((data) => {
-          let date = new Date(data.day + ' ' + data.time);
-          date < now && citas.push(data);
-        });
+    await Promise.all(
+      citas.map(async (cita) => {
+        let date = new Date(cita.day + ' ' + cita.time);
+        date < now && citasFiltradas.push(cita);
       })
-      .then(() => setConsultsData(citas))
-      .catch((err) => console.log(err));
-  };
+    ).catch((err) => console.log(err));
 
-  const getPetData = async (consult) => {
-    await getPet(consult.pet).then((res) => {
-      consult.pet = res.data;
-      setConsults([...consults, consult]);
-    });
+    setConsultsData(citasFiltradas);
+
   };
 
   useEffect(() => {
-    consultsData.map((consult) => getPetData(consult));
-  }, [consultsData]);
-
-  useEffect(() => {
-    getAppointmentsData();
+    getClientAppointments(user.email);
   }, []);
+
+  useEffect(() => {
+    appointmentWithPet.length > 0 && getAppointmentsData();
+  }, [appointmentWithPet]);
 
   return (
     <Stack py="20px">
