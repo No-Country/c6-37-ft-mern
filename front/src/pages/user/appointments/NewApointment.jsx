@@ -38,7 +38,7 @@ const NewAppointment = ({ refreshShifts }) => {
     type: '',
     day: '',
     time: '',
-    pet: {},
+    pet: '',
     client: user.email,
   });
   const [consultList, setConsultList] = useState([]);
@@ -72,7 +72,7 @@ const NewAppointment = ({ refreshShifts }) => {
 
       return;
     }
-
+    // console.log(consult);
     setConsultList([...consultList, consult]);
   };
 
@@ -125,6 +125,8 @@ const NewAppointment = ({ refreshShifts }) => {
     getPetsData();
     setConsult;
   }, []);
+
+  useEffect(()=>{console.log(consultList);},[consultList])
 
   return (
     <>

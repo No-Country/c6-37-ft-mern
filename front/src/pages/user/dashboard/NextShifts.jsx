@@ -59,7 +59,6 @@ function NextShifts() {
 
   useEffect(() => {
     appointmentWithPet.length > 0 && getAppointmentsData();
-    console.log(appointmentWithPet);
   }, [appointmentWithPet]);
 
 

@@ -8,9 +8,7 @@ import HistorialAppointment from './../appointments/HistorialAppointment';
 
 function PreviousShifts() {
   const {getClientAppointments,appointmentWithPet} = appointmentsHook();
-  const { getPet } = petsHook();
   const { user } = useUser();
-  const [consults, setConsults] = useState([]);
   const [consultsData, setConsultsData] = useState([]);
 
   const getAppointmentsData = async () => {
