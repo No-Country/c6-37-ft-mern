@@ -4,12 +4,13 @@ import { FiArrowLeft } from 'react-icons/fi';
 import DataTable from './../../components/table/dataTable';
 import SearchBar from './SearchBar';
 import PetProfileContainer from './../../components/admin/pet_profile/PetProfileContainer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPetData } from './../../redux/features/petSlice';
 import { useEffect } from 'react';
-import { getPet, getPets } from './../../services/pets';
 import { getClient } from './../../services/clients';
 import { setUserData } from './../../redux/features/userSlice';
+import petsHook from '../../services/petsHook';
+
 const columns = [
   { key: 'name', title: 'Name' },
   { key: 'owner', title: 'Owner' },
@@ -18,9 +19,10 @@ const columns = [
 ];
 
 const PetsList = () => {
+  const { petsWithOwner, getPets,getPet } = petsHook();
+  const state = useSelector((state) => state.petData);
   const [selectedPet, setSelectedPet] = useState(null);
   const [selectedClient, setSelectedClient] = useState(null);
-  const [rows, setRows] = useState([]);
   const dispatch = useDispatch();
 
   const handleSelect = async (pet) => {
@@ -28,51 +30,14 @@ const PetsList = () => {
     let clientData;
 
     await getPet(pet._id).then((pet) => (petData = pet.data));
-
     await getClient(petData.owner).then((client) => (clientData = client.data));
 
     setSelectedPet(petData);
     setSelectedClient(clientData);
-
-  };
-
-  const getPetsData = async (pets) => {
-    await getPets()
-      .then((res) => {
-        res.data.map((pet) => {
-          pets.push(pet);
-        });
-      })
-      .catch((error) => console.log(error));
-
-    return pets;
-  };
-
-  const getOwnerData = async (pet) => {
-    let client;
-    await getClient(pet.owner)
-      .then((res) => {
-        client = res.data;
-      })
-      .catch((error) => console.log(error));
-
-    return client;
   };
 
   useEffect(() => {
-    let pets = [];
-    getPetsData(pets).then((res) => {
-      res.map((pet) => {
-        getOwnerData(pet)
-          .then((owner) => {
-
-            pet.owner = owner.name + ' ' + owner.lastName;
-          })
-          .catch((error) => console.log(error));
-      });
-
-      setRows(pets);
-    });
+    getPets();
   }, []);
 
   useEffect(() => {
@@ -85,7 +50,7 @@ const PetsList = () => {
 
   return (
     <Stack>
-      {selectedPet ? (
+      {selectedPet && state.name !== '' ? (
         <>
           <Button
             variantColor="blue"
@@ -111,16 +76,12 @@ const PetsList = () => {
           >
             <SearchBar search={['name', 'owner']} />
 
-            {rows.length > 0 ? (
-              <DataTable
-                columns={columns}
-                rows={rows}
-                handleSelect={(pet) => handleSelect(pet)}
-                isClickable={true}
-              />
-            ) : (
-              <Text>Loading data...</Text>
-            )}
+            <DataTable
+              columns={columns}
+              rows={petsWithOwner}
+              handleSelect={(pet) => handleSelect(pet)}
+              isClickable={true}
+            />
           </Stack>
         </>
       )}
@@ -129,6 +90,3 @@ const PetsList = () => {
 };
 
 export default PetsList;
-
-
-/*{"name":"Administrator","lastName":"","email":"","password":"","address":"","phoneNumber":"","isAdmin":true}*/

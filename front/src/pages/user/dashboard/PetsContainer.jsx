@@ -1,11 +1,11 @@
 import React from 'react';
 import { Accordion, Flex, Text } from '@chakra-ui/react';
 import PetChip from './PetChip';
-import { getOwnerPets } from './../../../services/pets';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import PetModal from '../pet/PetModal';
 import useUser from '../../../hooks/useUser';
+import petsHook from '../../../services/petsHook';
 
 const petEx = {
   name: 'Firulais',
@@ -20,6 +20,7 @@ const petEx = {
 };
 
 const PetsContainer = () => {
+  const {getOwnerPets} = petsHook();
   const { user } = useUser();
   const [pets, setPets] = useState([]);
   const [refresh, setRefresh] = useState(0);
@@ -28,6 +29,10 @@ const PetsContainer = () => {
     await getOwnerPets(user.email)
       .then((pets) => setPets(pets.data))
       .catch((err) => console.log(err));
+  };
+
+  const refreshPets = () => {
+    setRefresh(refresh + 1);
   };
 
   useEffect(() => {
@@ -51,8 +56,7 @@ const PetsContainer = () => {
           MY PETS
         </Text>
         <PetModal
-          refresh={refresh}
-          setRefresh={setRefresh}
+          refreshPets={() => refreshPets()}
           email={'pepe@example.com'}
         />
       </Flex>
@@ -60,10 +64,9 @@ const PetsContainer = () => {
         <Accordion allowToggle>
           {pets.map((pet) => (
             <PetChip
+              refreshPets={() => refreshPets()}
               key={pet.name}
               pet={pet}
-              refresh={refresh}
-              setRefresh={setRefresh}
             />
           ))}
         </Accordion>

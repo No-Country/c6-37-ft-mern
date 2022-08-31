@@ -9,12 +9,11 @@ function PetProfile() {
   const petData = useSelector((state) => state.petData);
 
   return (
-    <HStack w='100%' alignItems="center" justifyContent="center" gap='16'>
+    <HStack w='100%' alignItems="flex-start" justifyContent="center" gap='16'>
       <Avatar
         src={petData.imgUrl}
         name={petData.name}
         size="xl"
-        alignSelf="center"
       />
 
       <Stack w='100%' justifyContent="center">
@@ -25,7 +24,6 @@ function PetProfile() {
         )}
       </Stack>
 
-      <EditToolPet />
     </HStack>
   );
 }

@@ -1,13 +1,14 @@
-import { Box, Stack, Text, Link, Flex, Center } from '@chakra-ui/react';
+import { Stack, Text, Flex, Center } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import useUser from '../../../hooks/useUser';
-import { getClientAppointments } from '../../../services/appointments';
-import { getPet } from '../../../services/pets';
+import appointmentsHook from '../../../services/appointmentsHook';
+import petsHook from '../../../services/petsHook';
 import DateShift from '../appointments/DateShift';
 import HistorialAppointment from './../appointments/HistorialAppointment';
-import Shifts from './../appointments/Shifts';
 
 function PreviousShifts() {
+  const {getClientAppointments} = appointmentsHook();
+  const { getPet } = petsHook();
   const { user } = useUser();
   const [consults, setConsults] = useState([]);
   const [consultsData, setConsultsData] = useState([]);

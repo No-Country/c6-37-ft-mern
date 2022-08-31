@@ -22,11 +22,13 @@ import { BsPlus, BsPlusCircle } from 'react-icons/bs';
 import Pets from './Pets';
 import DateShift from './DateShift';
 import { useEffect } from 'react';
-import { getOwnerPets } from '../../../services/pets';
 import useUser from '../../../hooks/useUser';
-import { createAppointment } from '../../../services/appointments';
+import petsHook from '../../../services/petsHook';
+import appointmentsHook from '../../../services/appointmentsHook';
 
 const NewAppointment = ({ refreshShifts }) => {
+  const {createAppointment} = appointmentsHook();
+  const {getOwnerPets} = petsHook();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useUser();
@@ -106,12 +108,13 @@ const NewAppointment = ({ refreshShifts }) => {
       position: 'bottom-right',
       isClosable: true,
     });
-    refreshShifts();
     onClose();
   };
 
   const createConsult = async (consult) => {
-    await createAppointment(consult).catch((err) => err.message);
+    await createAppointment(consult)
+      .then(() => refreshShifts())
+      .catch((err) => err.message);
   };
 
   useEffect(() => {
@@ -120,7 +123,8 @@ const NewAppointment = ({ refreshShifts }) => {
 
   useEffect(() => {
     getPetsData();
-  }, [pets]);
+    setConsult;
+  }, []);
 
   return (
     <>

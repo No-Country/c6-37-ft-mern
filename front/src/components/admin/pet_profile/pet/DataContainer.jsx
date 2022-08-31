@@ -1,24 +1,31 @@
 import { Flex, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 import DataCard from './DataCard';
+import EditToolPet from './EditToolPet';
 
 function DataContainer({ petData }) {
   return (
     <>
-      <Stack direction="row" justifyContent="flex-start" alignItems="flex-start" gap='20'>
-        <Flex direction="column" gap='5'>
+      <Stack
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        gap="20"
+      >
+        <Flex direction="column" gap="5">
           <DataCard label="name" text={petData.name} />
           <DataCard label="specie" text={petData.specie} />
-          <DataCard label="size" text={petData.size} />
+          <DataCard label="weight" text={petData.weight} />
         </Flex>
-        <Flex direction="column" gap='5'>
+        <Flex direction="column" gap="5">
           <DataCard label="breed" text={petData.breed} />
           <DataCard label="birth" text={petData.birth} />
         </Flex>
-        <Flex direction="column" gap='5'>
+        <Flex direction="column" gap="5">
           <DataCard label="sex" text={petData.sex} />
-          <DataCard label="weight" text={petData.weight} />
+          <DataCard label="size" text={petData.size} />
         </Flex>
+        <EditToolPet />
       </Stack>
 
       <Stack direction="column" spacing="0px">
@@ -30,7 +37,7 @@ function DataContainer({ petData }) {
         >
           Note:
         </Text>
-        <Text fontSize="15px" fontWeight="light">
+        <Text fontSize="15px" fontWeight="light" maxW='450px'>
           {petData.note}
         </Text>
       </Stack>

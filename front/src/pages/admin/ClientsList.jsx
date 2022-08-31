@@ -20,14 +20,23 @@ const ClientsList = () => {
   const state = useSelector((state) => state.userData);
   const [rows, setRows] = useState([]);
   const dispatch = useDispatch();
+  const [selectedClient, setSelectedClient] = useState(null);
 
-  const handleSelect = (client) => {
-    dispatch(setUserData(client));
+  const handleSelect = async (client) => {
+    let clientData;
+   
+    await getClient(client.email).then((res)=>(clientData = res.data));
+
+    setSelectedClient(clientData);
   };
 
-  const handleBack = () => {
+  const handleBack =  () => {
     dispatch(delUserData());
   };
+
+  useEffect(()=>{
+    selectedClient && dispatch(setUserData(selectedClient));
+  },[selectedClient])
 
   useEffect(() => {
     getData();
@@ -50,7 +59,7 @@ const ClientsList = () => {
 
   return (
     <Stack>
-      {state.name !== '' ? (
+      {(selectedClient && state.name !== '') ? (
         <>
           <Button
             variantColor="blue"

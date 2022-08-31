@@ -7,10 +7,12 @@ import { delUserData, setEditable } from './../../redux/features/userSlice';
 import CustomModal from './CustomModal';
 import { deleteClient } from '../../services/clients';
 import { deleteUser } from '../../services/users';
-import { deleteClientPets} from '../../services/pets';
-import { deleteClientAppointments } from '../../services/appointments';
+import petsHook from '../../services/petsHook';
+import appointmentsHook from '../../services/appointmentsHook';
 
 const EditTool = () => {
+  const {deleteClientAppointments} = appointmentsHook();
+  const {deleteClientPets} = petsHook();
   const state = useSelector((state) => state.userData);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);

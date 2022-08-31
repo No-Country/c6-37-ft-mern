@@ -20,8 +20,8 @@ import {
 import React, { useState } from 'react';
 import { BsPlus } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
+import petsHook from '../../../services/petsHook';
 import useUser from './../../../hooks/useUser';
-import { createPet, updatePet } from './../../../services/pets';
 
 const species = ['Dog', 'Cat'];
 const breeds = {
@@ -30,7 +30,8 @@ const breeds = {
 };
 const sizes = ['Small', 'Medium', 'Large'];
 
-const EditPet = ({ pet, refresh, setRefresh }) => {
+const EditPet = ({ pet, refreshPets }) => {
+  const { createPet, updatePet } = petsHook();
   const { user } = useUser();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -100,7 +101,7 @@ const EditPet = ({ pet, refresh, setRefresh }) => {
 
     refreshPets();
   };
-  
+
   const editPetData = async () => {
     await updatePet(newPet)
       .then(() => {
@@ -118,10 +119,6 @@ const EditPet = ({ pet, refresh, setRefresh }) => {
       })
       .catch((err) => console.log(err));
     refreshPets();
-  };
-
-  const refreshPets = () => {
-    setRefresh(refresh + 1);
   };
 
   return (
@@ -160,7 +157,6 @@ const EditPet = ({ pet, refresh, setRefresh }) => {
             fontSize="1.7rem"
           >
             {pet ? 'EDIT PET' : 'ADD PET'}
-
           </ModalHeader>
 
           <ModalCloseButton />
@@ -171,7 +167,7 @@ const EditPet = ({ pet, refresh, setRefresh }) => {
               flexDirection="column"
               alignItems="center"
               justifyContent="center"
-              gap='20px'
+              gap="20px"
               mx="20px"
             >
               <FormControl isRequired>

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  _id:'',
   name:'',
   specie:'',
   size:'',
@@ -21,11 +22,23 @@ const petSlice = createSlice({
     editPetData: (state) => {
       state.editable = !state.editable
     },
-    delPetData: (state, action) => {
-      state = action.payload
+    delPetData: (state) => {
+      const {_id, name, specie, size, breed, birth, sex, weight, note, owner} = initialState;
+      state._id = _id;
+      state.name = name;
+      state.specie = specie;
+      state.size = size;  
+      state.breed = breed;
+      state.sex = sex;
+      state.birth = birth;
+      state.weight = weight;
+      state.note = note;
+      state.owner = owner;
+      state.editable = false;
     },
     setPetData: (state, action) => {
-      const {name, specie, size, breed, sex, birth, weight, note, owner} = action.payload
+      const {_id, name, specie, size, breed, sex, birth, weight, note, owner} = action.payload
+      state._id = _id;
       state.name = name;
       state.specie = specie;
       state.size = size;  

@@ -1,10 +1,11 @@
 import { IconButton, useDisclosure, useToast } from '@chakra-ui/react';
 import React, {useRef } from 'react';
 import { MdDelete } from 'react-icons/md';
+import petsHook from '../../../services/petsHook';
 import CustomModal from './../../../components/admin/CustomModal';
-import { deletePet } from './../../../services/pets';
 
-const DeletePetButton = ({ pet, refresh, setRefresh }) => {
+const DeletePetButton = ({ pet,refreshPets }) => {
+  const {deletePet} = petsHook();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const finalRef = useRef(null);
@@ -28,10 +29,6 @@ const DeletePetButton = ({ pet, refresh, setRefresh }) => {
       })
       .catch((err) => console.log(err));
     refreshPets();
-  };
-
-  const refreshPets = () => {
-    setRefresh(refresh + 1);
   };
 
   return (
