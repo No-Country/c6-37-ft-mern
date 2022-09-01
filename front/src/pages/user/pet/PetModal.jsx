@@ -35,22 +35,21 @@ const EditPet = ({ pet, refreshPets }) => {
   const { user } = useUser();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedSpecie, setSelectedSpecie] = useState(pet ? pet.specie : '');
-  const [newPet, setNewPet] = useState(
-    pet
-      ? pet
-      : {
-          name: '',
-          specie: '',
-          breed: '',
-          sex: '',
-          size: '',
-          birth: '',
-          weight: '',
-          note: '',
-          owner: user.email,
-        }
+  const [selectedSpecie, setSelectedSpecie] = useState(
+    pet.name !== '' ? pet.specie : ''
   );
+  const [newPet, setNewPet] = useState(pet);
+  const initialState = {
+    name: '',
+    specie: '',
+    breed: '',
+    sex: '',
+    size: '',
+    birth: '',
+    weight: '',
+    note: '',
+    owner: user.email,
+  };
 
   const handleChange = (e) => {
     setNewPet({ ...newPet, [e.target.name]: e.target.value });
@@ -79,7 +78,7 @@ const EditPet = ({ pet, refreshPets }) => {
 
       return;
     }
-    pet ? editPetData() : createPetData();
+    pet.name !== '' ? editPetData() : createPetData();
   };
 
   const createPetData = async () => {
@@ -95,6 +94,7 @@ const EditPet = ({ pet, refreshPets }) => {
         });
       })
       .then(() => {
+        setNewPet(initialState);
         onClose();
       })
       .catch((err) => console.log(err));
@@ -115,6 +115,7 @@ const EditPet = ({ pet, refreshPets }) => {
         });
       })
       .then(() => {
+        setNewPet(initialState);
         onClose();
       })
       .catch((err) => console.log(err));
@@ -130,14 +131,14 @@ const EditPet = ({ pet, refreshPets }) => {
         borderRadius="full"
         onClick={onOpen}
         leftIcon={
-          pet ? (
+          pet.name !== '' ? (
             <MdEdit fontWeight="bold" />
           ) : (
             <BsPlus fontSize="20px" fontWeight="bold" />
           )
         }
       >
-        {pet ? 'Edit Pet' : 'Add Pet'}
+        {pet.name !== '' ? 'Edit Pet' : 'Add Pet'}
       </Button>
 
       <Modal
@@ -156,7 +157,7 @@ const EditPet = ({ pet, refreshPets }) => {
             fontWeight="600"
             fontSize="1.7rem"
           >
-            {pet ? 'EDIT PET' : 'ADD PET'}
+            {pet.name !== '' ? 'EDIT PET' : 'ADD PET'}
           </ModalHeader>
 
           <ModalCloseButton />

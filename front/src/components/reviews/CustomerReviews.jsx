@@ -78,6 +78,7 @@ const CustomerReviews = () => {
         heightChip="230px"
         gapChip="25px"
       />
+      
     </Stack>
     </div>
   );

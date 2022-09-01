@@ -1,6 +1,7 @@
 import { Box, Flex, VStack, Stack, Text, Heading } from '@chakra-ui/react'
 import { BsArrowDownCircle } from 'react-icons/bs'
 import { motion } from 'framer-motion'
+import { Link } from 'react-scroll'
 
 const Info = () => {
   return (
@@ -17,12 +18,14 @@ const Info = () => {
       </Box>
       <motion.div
       whileTap={{ scale: 0.8 }}>
+        <Link to='services' spy={true} smooth={true} duration={500}>
       <Stack as='button' w='192px' h='48px' borderRadius='50' bg='#035AA6' alignItems='center' direction='row' justifyContent='center' color='#fff' gap='4' cursor='pointer'>
         <Text fontSize='22px' >See more</Text>
         <Box fontSize='26px'>
           <BsArrowDownCircle />
         </Box>
       </Stack>
+      </Link>
       </motion.div>
     </VStack>
   )

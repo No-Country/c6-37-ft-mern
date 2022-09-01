@@ -9,8 +9,8 @@ AOS.init();
 function ContactUs() {
   return (
     <div data-aos='zoom-in-up'>
-    <Stack h='720px' w='1280px' py='5' alignItems='center' position='relative' >
-      <Heading fontFamily='Anek Bangla, sans-serif' fontSize='36px' fontWeight='bold' textAlign='center' >Contact Us</Heading>
+    <Stack h='720px' w='1280px' py='5' alignItems='center' position='relative' name="contact">
+      <Heading fontFamily='Anek Bangla, sans-serif' fontSize='36px' fontWeight='bold' textAlign='center'>Contact Us</Heading>
         <Container />
         <ContactMap />
     </Stack></div>
