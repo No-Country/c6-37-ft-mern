@@ -27,8 +27,8 @@ import petsHook from '../../../services/petsHook';
 import appointmentsHook from '../../../services/appointmentsHook';
 
 const NewAppointment = ({ refreshShifts }) => {
-  const {createAppointment} = appointmentsHook();
-  const {getOwnerPets} = petsHook();
+  const { createAppointment } = appointmentsHook();
+  const { getOwnerPets } = petsHook();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useUser();
@@ -46,6 +46,11 @@ const NewAppointment = ({ refreshShifts }) => {
 
   const handleChange = (e) => {
     setConsult({ ...consult, [e.target.name]: e.target.value });
+  };
+
+  const handleOpen = () => {
+    getPetsData();
+    onOpen();
   };
 
   const getPetsData = async () => {
@@ -72,7 +77,6 @@ const NewAppointment = ({ refreshShifts }) => {
 
       return;
     }
-    // console.log(consult);
     setConsultList([...consultList, consult]);
   };
 
@@ -125,7 +129,6 @@ const NewAppointment = ({ refreshShifts }) => {
 
   useEffect(() => {
     getPetsData();
-    setConsult;
   }, []);
 
   return (
@@ -136,7 +139,7 @@ const NewAppointment = ({ refreshShifts }) => {
         colorScheme="blue"
         size="sm"
         borderRadius="full"
-        onClick={onOpen}
+        onClick={() => handleOpen()}
         leftIcon={<BsPlus fontSize="20px" fontWeight="bold" />}
       >
         Book a shift

@@ -1,6 +1,7 @@
-import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
+import { Grid, GridItem, Heading, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import AppointmentModal from '../../components/admin/AppointmentModal';
 import appointmentsHook from '../../services/appointmentsHook';
 import { getClient, getClients } from '../../services/clients';
 import petsHook from '../../services/petsHook';
@@ -19,8 +20,11 @@ const columns = [
 const Dashboard = () => {
   const { getPets, pets } = petsHook();
   const { appointmentWithClients, getAppointments } = appointmentsHook();
+  const [ selectedAppointment, setSelectedAppointment ] = useState();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [appointments, setAppointments] = useState([]);
   const [clients, setClients] = useState([]);
+  const finalRef = useRef(null);
 
   const getAppointmentsData = async () => {
     let citas = appointmentWithClients;
@@ -47,6 +51,11 @@ const Dashboard = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleSelect = (appointment) => {
+    setSelectedAppointment(appointment);
+    onOpen();
   };
 
   useEffect(() => {
@@ -83,9 +92,20 @@ const Dashboard = () => {
           title={'Today Appointments'}
           columns={columns}
           rows={appointments}
-          isClickable={false}
-        />
+          isClickable={true}
+          handleSelect={(appointment) => handleSelect(appointment)}
+          />
       </Stack>
+      {selectedAppointment && (
+        <AppointmentModal
+          finalFocusRef={finalRef}
+          isOpen={isOpen}
+          onClose={onClose}
+          title={'Appointment Details'}
+          appointment={selectedAppointment}
+          cancel={'Close'}
+        />
+      )}
     </Stack>
   );
 };
