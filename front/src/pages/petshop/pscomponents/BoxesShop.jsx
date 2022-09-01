@@ -206,7 +206,7 @@ let data = {
 const BoxesShop = () => {
   return (
     <Stack justifyContent="center" alignContent="center" gap="40">
-      <Box>
+      <Box name='food'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -256,7 +256,7 @@ const BoxesShop = () => {
         </HStack>
       </Box>
 
-      <Box>
+      <Box name='clothing'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -281,7 +281,7 @@ const BoxesShop = () => {
         </HStack>
       </Box>
 
-      <Box>
+      <Box name='collar'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -306,7 +306,7 @@ const BoxesShop = () => {
         </HStack>
       </Box>
 
-      <Box>
+      <Box name='toys'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -331,7 +331,7 @@ const BoxesShop = () => {
         </HStack>
       </Box>
 
-      <Box>
+      <Box name='bedding'>
         <Text
           textAlign="center"
           fontSize="42px"

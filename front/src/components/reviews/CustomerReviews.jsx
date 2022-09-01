@@ -78,7 +78,7 @@ const CustomerReviews = () => {
         heightChip="230px"
         gapChip="25px"
       />
-      
+      <Stack name='contact'></Stack>
     </Stack>
     </div>
   );
