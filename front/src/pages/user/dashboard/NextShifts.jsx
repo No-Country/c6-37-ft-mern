@@ -3,19 +3,17 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import useUser from '../../../hooks/useUser';
 import appointmentsHook from '../../../services/appointmentsHook';
-import petsHook from '../../../services/petsHook';
+// import petsHook from '../../../services/petsHook';
 import DateShift from '../appointments/DateShift';
 import NewAppointment from './../appointments/NewApointment';
 
 function NextShifts() {
   const { deleteAppointment, getClientAppointments, appointmentWithPet } =
     appointmentsHook();
-  const { getPet } = petsHook();
   const toast = useToast();
   const { user } = useUser();
-  const [consults, setConsults] = useState([]);
   const [consultsData, setConsultsData] = useState([]);
-  const [refresh, setRefresh] = useState(0);
+  const [refresh, setRefresh] = useState(false);
 
   const getAppointmentsData = async () => {
     let citas = appointmentWithPet;
@@ -45,17 +43,17 @@ function NextShifts() {
           isClosable: true,
         });
       })
-      .then(refreshShifts())
+      .then(()=>refreshShifts())
       .catch((err) => console.log(err));
   };
 
   const refreshShifts = () => {
-    setRefresh(refresh + 1);
+    setRefresh(!refresh);
   };
 
   useEffect(() => {
     getClientAppointments(user.email);
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     appointmentWithPet.length > 0 && getAppointmentsData();
@@ -79,7 +77,7 @@ function NextShifts() {
           NEXT SHIFTS
         </Text>
 
-        <Flex direction="column" w="100%">
+        <Flex maxH='200px' overflowY='auto' direction="column" w="100%">
           {consultsData.length > 0 ? (
             consultsData.map((consult, index) => (
               <DateShift

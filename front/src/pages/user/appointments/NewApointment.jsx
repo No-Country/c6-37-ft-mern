@@ -108,6 +108,8 @@ const NewAppointment = ({ refreshShifts }) => {
       position: 'bottom-right',
       isClosable: true,
     });
+    setConsultList([]);
+    setActivePet(null);
     onClose();
   };
 
@@ -125,8 +127,6 @@ const NewAppointment = ({ refreshShifts }) => {
     getPetsData();
     setConsult;
   }, []);
-
-  useEffect(()=>{console.log(consultList);},[consultList])
 
   return (
     <>
