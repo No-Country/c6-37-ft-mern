@@ -1,4 +1,4 @@
-import { Heading, Stack, useDisclosure } from '@chakra-ui/react';
+import { Button, Flex, Heading, Stack, useDisclosure } from '@chakra-ui/react';
 import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -40,6 +40,11 @@ const AppointmentsList = () => {
           py={6}
           boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)"
         >
+          <Flex>
+            <Button borderRadius='0' bgColor='#C8C8C8'fontFamily="Anek Bangla, sans-serif" _active=''>Today</Button>
+            <Button borderRadius='0'>Today</Button>
+            <Button borderRadius='0'>Today</Button>
+          </Flex>
           <SearchBar search={['consult', 'client', 'pet']} />
           <DataTable
             columns={columns}
