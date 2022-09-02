@@ -18,7 +18,7 @@ const SearchBar = ({ search, handleChange }) => {
               pointerEvents="none"
               children={<FaSearch color="#718096" />}
             />
-            <Input fontSize="sm" placeholder={'Search ' + item} bg="#E6E6E6" name={item} handleChange={(e)=>handleChange(e)} />
+            <Input fontSize="sm" placeholder={'Search ' + item} bg="#E6E6E6" name={item} onChange={handleChange} />
           </InputGroup>
         </GridItem>
       ))}

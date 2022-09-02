@@ -20,7 +20,11 @@ const ClientsList = () => {
   const state = useSelector((state) => state.userData);
   const [rows, setRows] = useState([]);
   const [dataToShow, setDataToShow] = useState([]);
-  const [filterInfo, setFilterInfo] = useState({name:'', phone:'', address:''});
+  const [filterInfo, setFilterInfo] = useState({
+    name: '',
+    phone: '',
+    address: '',
+  });
   const dispatch = useDispatch();
   const [selectedClient, setSelectedClient] = useState(null);
 
@@ -29,18 +33,17 @@ const ClientsList = () => {
       ...filterInfo,
       [e.target.name]: e.target.value,
     });
-    console.log(e);
   };
 
   const handleSelect = async (client) => {
     let clientData;
-   
-    await getClient(client.email).then((res)=>(clientData = res.data));
+
+    await getClient(client.email).then((res) => (clientData = res.data));
 
     setSelectedClient(clientData);
   };
 
-  const handleBack =  () => {
+  const handleBack = () => {
     dispatch(delUserData());
   };
 
@@ -59,23 +62,115 @@ const ClientsList = () => {
       });
   };
 
-  const filter = () => {
+  const filter = async () => {
+    let clientesFiltrados = [];
 
+    if (
+      !!filterInfo.name  &&
+      !!filterInfo.phone  &&
+      !!filterInfo.address 
+    ) {
+      rows.map((row) => {
+        if (
+          row.name.toLowerCase().includes(filterInfo.name.toLowerCase()) &&
+          row.phoneNumber
+            .toLowerCase()
+            .includes(filterInfo.phone.toLowerCase()) &&
+          row.address.toLowerCase().includes(filterInfo.address.toLowerCase())
+        ) {
+          clientesFiltrados.push(row);
+        }
+      });
+    } else if (!!filterInfo.name) {
+      if (!!filterInfo.phone) {
+        rows.map((row) => {
+          if (
+            row.name.toLowerCase().includes(filterInfo.name.toLowerCase()) &&
+            row.phoneNumber
+              .toLowerCase()
+              .includes(filterInfo.phone.toLowerCase())
+          ) {
+            clientesFiltrados.push(row);
+          }
+        });
+      } else if (!!filterInfo.address) {
+        rows.map((row) => {
+          if (
+            row.name.toLowerCase().includes(filterInfo.name.toLowerCase()) &&
+            row.address.toLowerCase().includes(filterInfo.address.toLowerCase())
+          ) {
+            clientesFiltrados.push(row);
+          }
+        });
+      } else {
+        rows.map((row) => {
+          if (row.name.toLowerCase().includes(filterInfo.name.toLowerCase())) {
+            clientesFiltrados.push(row);
+          }
+        });
+      }
+    } else if (!!filterInfo.phone) {
+      if (!!filterInfo.address) {
+        rows.map((row) => {
+          if (
+            row.phoneNumber
+              .toLowerCase()
+              .includes(filterInfo.phone.toLowerCase()) &&
+            row.address.toLowerCase().includes(filterInfo.address.toLowerCase())
+          ) {
+            clientesFiltrados.push(row);
+          }
+        });
+      } else {
+        rows.map((row) => {
+          if (
+            row.phoneNumber
+              .toLowerCase()
+              .includes(filterInfo.phone.toLowerCase())
+          ) {
+            clientesFiltrados.push(row);
+          }
+        });
+      }
+    } else if (!!filterInfo.address) {
+      rows.map((row) => {
+        if (
+          row.address.toLowerCase().includes(filterInfo.address.toLowerCase())
+        ) {
+          clientesFiltrados.push(row);
+        }
+      });
+    }else{
 
+      clientesFiltrados = rows;
 
-  }
+    }
 
-  useEffect(()=>{
+    setDataToShow(clientesFiltrados);
+  };
+
+  useEffect(() => {
+    !!!filterInfo.name || !!!filterInfo.phone || !!!filterInfo.address
+      ? setDataToShow([])
+      : setDataToShow(rows);
+    filter();
+  }, [filterInfo]);
+
+  useEffect(() => {
     selectedClient && dispatch(setUserData(selectedClient));
-  },[selectedClient])
+  }, [selectedClient]);
 
   useEffect(() => {
     getData();
   }, []);
 
+  useEffect(() => {
+    setDataToShow(rows);
+  }, [rows]);
+
   return (
     <Stack>
-      {(selectedClient && state.name !== '') ? (
+      {selectedClient && state.name !== '' ? (
         <>
           <Button
             variantColor="blue"
@@ -99,11 +194,14 @@ const ClientsList = () => {
             py={6}
             boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)"
           >
-            <SearchBar search={['name', 'phone', 'address']} handleChange={(e)=>handleChange(e)} />
+            <SearchBar
+              search={['name', 'phone', 'address']}
+              handleChange={handleChange}
+            />
 
             <DataTable
               columns={columns}
-              rows={rows}
+              rows={dataToShow}
               handleSelect={(client) => handleSelect(client)}
               isClickable={true}
             />
