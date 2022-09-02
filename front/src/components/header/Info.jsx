@@ -6,7 +6,7 @@ import { Link } from 'react-scroll'
 const Info = () => {
   return (
     <VStack gap='5' userSelect='none' h='720px' alignItems='center' justifyContent='center'>
-      <Flex direction='column' alignItems='center' lineHeight='1px' w='204px'>
+      <Flex direction='column' alignItems='center' lineHeight='1px' w='204px' transform={{ sm: 'scale(1)', base: 'scale(0.7)'}} h={{ sm: 'auto', base: '170px'}}>
         <Text fontFamily='Anek Bangla, sans-serif' fontSize='26px'>The</Text>
         <Heading fontFamily='Anek Bangla, sans-serif' fontSize='70px' fontWeight='bold'>Best</Heading>
         <Text fontFamily='Anek Bangla, sans-serif' fontSize='26px' >For your</Text>

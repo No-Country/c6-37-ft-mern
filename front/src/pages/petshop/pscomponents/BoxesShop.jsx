@@ -1,4 +1,4 @@
-import { Box, HStack, Text, VStack, Image, Stack } from "@chakra-ui/react";
+import { Box, HStack, Text, VStack, Image, Stack, Flex } from "@chakra-ui/react";
 import ChipBoxesShop from "./ChipBoxesShop";
 import React from "react";
 
@@ -206,7 +206,7 @@ let data = {
 const BoxesShop = () => {
   return (
     <Stack justifyContent="center" alignContent="center" gap="40">
-      <Box name='food'>
+      <Flex name='food' direction='column' alignItems='center' gap='7'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -217,7 +217,7 @@ const BoxesShop = () => {
         >
           {data.dogFood.title}
         </Text>
-        <HStack justifyContent="center" gap="10">
+        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
           {data.dogFood.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -228,10 +228,10 @@ const BoxesShop = () => {
               priceNumber={product.price}
             />
           ))}
-        </HStack>
-      </Box>
+        </Stack>
+      </Flex>
 
-      <Box>
+      <Flex direction='column' alignItems='center' gap='7'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -242,7 +242,7 @@ const BoxesShop = () => {
         >
           {data.catFood.title}
         </Text>
-        <HStack justifyContent="center" gap="10">
+        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
           {data.catFood.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -253,10 +253,10 @@ const BoxesShop = () => {
               priceNumber={product.price}
             />
           ))}
-        </HStack>
-      </Box>
+        </Stack>
+      </Flex>
 
-      <Box name='clothing'>
+      <Flex name='clothing' direction='column' alignItems='center' gap='7'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -267,7 +267,7 @@ const BoxesShop = () => {
         >
           {data.clothing.title}
         </Text>
-        <HStack justifyContent="center" gap="10">
+        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
           {data.clothing.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -278,10 +278,10 @@ const BoxesShop = () => {
               priceNumber={product.price}
             />
           ))}
-        </HStack>
-      </Box>
+        </Stack>
+      </Flex>
 
-      <Box name='collar'>
+      <Flex name='collar' direction='column' alignItems='center' gap='7'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -292,7 +292,7 @@ const BoxesShop = () => {
         >
           {data.collar.title}
         </Text>
-        <HStack justifyContent="center" gap="10">
+        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
           {data.collar.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -303,10 +303,10 @@ const BoxesShop = () => {
               priceNumber={product.price}
             />
           ))}
-        </HStack>
-      </Box>
+        </Stack>
+      </Flex>
 
-      <Box name='toys'>
+      <Flex name='toys' direction='column' alignItems='center' gap='7'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -317,7 +317,7 @@ const BoxesShop = () => {
         >
           {data.toys.title}
         </Text>
-        <HStack justifyContent="center" gap="10">
+        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
           {data.toys.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -328,10 +328,10 @@ const BoxesShop = () => {
               priceNumber={product.price}
             />
           ))}
-        </HStack>
-      </Box>
+        </Stack>
+      </Flex>
 
-      <Box name='bedding'>
+      <Flex name='bedding' direction='column' alignItems='center' gap='7'>
         <Text
           textAlign="center"
           fontSize="42px"
@@ -342,7 +342,7 @@ const BoxesShop = () => {
         >
           {data.bedding.title}
         </Text>
-        <HStack justifyContent="center" gap="10">
+        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
           {data.bedding.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -353,8 +353,8 @@ const BoxesShop = () => {
               priceNumber={product.price}
             />
           ))}
-        </HStack>
-      </Box>
+        </Stack>
+      </Flex>
     </Stack>
   );
 };

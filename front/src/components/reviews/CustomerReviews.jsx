@@ -77,6 +77,7 @@ const CustomerReviews = () => {
         widthChip="310px"
         heightChip="230px"
         gapChip="25px"
+        gridColumn="repeat(1,1fr)"
       />
       <Stack name='contact'></Stack>
     </Stack>

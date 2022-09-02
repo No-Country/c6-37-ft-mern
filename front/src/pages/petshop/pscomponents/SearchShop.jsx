@@ -26,10 +26,10 @@ const SearchShop = () => {
       alignItems="center"
       justifyContent="center"
       py="5"
-      mb="80px"
+      mb={{sm:'80px', base:'10px'}}
     >
       <InputGroup
-        w="394px"
+        w={{sm: "394px", base: "280px"}}
         h="42px"
         direction="row"
         alignItems="center"
@@ -47,7 +47,12 @@ const SearchShop = () => {
           children={<FaSearch color="#718096" />}
         />
       </InputGroup>
-      <HStack gap="33px">
+
+      <Stack  
+          gap={{ base: '5px', sm:'33px'}}
+          direction={{ base: 'column', sm: 'row' }}
+          w={{ sm: '500px', base: '407px' }}
+          alignItems='center'>
 
       <motion.div
           whileHover={{ scale: [null, 1.1, 1.1] }}
@@ -60,7 +65,7 @@ const SearchShop = () => {
           offset={-100}
           smooth={true}
           duration={800}>
-          <Text fontSize="20px" fontFamily="Anek Bangla, sans-serif" cursor='pointer'>
+          <Text fontSize={{ sm:"20px", base:"22px"}} fontFamily="Anek Bangla, sans-serif" cursor='pointer'>
             Food
           </Text>
         </Link>
@@ -77,7 +82,7 @@ const SearchShop = () => {
           offset={-100}
           smooth={true}
           duration={900}>
-          <Text fontSize="20px" fontFamily="Anek Bangla, sans-serif" cursor='pointer'>
+          <Text fontSize={{ sm:"20px", base:"22px"}} fontFamily="Anek Bangla, sans-serif" cursor='pointer'>
             Clothing
           </Text>
         </Link>
@@ -94,7 +99,7 @@ const SearchShop = () => {
           offset={-100}
           smooth={true}
           duration={1500}>
-          <Text fontSize="20px" fontFamily="Anek Bangla, sans-serif" cursor='pointer'>
+          <Text fontSize={{ sm:"20px", base:"22px"}} fontFamily="Anek Bangla, sans-serif" cursor='pointer'>
             Leash / Collar
           </Text>
         </Link>
@@ -111,7 +116,7 @@ const SearchShop = () => {
           offset={-100}
           smooth={true}
           duration={1800}>
-          <Text fontSize="20px" fontFamily="Anek Bangla, sans-serif" cursor='pointer'>
+          <Text fontSize={{ sm:"20px", base:"22px"}} fontFamily="Anek Bangla, sans-serif" cursor='pointer'>
             Toys
           </Text>
         </Link>
@@ -130,12 +135,12 @@ const SearchShop = () => {
           smooth={true}
           duration={2300}
         >   
-          <Text fontSize="20px" fontFamily="Anek Bangla, sans-serif" cursor='pointer' >
+          <Text fontSize={{ sm:"20px", base:"22px"}} fontFamily="Anek Bangla, sans-serif" cursor='pointer' >
             Bedding
           </Text>
         </Link>
         </motion.div>
-      </HStack>
+      </Stack>
     </Stack>
   );
 };
