@@ -19,8 +19,18 @@ const columns = [
 const ClientsList = () => {
   const state = useSelector((state) => state.userData);
   const [rows, setRows] = useState([]);
+  const [dataToShow, setDataToShow] = useState([]);
+  const [filterInfo, setFilterInfo] = useState({name:'', phone:'', address:''});
   const dispatch = useDispatch();
   const [selectedClient, setSelectedClient] = useState(null);
+
+  const handleChange = (e) => {
+    setFilterInfo({
+      ...filterInfo,
+      [e.target.name]: e.target.value,
+    });
+    console.log(e);
+  };
 
   const handleSelect = async (client) => {
     let clientData;
@@ -33,14 +43,6 @@ const ClientsList = () => {
   const handleBack =  () => {
     dispatch(delUserData());
   };
-
-  useEffect(()=>{
-    selectedClient && dispatch(setUserData(selectedClient));
-  },[selectedClient])
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const getData = async () => {
     let array = [];
@@ -56,6 +58,20 @@ const ClientsList = () => {
         console.log(err);
       });
   };
+
+  const filter = () => {
+
+
+
+  }
+
+  useEffect(()=>{
+    selectedClient && dispatch(setUserData(selectedClient));
+  },[selectedClient])
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Stack>
@@ -83,7 +99,7 @@ const ClientsList = () => {
             py={6}
             boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)"
           >
-            <SearchBar search={['name', 'phone', 'address']} />
+            <SearchBar search={['name', 'phone', 'address']} handleChange={(e)=>handleChange(e)} />
 
             <DataTable
               columns={columns}

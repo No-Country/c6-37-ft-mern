@@ -58,7 +58,7 @@ let datos = [
 const CustomerReviews = () => {
   return (
     <div data-aos="zoom-in-up">
-    <Stack alignItems="center" justifyContent="center" w="1280px" gap="60px" py={20} >
+    <Stack alignItems="center" justifyContent="center" w='100%' maxW="1280px" gap="60px" py={20} >
       <Stack>
         <Text
           fontSize="36px"

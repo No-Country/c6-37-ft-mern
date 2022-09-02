@@ -14,7 +14,7 @@ const theme = extendTheme({
           color: '#fff',
           fontWeight: 'light',
           textTransform: 'capitalize',
-          fontSize: '14px'
+          fontSize: {sm:'16px', base:'14px'}
         }
       }
     }

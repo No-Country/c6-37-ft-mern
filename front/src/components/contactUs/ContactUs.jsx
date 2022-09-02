@@ -2,6 +2,7 @@ import { Heading, Stack } from '@chakra-ui/react';
 import React from 'react';
 import ContactMap from './ContactMap';
 import Container from './Container';
+import ContactUsResp from './ContacsUsResp';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -11,10 +12,12 @@ function ContactUs() {
     <div data-aos="zoom-in-up">
       <Stack
         h="720px"
-        w="1280px"
+        w='100%'
+        maxW="1280px"
         py="5"
         alignItems="center"
         position="relative"
+        display={{ sm: 'block', base: 'none'}}
       >
         <Heading
           fontFamily="Anek Bangla, sans-serif"
@@ -27,6 +30,7 @@ function ContactUs() {
         <Container />
         <ContactMap />
       </Stack>
+      <ContactUsResp />
     </div>
   );
 }
