@@ -31,8 +31,6 @@ export const userDataSlice = createSlice({
       state.email = email;
       state.address = address;
       state.editable = false;
-      // state = {...state, ...initialState}
-      console.log(state);
     },
     setEditable: (state) => {
       state.editable = !state.editable;

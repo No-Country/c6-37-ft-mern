@@ -3,39 +3,32 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import useUser from '../../../hooks/useUser';
 import appointmentsHook from '../../../services/appointmentsHook';
-import petsHook from '../../../services/petsHook';
+// import petsHook from '../../../services/petsHook';
 import DateShift from '../appointments/DateShift';
 import NewAppointment from './../appointments/NewApointment';
 
 function NextShifts() {
-  const { deleteAppointment, getClientAppointments } = appointmentsHook();
-  const { getPet } = petsHook();
+  const { deleteAppointment, getClientAppointments, appointmentWithPet } =
+    appointmentsHook();
   const toast = useToast();
   const { user } = useUser();
-  const [consults, setConsults] = useState([]);
   const [consultsData, setConsultsData] = useState([]);
-  const [refresh, setRefresh] = useState(0);
-  const [citas, setCitas] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const getAppointmentsData = async () => {
+    let citas = appointmentWithPet;
+    let citasFiltradas = [];
     let now = new Date();
-    await getClientAppointments(user.email)
-      .then((res) => {
-        res.data.map((data) => {
-          let date = new Date(`${data.day} ${data.time}`);
-          date >= now && setCitas(data);
-          console.log(data);
-        });
-      })
-      .then(() => setConsultsData(citas))
-      .catch((err) => console.log(err));
-  };
 
-  const getPetData = async (consult) => {
-    await getPet(consult.pet).then((res) => {
-      consult.pet = res.data;
-      setConsults([...consults, consult]);
-    });
+    await Promise.all(
+      citas.map(async (cita) => {
+        let date = new Date(cita.day + ' ' + cita.time);
+        date >= now && citasFiltradas.push(cita);
+      })
+    ).catch((err) => console.log(err));
+
+    setConsultsData(citasFiltradas);
+
   };
 
   const deleteShiftData = async (selectedConsult) => {
@@ -50,23 +43,22 @@ function NextShifts() {
           isClosable: true,
         });
       })
-      .then(refreshShifts())
+      .then(()=>refreshShifts())
       .catch((err) => console.log(err));
   };
 
   const refreshShifts = () => {
-    setRefresh(refresh + 1);
+    setRefresh(!refresh);
   };
 
   useEffect(() => {
-    // consultsData.map((consult) => getPetData(consult));
-    console.log(consultsData);
-  }, [consultsData]);
+    getClientAppointments(user.email);
+  }, [refresh]);
 
   useEffect(() => {
-    getAppointmentsData();
-    // console.log('entro');
-  }, [refresh]);
+    appointmentWithPet.length > 0 && getAppointmentsData();
+  }, [appointmentWithPet]);
+
 
   return (
     <Stack py="20px">
@@ -85,7 +77,7 @@ function NextShifts() {
           NEXT SHIFTS
         </Text>
 
-        <Flex direction="column" w="100%">
+        <Flex maxH='200px' overflowY='auto' direction="column" w="100%">
           {consultsData.length > 0 ? (
             consultsData.map((consult) => (
               <DateShift

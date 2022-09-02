@@ -1,8 +1,9 @@
-import { Stack } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { Stack, useDisclosure } from '@chakra-ui/react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DataTable from '../../../table/dataTable';
 import appointmentsHook from '../../../../services/appointmentsHook';
+import AppointmentModal from '../../AppointmentModal';
 
 const columns = [
   { key: 'type', title: 'Consult' },
@@ -10,18 +11,19 @@ const columns = [
   { key: 'day', title: 'Day' },
 ];
 function PetAppointments() {
-  const {getPetAppointments} = appointmentsHook();
   const state = useSelector((state) => state.petData);
-  const [rows, setRows] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { getPetAppointments, appointmentWithClients } = appointmentsHook();
+  const finalRef = useRef(null);
 
-  const getPetAppointmentsData = async () => {
-    await getPetAppointments(state._id)
-      .then((res) => setRows(res.data))
-      .catch((err) => console.log(err));
+  const handleSelect = (appointment) => {
+    setSelectedAppointment(appointment);
+    onOpen();
   };
 
   useEffect(() => {
-    state._id && getPetAppointmentsData();
+    state._id && getPetAppointments(state._id);
   }, [state]);
 
   return (
@@ -29,11 +31,21 @@ function PetAppointments() {
       <DataTable
         title="Appointments"
         columns={columns}
-        rows={rows}
-        handleSelect={(pet) => handleSelect(pet)}
-        isClickable={false}
+        rows={appointmentWithClients}
+        isClickable={true}
+        handleSelect={(appointment) => handleSelect(appointment)}
         maxH="350px"
       />
+      {selectedAppointment && (
+        <AppointmentModal
+          finalFocusRef={finalRef}
+          isOpen={isOpen}
+          onClose={onClose}
+          title={'Appointment Details'}
+          appointment={selectedAppointment}
+          cancel={'Close'}
+        />
+      )}
     </Stack>
   );
 }

@@ -30,7 +30,7 @@ const Login = () => {
         title: 'Error',
         description: 'Please fill all fields',
         status: 'error',
-        duration: 9000,
+        duration: 6000,
         position: 'bottom-right',
         isClosable: true,
       });

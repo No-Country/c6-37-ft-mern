@@ -15,7 +15,7 @@ const appointmentsHook = () => {
   };
 
   const getAppointmentPet = async () => {
-    const citas = appointments;
+    let citas = appointments;
 
     const AppointmentAndPet = await Promise.all(
       citas.map(async (cita) => {
@@ -28,17 +28,18 @@ const appointmentsHook = () => {
   };
 
   const getAppointmentClient = async () => {
-    const citas = appointments;
+    let citas = appointments;
 
     const appointmentsAndClients = await Promise.all(
       citas.map(async (cita) => {
         await getClient(cita.client).then(
-          (res) => (cita.client = `${res.data.name} ${res.data.lastName}`)
+          (res) => {
+            cita.client = `${res.data.name} ${res.data.lastName}`
+          }
         );
         return cita;
       })
     );
-
     setAppointmentsWithClients(appointmentsAndClients);
   };
 
@@ -48,8 +49,7 @@ const appointmentsHook = () => {
   };
 
   const getPetAppointments = async (_id) => {
-    const resp = await axios.get(URL + 'pet/' + _id);
-    return resp;
+    await axios.get(URL + 'pet/' + _id).then((res) => setAppointments(res.data));
   };
 
   const getClientAppointments = async (email) => {

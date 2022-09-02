@@ -31,13 +31,13 @@ const DateShift = ({ consult, deleteShiftData, haveDeleteModal, isDeleteable }) 
         gap="20px"
       >
         <Flex gap="10px" alignItems="center" flex="1">
-          <Avatar size="xs" name={consult.pet.name} />
+          <Avatar size="xs" name={consult.pet.name?consult.pet.name:consult.pet} />
           <Text
             fontSize="14px"
             fontWeight="bold"
             fontFamily="Anek Bangla, sans-serif"
           >
-            {consult.pet.name}
+            {consult.pet.name?consult.pet.name:consult.pet}
           </Text>
         </Flex>
         <Text

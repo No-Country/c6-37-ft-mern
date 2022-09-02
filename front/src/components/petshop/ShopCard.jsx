@@ -3,7 +3,7 @@ import { AiOutlineLine } from 'react-icons/ai'
 
 const ShopCard = (props) => {
   return (
-    <VStack cursor='pointer' h='450px' w='300px' bg='#fff' borderRadius={20} justifyContent='center' spacing='0px' pb='5'>
+    <VStack cursor='pointer' h='450px' w='300px' bg='#fff' borderRadius={20} justifyContent='center' spacing='0px' pb='5' display={props.display}>
       <Image src={props.src} alt='product image' maxW='262px' h='170px' objectFit='contain' />
 
       <HStack fontSize='50px'>

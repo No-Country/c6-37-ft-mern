@@ -19,7 +19,7 @@ const petsHook = () => {
     const petsAndOwner = await Promise.all(
       mascotas.map(async (mascota)=>{
 
-        await getClient(mascota.owner).then((res)=> (mascota.owner = `${res.data.name} ${res.data.lastName}`)).catch((err)=>console.log(err));
+        await getClient(mascota.owner).then((res)=> {mascota.owner = `${res.data.name} ${res.data.lastName}`}).catch((err)=>console.log(err));
         return mascota;
       })
     )

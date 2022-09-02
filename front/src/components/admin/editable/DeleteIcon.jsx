@@ -10,19 +10,15 @@ import  CustomModal  from "./../CustomModal";
 
 const DeleteIcon = () => {
   const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const finalRef = React.useRef(null);
 
   const handleDelete = () => {
 
     dispatch(delUserData());
-    // dispatch(setEditable());
-
     onClose();
 
   }
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const finalRef = React.useRef(null);
-
   return (
     <>
       <Box

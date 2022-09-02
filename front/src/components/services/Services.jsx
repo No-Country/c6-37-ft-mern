@@ -14,11 +14,10 @@ let datos = [
   {id: 6, img: '/assets/vet_icono.png', text: 'PET APOINTMENTS' },
 ];
 
-// sfc shortcut
 const Services = () => {
   return (
     <div data-aos='zoom-in-up'>
-    <Stack alignItems="center" justifyContent="center" w="1280px" gap="60px" py={20} id='services'>
+    <Stack alignItems="center" justifyContent="center" maxW="1280px" w='100%' gap="60px" py={20} name='services'>
       <Stack>
         <Text
           fontSize="36px"
@@ -33,8 +32,9 @@ const Services = () => {
         data={datos}
         fSize={'20px'}
         fWeight={'bold'}
-        widthChip="225px"
-        heightChip="150px"
+        widthChip={{ sm:"225px", base:'150px'}}
+        heightChip={{ sm:"150px", base: '100px'}}
+        gridColumn="repeat(2,1fr)"
       />
     </Stack>
     </div>

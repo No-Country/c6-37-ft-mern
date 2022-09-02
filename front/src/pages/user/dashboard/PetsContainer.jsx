@@ -7,23 +7,23 @@ import PetModal from '../pet/PetModal';
 import useUser from '../../../hooks/useUser';
 import petsHook from '../../../services/petsHook';
 
-const petEx = {
-  name: 'Firulais',
-  specie: 'Canine',
-  breed: 'Jack Russel',
-  sex: 'Male',
-  size: 'Mini',
-  birth: '16/03/18',
-  weight: '12',
-  note: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. ',
-  img: '/assets/dog.png',
-};
-
 const PetsContainer = () => {
-  const {getOwnerPets} = petsHook();
+  const { getOwnerPets } = petsHook();
   const { user } = useUser();
   const [pets, setPets] = useState([]);
   const [refresh, setRefresh] = useState(0);
+
+  const initialState = {
+    name: '',
+    specie: '',
+    breed: '',
+    sex: '',
+    size: '',
+    birth: '',
+    weight: '',
+    note: '',
+    owner: user.email,
+  };
 
   const getOwnerPetsData = async () => {
     await getOwnerPets(user.email)
@@ -57,7 +57,7 @@ const PetsContainer = () => {
         </Text>
         <PetModal
           refreshPets={() => refreshPets()}
-          email={'pepe@example.com'}
+          pet={initialState}
         />
       </Flex>
       {pets.length > 0 ? (
