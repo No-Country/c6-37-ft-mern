@@ -16,6 +16,7 @@ const Routing = () => {
   return (
     <Routes>
       <Route index element={<Landing />} />
+      <Route path="/" element={<Landing />} />
       <Route path="/petshop" element={<PetShop />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<Signup />} />

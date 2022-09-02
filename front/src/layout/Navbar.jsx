@@ -14,6 +14,8 @@ import {
   scrollSpy,
   scroller,
 } from 'react-scroll';
+import HamburgerMenu from '../components/header/HamburgerMenu';
+
 
 const Navbar = () => {
   const { isLogged } = useUser();
@@ -41,7 +43,8 @@ const Navbar = () => {
     <Stack
       position="fixed"
       h="64px"
-      w="1280px"
+      w='100%'
+      maxW="1280px"
       direction="row"
       justifyContent="space-between"
       alignItems="center"
@@ -166,6 +169,11 @@ const Navbar = () => {
       ) : (
         <UserMenu />
       )}
+      <Flex display={{ base: 'flex', lg: 'none' }}>
+        <motion.div whileTap={{ scale: 0.8 }}>
+        <HamburgerMenu />
+        </motion.div>
+        </Flex>
     </Stack>
   );
 };
