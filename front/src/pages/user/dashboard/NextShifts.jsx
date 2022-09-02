@@ -15,16 +15,15 @@ function NextShifts() {
   const [consults, setConsults] = useState([]);
   const [consultsData, setConsultsData] = useState([]);
   const [refresh, setRefresh] = useState(0);
+  const [citas, setCitas] = useState([]);
 
   const getAppointmentsData = async () => {
-    let citas = [];
     let now = new Date();
     await getClientAppointments(user.email)
       .then((res) => {
         res.data.map((data) => {
-          let date = new Date(data.day + ' ' + data.time);
-          // date >= now && setConsultsData(consultsData.concat(data))
-          date >= now && citas.push(data);
+          let date = new Date(`${data.day} ${data.time}`);
+          date >= now && setCitas(data);
           console.log(data);
         });
       })
@@ -66,7 +65,7 @@ function NextShifts() {
 
   useEffect(() => {
     getAppointmentsData();
-    console.log('entro');
+    // console.log('entro');
   }, [refresh]);
 
   return (
@@ -88,9 +87,9 @@ function NextShifts() {
 
         <Flex direction="column" w="100%">
           {consultsData.length > 0 ? (
-            consultsData.map((consult, index) => (
+            consultsData.map((consult) => (
               <DateShift
-                key={index}
+                key={consult._id}
                 consult={consult}
                 isDeleteable={true}
                 haveDeleteModal={true}

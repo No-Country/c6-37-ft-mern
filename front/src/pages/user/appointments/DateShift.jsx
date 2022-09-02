@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Avatar,
   Text,
@@ -18,6 +18,8 @@ const DateShift = ({ consult, deleteShiftData, haveDeleteModal, isDeleteable }) 
     deleteShiftData(consult);
     onClose();
   };
+
+  useEffect(() => {console.log(consult.pet)},[])
 
   return (
     <>

@@ -25,7 +25,7 @@ import useUser from './../../../hooks/useUser';
 
 const species = ['Dog', 'Cat'];
 const breeds = {
-  Dog: ['Chihuahua', 'Pug', 'Pitbull'],
+  Dog: ['Chihuahua', 'Pug', 'Pitbull', 'Dachshund', 'Caniche', 'Boxer', 'Galgo', 'otro'],
   Cat: ['Persa', 'Siames', , 'Maine Coon'],
 };
 const sizes = ['Small', 'Medium', 'Large'];

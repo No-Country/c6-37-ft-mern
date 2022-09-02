@@ -33,7 +33,7 @@ const appointmentsHook = () => {
     const appointmentsAndClients = await Promise.all(
       citas.map(async (cita) => {
         await getClient(cita.client).then(
-          (res) => (cita.client = res.data.name + ' ' + res.data.lastName)
+          (res) => (cita.client = `${res.data.name} ${res.data.lastName}`)
         );
         return cita;
       })
