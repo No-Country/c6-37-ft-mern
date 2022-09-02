@@ -18,7 +18,7 @@ const Dashboard = () => {
           <UserChip />
         </Box>
 
-        <Flex justifyContent="center" gap="40px">
+        <Flex justifyContent="center" gap="40px" direction={{ base:'column', xl: 'row'}}>
           <Flex
             boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)"
             width="440px"
