@@ -23,7 +23,7 @@ const PetsList = () => {
   const state = useSelector((state) => state.petData);
   const [selectedPet, setSelectedPet] = useState(null);
   const [selectedClient, setSelectedClient] = useState(null);
-  const [dataToShow, setDataToShow] = useState(null);
+  const [dataToShow, setDataToShow] = useState([]);
   const [filterInfo, setFilterInfo] = useState({
     name: '',
     owner: '',
@@ -47,23 +47,36 @@ const PetsList = () => {
     setSelectedClient(clientData);
   };
 
-
   const filter = async () => {
+    let filterPet = [];
 
-    let filterPet =[];
-
-    if(!!filterInfo.name && !!filterInfo.owner) {
-
+    if (!!filterInfo.name && !!filterInfo.owner) {
       petsWithOwner.map((row) => {
-
-        
-
-      })
-
+        if (
+          row.name.toLowerCase().includes(filterInfo.name.toLowerCase()) &&
+          row.owner.toLowerCase().includes(filterInfo.owner.toLowerCase())
+        ) {
+          filterPet.push(row);
+        }
+      });
+    } else if (!!filterInfo.name) {
+      petsWithOwner.map((row) => {
+        if (row.name.toLowerCase().includes(filterInfo.name.toLowerCase())) {
+          filterPet.push(row);
+        }
+      });
+    } else if (!!filterInfo.owner) {
+      petsWithOwner.map((row) => {
+        if (row.owner.toLowerCase().includes(filterInfo.owner.toLowerCase())) {
+          filterPet.push(row);
+        }
+      });
+    } else {
+      filterPet = petsWithOwner;
     }
 
-
-  }
+    setDataToShow(filterPet);
+  };
 
   useEffect(() => {
     getPets();
@@ -118,7 +131,7 @@ const PetsList = () => {
 
             <DataTable
               columns={columns}
-              rows={petsWithOwner}
+              rows={dataToShow}
               handleSelect={(pet) => handleSelect(pet)}
               isClickable={true}
             />

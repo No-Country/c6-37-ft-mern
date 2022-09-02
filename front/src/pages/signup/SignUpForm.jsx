@@ -20,35 +20,35 @@ const SignUpForm = ({handleChange, handleSubmit}) => {
   return (
     <Stack
       spacing="0px"
-      direction={{ base: 'column', sm: 'row' }}
-      w={{ base: '440px', sm: '740px' }}
-      h={{ base: '780px', sm: '470px' }}
+      direction={{ base: 'column', md: 'row' }}
+      w={{ base: '440px', md: '740px' }}
+      h={{ base: '780px', md: '470px' }}
       borderRadius="22px"
       boxShadow="5px 5px 15px 0px gray"
     >
       <Box
-        w={{ base: '100%', sm: '40%' }}
-        h={{ base: '40%', sm: '100%' }}
-        borderLeftRadius={{ base: '0px', sm: '22px' }}
-        // borderTopRadius={{ base: "22px", sm: "0pxpx" }}
+        w={{ base: '100%', md: '40%' }}
+        h={{ base: '40%', md: '100%' }}
+        borderLeftRadius={{ base: '0px', md: '22px' }}
+        // borderTopRadius={{ base: "22px", md: "0pxpx" }}
       >
         <Image
           src="/assets/signup_bg.jpg"
           boxSize="470px"
           objectFit="cover"
-          borderLeftRadius={{ base: '0px', sm: '22px' }}
-          // borderTopRadius={{ base: "22px", sm: "0pxpx" }}
+          borderLeftRadius={{ base: '0px', md: '22px' }}
+          // borderTopRadius={{ base: "22px", md: "0pxpx" }}
         />
       </Box>
 
       <Box
         py="10px"
         px="20px"
-        w={{ base: '100%', sm: '60%' }}
-        h={{ base: '60%', sm: '100%' }}
+        w={{ base: '100%', md: '60%' }}
+        h={{ base: '60%', md: '100%' }}
         bg="#0B8CBF"
-        // borderBottomRadius={{ base:"22px", sm: "0px" }}
-        borderRightRadius={{ base: '0px', sm: '22px' }}
+        // borderBottomRadius={{ base:"22px", md: "0px" }}
+        borderRightRadius={{ base: '0px', md: '22px' }}
         align="center"
       >
         <Heading color="white" size="lg" align="center" my="10">

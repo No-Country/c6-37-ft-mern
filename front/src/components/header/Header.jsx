@@ -5,15 +5,15 @@ import Info from './Info';
 function Header() {
   return (
     <Stack
-      direction={{ sm: 'row', base: 'column' }}
+      direction={{ md: 'row', base: 'column' }}
       bgImage="/assets/hero_background.png"
       maxW="1280px"
       w="100%"
       h="720px"
       alignItems="center"
-      mt={{ sm: '0!important', base: '80px!important' }}
+      mt={{ md: '0!important', base: '80px!important' }}
       justifyContent="center"
-      gap={{ sm: '36', base: '5' }}
+      gap={{ md: '36', base: '5' }}
       name="home"
     >
       <Info />

@@ -8,7 +8,7 @@ const ContactUsResp = () => {
     <Stack
       justifyContent="center"
       alignItems="center"
-      display={{ sm: "none", base: "flex" }}
+      display={{ md: "none", base: "flex" }}
     >
       <Heading
         fontFamily="Anek Bangla, sans-serif"

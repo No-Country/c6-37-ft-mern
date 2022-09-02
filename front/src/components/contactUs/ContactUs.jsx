@@ -17,7 +17,7 @@ function ContactUs() {
         py="5"
         alignItems="center"
         position="relative"
-        display={{ sm: 'block', base: 'none'}}
+        display={{ md: 'block', base: 'none'}}
       >
         <Heading
           fontFamily="Anek Bangla, sans-serif"
