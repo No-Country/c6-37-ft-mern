@@ -11,7 +11,7 @@ function Header() {
       w="100%"
       h="720px"
       alignItems="center"
-      mt={{ md: '0!important', base: '80px!important' }}
+      pt={{ md: '0', base: '80px' }}
       justifyContent="center"
       gap={{ md: '36', base: '5' }}
       name="home"

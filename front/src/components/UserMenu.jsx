@@ -7,6 +7,7 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
@@ -46,7 +47,7 @@ const UserMenu = () => {
           _hover={{ bg: '#FFFFFF26' }}
           _active={{ bg: '#FFFFFF26' }}
         >
-          {user.name && user.name} {user.lastName && user.lastName}
+          <Text display={{base:'none', lg:'block'}}>{user.name && user.name} {user.lastName && user.lastName}</Text>
         </MenuButton>
         <MenuList>
           <MenuItem gap="2" onClick={handleClick}>
