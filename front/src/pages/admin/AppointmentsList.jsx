@@ -20,9 +20,21 @@ const AppointmentsList = () => {
   const { appointmentWithClients, getAppointments } = appointmentsHook();
   const [selectedAppointment, setSelectedAppointment] = useState();
   const [dataToShow, setDataToShow] = useState([]);
+  const [filterInfo, setFilterInfo] = useState({
+    consult: '',
+    client: '',
+    pet: '',
+  });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activeItem, setActiveItem] = useState(1);
   const finalRef = useRef(null);
+
+  const handleChange = (e) => {
+    setFilterInfo({
+      ...filterInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleActive = async () => {
     let citasFiltradas = [];
@@ -39,13 +51,99 @@ const AppointmentsList = () => {
       })
     ).catch((err) => console.log(err));
 
-    setDataToShow(citasFiltradas);
+    if (!!filterInfo.consult || !!filterInfo.client || !!filterInfo.pet) {
+      filter(citasFiltradas);
+    } else {
+      setDataToShow(citasFiltradas);
+    }
   };
 
   const handleSelect = (appointment) => {
     setSelectedAppointment(appointment);
     onOpen();
   };
+
+  const filter = (citasFiltradas) => {
+    let filterAppointments = [];
+
+    if (!!filterInfo.consult && !!filterInfo.client && !!filterInfo.pet) {
+      citasFiltradas.map((row) => {
+        if (
+          row.type.toLowerCase().includes(filterInfo.consult.toLowerCase()) &&
+          row.client.toLowerCase().includes(filterInfo.client.toLowerCase()) &&
+          row.pet.toLowerCase().includes(filterInfo.pet.toLowerCase())
+        ) {
+          filterAppointments.push(row);
+        }
+      });
+    } else if (!!filterInfo.consult) {
+      if (!!filterInfo.client) {
+        citasFiltradas.map((row) => {
+          if (
+            row.type.toLowerCase().includes(filterInfo.consult.toLowerCase()) &&
+            row.client.toLowerCase().includes(filterInfo.client.toLowerCase())
+          ) {
+            filterAppointments.push(row);
+          }
+        });
+      } else if (!!filterInfo.pet) {
+        citasFiltradas.map((row) => {
+          if (
+            row.type.toLowerCase().includes(filterInfo.consult.toLowerCase()) &&
+            row.pet.toLowerCase().includes(filterInfo.pet.toLowerCase())
+          ) {
+            filterAppointments.push(row);
+          }
+        });
+      } else {
+        citasFiltradas.map((row) => {
+          if (
+            row.type.toLowerCase().includes(filterInfo.consult.toLowerCase())
+          ) {
+            filterAppointments.push(row);
+          }
+        });
+      }
+    } else if (!!filterInfo.client) {
+      if (!!filterInfo.pet) {
+        citasFiltradas.map((row) => {
+          if (
+            row.client
+              .toLowerCase()
+              .includes(filterInfo.client.toLowerCase()) &&
+            row.pet.toLowerCase().includes(filterInfo.pet.toLowerCase())
+          ) {
+            filterAppointments.push(row);
+          }
+        });
+      } else {
+        citasFiltradas.map((row) => {
+          if (
+            row.client.toLowerCase().includes(filterInfo.client.toLowerCase())
+          ) {
+            filterAppointments.push(row);
+          }
+        });
+      }
+    } else if (!!filterInfo.pet) {
+      citasFiltradas.map((row) => {
+        if (row.pet.toLowerCase().includes(filterInfo.pet.toLowerCase())) {
+          filterAppointments.push(row);
+        }
+      });
+    } else {
+      filterAppointments = appointmentWithClients;
+    }
+
+    setDataToShow(filterAppointments);
+  };
+
+  useEffect(() => {
+    !!!filterInfo.consult || !!!filterInfo.client || !!!filterInfo.pet
+      ? setDataToShow([])
+      : setDataToShow(rows);
+    handleActive();
+  }, [filterInfo]);
 
   useEffect(() => {
     getAppointments();
@@ -71,7 +169,10 @@ const AppointmentsList = () => {
           boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)"
         >
           <ButtonsBar activeItem={activeItem} setActiveItem={setActiveItem} />
-          <SearchBar search={['consult', 'client', 'pet']} />
+          <SearchBar
+            search={['consult', 'client', 'pet']}
+            handleChange={handleChange}
+          />
           <DataTable
             columns={columns}
             rows={dataToShow}
