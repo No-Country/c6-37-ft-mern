@@ -1,4 +1,4 @@
-import { Link, IconButton, Menu, MenuButton, MenuItem, MenuList,Divider } from '@chakra-ui/react';
+import { IconButton, Menu, MenuButton, MenuItem, MenuList,Divider } from '@chakra-ui/react';
 import React from 'react';
 import { HiMenu } from 'react-icons/hi';
 import { Link as RouterLink } from 'react-router-dom';

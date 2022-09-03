@@ -7,12 +7,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Link,
-  DirectLink,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
+  animateScroll
 } from 'react-scroll';
 import HamburgerMenu from '../components/header/HamburgerMenu';
 
@@ -49,7 +44,7 @@ const Navbar = () => {
       justifyContent="space-between"
       alignItems="center"
       px="5"
-      bgColor={scroll ? '#0B8CBF' : 'transparent' && {base: '#0B8CBF', md: 'transparent'}}
+      bgColor={scroll ? '#0B8CBF' : 'transparent' && {base: '#0B8CBF', lg: 'transparent'}}
       borderRadius="0 0 20px 20px"
       zIndex={20}
       transition="all linear 0.3s"

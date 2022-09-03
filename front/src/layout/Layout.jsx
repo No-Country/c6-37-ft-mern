@@ -20,7 +20,7 @@ function Layout({ children }) {
         w="100%"
         spacing={0}>
         <Stack 
-        display={{ base: 'none', md: 'flex' }}
+        display={{ base: 'none', lg: 'flex' }}
         maxWidth='1280px'
         w="100%">
         <Image src='/assets/top_wave.png'/>

@@ -16,9 +16,9 @@ const GridChip = ({ data, fSize, fWeight, stars, widthChip, heightChip, gridColu
         <motion.div
         whileHover={{ scale: [null, 1.1, 1.1] }}
         transition={{ duration: 0.3 }}
+        key={dato.id}
         >
         <GridChipItem
-          key={dato.id}
           img={dato.img}
           text={dato.text}
           fSize={fSize}
