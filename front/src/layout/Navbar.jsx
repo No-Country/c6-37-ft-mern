@@ -14,6 +14,8 @@ import {
   scrollSpy,
   scroller,
 } from 'react-scroll';
+import HamburgerMenu from '../components/header/HamburgerMenu';
+
 
 const Navbar = () => {
   const { isLogged } = useUser();
@@ -41,12 +43,13 @@ const Navbar = () => {
     <Stack
       position="fixed"
       h="64px"
-      w="1280px"
+      w='100%'
+      maxW="1280px"
       direction="row"
       justifyContent="space-between"
       alignItems="center"
       px="5"
-      bgColor={scroll ? '#0B8CBF' : 'transparent'}
+      bgColor={scroll ? '#0B8CBF' : 'transparent' && {base: '#0B8CBF', md: 'transparent'}}
       borderRadius="0 0 20px 20px"
       zIndex={20}
       transition="all linear 0.3s"
@@ -55,7 +58,7 @@ const Navbar = () => {
         <Image src="/assets/logo.png" alt="logo" w="75px" />
       </Flex>
 
-      <Flex gap={10}>
+      <Flex gap={10} display={{ base: 'none', lg: 'flex' }}>
         <motion.div
           whileHover={{ scale: [null, 1.1, 1.1] }}
           transition={{ duration: 0.3 }}
@@ -137,7 +140,7 @@ const Navbar = () => {
       </Flex>
 
       {!isLogged ? (
-        <Flex gap="5" alignItems="center">
+        <Flex gap="5" alignItems="center" display={{ base: 'none', lg: 'flex' }}>
           <motion.div whileTap={{ scale: 0.8 }}>
             <Button
               as={RouterLink}
@@ -166,6 +169,11 @@ const Navbar = () => {
       ) : (
         <UserMenu />
       )}
+      <Flex display={{ base: 'flex', lg: 'none' }}>
+        <motion.div whileTap={{ scale: 0.8 }}>
+        <HamburgerMenu />
+        </motion.div>
+        </Flex>
     </Stack>
   );
 };

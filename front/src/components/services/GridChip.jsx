@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const GridChip = ({ data, fSize, fWeight, stars, widthChip, heightChip, gridColumn }) => {
   return (
     <Grid
-      templateColumns={{base:gridColumn, sm:"repeat(3, 1fr)"}}
+      templateColumns={{base:gridColumn, md: "repeat(2, 1fr)",lg:"repeat(3, 1fr)"}}
       alignItems="center"
       justifyItems="center"
       gap="25px"

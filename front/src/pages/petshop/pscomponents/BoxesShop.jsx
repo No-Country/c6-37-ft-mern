@@ -217,7 +217,7 @@ const BoxesShop = () => {
         >
           {data.dogFood.title}
         </Text>
-        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
+        <Stack justifyContent="center" gap={{ md:'10', base:'55'}} direction={{ base:'column', md: 'row'}} flexWrap='wrap'>
           {data.dogFood.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -242,7 +242,7 @@ const BoxesShop = () => {
         >
           {data.catFood.title}
         </Text>
-        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
+        <Stack justifyContent="center" gap={{ md:'10', base:'55'}} direction={{ base:'column', md: 'row'}} flexWrap='wrap'>
           {data.catFood.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -267,7 +267,7 @@ const BoxesShop = () => {
         >
           {data.clothing.title}
         </Text>
-        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
+        <Stack justifyContent="center" gap={{ md:'10', base:'55'}} direction={{ base:'column', md: 'row'}} flexWrap='wrap'>
           {data.clothing.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -292,7 +292,7 @@ const BoxesShop = () => {
         >
           {data.collar.title}
         </Text>
-        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
+        <Stack justifyContent="center" gap={{ md:'10', base:'55'}} direction={{ base:'column', md: 'row'}} flexWrap='wrap'>
           {data.collar.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -317,7 +317,7 @@ const BoxesShop = () => {
         >
           {data.toys.title}
         </Text>
-        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
+        <Stack justifyContent="center" gap={{ md:'10', base:'55'}} direction={{ base:'column', md: 'row'}} flexWrap='wrap'>
           {data.toys.products.map((product, index) => (
             <ChipBoxesShop
               key={index}
@@ -342,7 +342,7 @@ const BoxesShop = () => {
         >
           {data.bedding.title}
         </Text>
-        <Stack justifyContent="center" gap={{ sm:'10', base:'55'}} direction={{ base:'column', sm: 'row'}} flexWrap='wrap'>
+        <Stack justifyContent="center" gap={{ md:'10', base:'55'}} direction={{ base:'column', md: 'row'}} flexWrap='wrap'>
           {data.bedding.products.map((product, index) => (
             <ChipBoxesShop
               key={index}

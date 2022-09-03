@@ -4,7 +4,7 @@ import {FaFacebookSquare,FaInstagramSquare } from 'react-icons/fa'
 const FootBar = () => {
   return (
     <VStack gap='5'>
-      <Stack direction='row' gap='10'>
+      <Stack direction='row' gap={{md:'10', base:'3'}}>
         <Text variant='footbar' >Home</Text>
         <Text variant='footbar' >services</Text>
         <Text variant='footbar' >about us</Text>

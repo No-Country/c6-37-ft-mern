@@ -31,9 +31,9 @@ const LoginForm = ({ handleChangeLogin, handleSubmitLogin }) => {
   return (
     <Stack
       spacing="0px"
-      direction={{ base: 'column', sm: 'row' }}
-      w={{ sm: '620px', base: '407px' }}
-      h={{ sm: '407px', base: '750px' }}
+      direction={{ base: 'column', md: 'row' }}
+      w={{ md: '620px', base: '407px' }}
+      h={{ md: '407px', base: '750px' }}
       borderRadius="22px"
       my="center"
       fontFamily="Anek Bangla, sans-serif"
@@ -41,26 +41,26 @@ const LoginForm = ({ handleChangeLogin, handleSubmitLogin }) => {
       boxShadow="5px 5px 15px 0px gray"
     >
       <Box
-        w={{ sm: '50%', base: '100%' }}
-        h={{ sm: '100%', base: '45%' }}
-        borderLeftRadius={{ sm: '22px', base: '0px' }}
-        // borderTopRadius={{ sm: "0pxpx", base: "22px" }}
+        w={{ md: '50%', base: '100%' }}
+        h={{ md: '100%', base: '45%' }}
+        borderLeftRadius={{ md: '22px', base: '0px' }}
+        // borderTopRadius={{ md: "0pxpx", base: "22px" }}
       >
         <Image
           src="/assets/login_bg.jpg"
           boxSize="407px"
           objectFit="cover"
-          borderLeftRadius={{ sm: '22px', base: '0px' }}
-          // borderTopRadius={{ sm: "0pxpx", base: "22px" }}
+          borderLeftRadius={{ md: '22px', base: '0px' }}
+          // borderTopRadius={{ md: "0pxpx", base: "22px" }}
         />
       </Box>
 
       <Box
-        w={{ sm: '50%', base: '100%' }}
-        h={{ sm: '100%', base: '55%' }}
+        w={{ md: '50%', base: '100%' }}
+        h={{ md: '100%', base: '55%' }}
         bg="#0B8CBF"
-        // borderBottomRadius={{ base:"22px", sm: "0px" }}
-        borderRightRadius={{ sm: '22px', base: '0px' }}
+        // borderBottomRadius={{ base:"22px", md: "0px" }}
+        borderRightRadius={{ md: '22px', base: '0px' }}
         align="center"
       >
         <Heading color="white" size="lg" align="center" my="50px">

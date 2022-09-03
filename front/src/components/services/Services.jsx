@@ -32,8 +32,8 @@ const Services = () => {
         data={datos}
         fSize={'20px'}
         fWeight={'bold'}
-        widthChip={{ sm:"225px", base:'150px'}}
-        heightChip={{ sm:"150px", base: '100px'}}
+        widthChip={{ md:"225px", base:'150px'}}
+        heightChip={{ md:"150px", base: '100px'}}
         gridColumn="repeat(2,1fr)"
       />
     </Stack>

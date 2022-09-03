@@ -1,20 +1,30 @@
-import { Stack } from '@chakra-ui/react';
+import { Image, Stack } from '@chakra-ui/react';
 import React from 'react';
 import Navbar from './Navbar';
 import useUser from './../hooks/useUser';
 import Footer from './footer/Footer';
 
 function Layout({ children }) {
-
   return (
-    <Stack minH="100vh" alignItems="center" spacing="0px" w="1280px" m="0 auto">
+    <Stack
+      minH="100vh"
+      alignItems="center"
+      spacing="0px"
+      w="100%"
+      maxW="1280px"
+      m="0 auto"
+    >
       <Navbar />
       <Stack
-        w="1280px"
-        bgImage="/assets/top_wave.png"
-        bgRepeat="no-repeat"
-        spacing={0}
-      >
+        maxWidth='1280px'
+        w="100%"
+        spacing={0}>
+        <Stack 
+        display={{ base: 'none', md: 'flex' }}
+        maxWidth='1280px'
+        w="100%">
+        <Image src='/assets/top_wave.png'/>
+        </Stack>
         {children}
       </Stack>
       <Footer />

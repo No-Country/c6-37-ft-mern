@@ -4,6 +4,7 @@ import React from 'react';
 const Container = () => {
   return (
     <Stack
+    display={{ md: 'block', base: 'none'}}
       bg="#0B8CBF"
       w="389px"
       h="425px"
