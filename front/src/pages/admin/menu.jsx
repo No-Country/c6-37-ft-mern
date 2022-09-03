@@ -25,13 +25,13 @@ const Menu = ({activeItem, setActiveItem, children }) => {
 
   return (
     <Stack>
-      <Grid
-        templateColumns="repeat(12, 1fr)"
-        alignItems="start"
-        justifyItems="start"
+      <Flex
+        alignItems={{lg:"start", base:'center'}}
+        justifyItems={{lg:"start", base:'center'}}
+        direction={{base:'column', lg:'row'}}
         gap="25px"
       >
-        <GridItem w="195px" ml={4} mt='100px' colSpan={2} boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)">
+        <Flex w={{lg:"195px", base:'auto'}} ml={{base:0, lg:4}} mt='100px' boxShadow="0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)">
           <VStack alignItems="flex-start" spacing={0} >
             {menuItems.map((item) => (
               <Flex
@@ -55,10 +55,10 @@ const Menu = ({activeItem, setActiveItem, children }) => {
               </Flex>
             ))}
           </VStack>
-        </GridItem>
+        </Flex>
 
-        <GridItem colSpan={10}>{children}</GridItem>
-      </Grid>
+        <Flex w='100%' justifyContent={{base:'center', lg: 'flex-start'}}>{children}</Flex>
+      </Flex>
     </Stack>
   );
 };

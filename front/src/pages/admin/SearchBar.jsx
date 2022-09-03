@@ -10,9 +10,9 @@ import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = ({ search, handleChange }) => {
   return (
-    <Grid templateColumns={'repeat(3, 1fr)'} gap={8}>
+    <Grid templateColumns={{md:'repeat(3, 1fr)', base:'repeat(1, 1fr)'}} gap={{md:8, base: 0}}>
       {search.map((item, index) => (
-        <GridItem mb="20px" key={index}>
+        <GridItem mb="20px" key={index} maxW='250px'>
           <InputGroup h="42px">
             <InputLeftElement
               pointerEvents="none"

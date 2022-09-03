@@ -43,12 +43,12 @@ function EditableProfile() {
   };
 
   return (
-    <Stack direction="row" justifyContent="center" gap="20" px="10">
-      <Stack direction="row" gap="6">
+    <Stack direction={{lg:"row", base:'column'}} justifyContent="center" gap="20" px={{lg:"10",base:'0'}}>
+      <Stack direction={{lg:"row", base:'column'}} gap="6" alignItems={{lg:'start', base:'center'}}>
         <Avatar size="xl" name={`${userInfo.name}`} />
 
-        <Stack gap="2">
-          <Flex direction="row" gap="6">
+        <Stack gap="2" w='100%'>
+          <Flex direction={{md:"row", base:'column'}} gap="6">
             <EditCard
               title="Name"
               name="name"
@@ -73,7 +73,7 @@ function EditableProfile() {
             />
           </Flex>
 
-          <Flex direction="row" gap="6">
+          <Flex direction={{md:"row", base:'column'}} gap="6">
             <EditCard
               title="Phone Number"
               name="phoneNumber"

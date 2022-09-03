@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react'
+import { Stack, VStack } from '@chakra-ui/react'
 import React from 'react'
 import ProfileContainer from './ProfileContainer'
 import ScrollAppointments from './ScrollAppointments'
@@ -11,7 +11,7 @@ function UserProfileContainer() {
   const edit = useSelector(state => state.userData.editable);  
 
   return (
-    <VStack boxShadow='0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)' gap='10' p='10'>
+    <Stack boxShadow='0.6px 1px 8px 0.5px rgba(0, 0, 0, 0.25)' gap='10' p={{lg:'10', base:'5'}}>
       {
         edit ?
         <EditableProfile /> :
@@ -22,7 +22,7 @@ function UserProfileContainer() {
         <ScrollContainer />
         <ScrollAppointments />
       </VStack>
-    </VStack>
+    </Stack>
   )
 }
 

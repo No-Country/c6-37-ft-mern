@@ -46,9 +46,9 @@ function PetProfileEdit() {
       <Stack
         direction="column"
         justifyContent="space-between"
-        alignItems="flex-start"
+        alignItems={{md:"flex-start",base:'center'}}
       >
-        <Flex direction="row" gap="5">
+        <Flex direction={{sm:"row",base:'column'}} gap="5" w='100%'>
           <EditCard
             handleChange={handleChange}
             data={petInfo.name}
@@ -68,7 +68,7 @@ function PetProfileEdit() {
             value={petInfo.specie}
           />
         </Flex>
-        <Flex direction="row" gap="5">
+        <Flex direction={{sm:"row",base:'column'}} gap="5" w='100%'>
           <EditCard
             handleChange={handleChange}
             title="sex"

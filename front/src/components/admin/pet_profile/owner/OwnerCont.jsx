@@ -4,7 +4,7 @@ import Info from './Info';
 
 function OwnerCont() {
   return (
-    <Stack w='100%' h="259px" gap='5'>
+    <Stack w='100%' gap='5'>
       <Heading
         as="h2"
         pl="2"

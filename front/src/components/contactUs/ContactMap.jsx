@@ -14,7 +14,7 @@ const ContactMap = () => {
       alignItems='left' spacing='-50px' direction='column'
       >
         <div data-aos='fade-right' data-aos-duration="1300">
-        <Image src='/assets/contact-cat.png' h='333px' w='312px' />
+        <Image src='/assets/contact-cat.png'  w='312px' />
         </div>
         <ContactCards />
       </Stack>

@@ -8,7 +8,7 @@ import { createUser } from './../../services/users';
 
 function Signup() {
   const toast = useToast();
-  const { isLogged } = useUser();
+  const { isLogged, isAdmin } = useUser();
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: '',

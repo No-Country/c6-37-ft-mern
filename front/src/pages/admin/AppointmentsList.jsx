@@ -160,7 +160,7 @@ const AppointmentsList = () => {
 
   return (
     <>
-      <Stack gap="48px">
+      <Stack gap="48px"  w={{base:'100%', lg:'auto'}} px={{base:4, lg:0}}>
         <Heading>Appointments</Heading>
 
         <Stack

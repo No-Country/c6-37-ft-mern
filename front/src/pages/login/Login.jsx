@@ -98,7 +98,7 @@ const Login = () => {
       justifyContent="center"
       alignItems="center"
       margin="auto 0"
-      pt="160px"
+      pt="60px"
     >
       <LoginForm handleChange={handleChange} handleSubmit={handleSubmit} />
     </Flex>

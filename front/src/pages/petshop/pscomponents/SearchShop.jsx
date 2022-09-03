@@ -26,6 +26,7 @@ const SearchShop = () => {
       alignItems="center"
       justifyContent="center"
       py="5"
+      mt={{base:'100px', lg:'auto'}}
       mb={{md:'80px', base:'10px'}}
     >
       <InputGroup

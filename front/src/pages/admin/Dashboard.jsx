@@ -69,10 +69,10 @@ const Dashboard = () => {
   }, [appointmentWithClients]);
 
   return (
-    <Stack gap="48px">
+    <Stack gap="48px" w={{base:'100%', lg:'auto'}} px={{base:4, lg:0}}>
       <Heading>Welcome</Heading>
       <Stack>
-        <Grid templateColumns="repeat(3, 1fr)" gap="16px">
+        <Grid templateColumns={{lg:"repeat(3, 1fr)", base:"repeat(1, 1fr)"}} gap="16px">
           <GridItem>
             <CounterChip
               title="Today Apointments"

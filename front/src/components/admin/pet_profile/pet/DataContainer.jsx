@@ -7,39 +7,48 @@ function DataContainer({ petData }) {
   return (
     <>
       <Stack
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        gap="20"
+        direction={{ lg: 'row', base: 'column' }}
+        justifyContent={{ lg: 'flex-start', base: 'center' }}
+        alignItems={{ lg: 'flex-start', base: 'center' }}
+        gap={{lg:"20",base:'5'}}
       >
-        <Flex direction="column" gap="5">
-          <DataCard label="name" text={petData.name} />
-          <DataCard label="specie" text={petData.specie} />
-          <DataCard label="weight" text={petData.weight} />
-        </Flex>
-        <Flex direction="column" gap="5">
-          <DataCard label="breed" text={petData.breed} />
-          <DataCard label="birth" text={petData.birth} />
-        </Flex>
-        <Flex direction="column" gap="5">
-          <DataCard label="sex" text={petData.sex} />
-          <DataCard label="size" text={petData.size} />
-        </Flex>
-        <EditToolPet />
-      </Stack>
-
-      <Stack direction="column" spacing="0px">
-        <Text
-          textTransform="capitalize"
-          fontWeight="bold"
-          fontFamily="Anek Bangla, sans-serif"
-          fontSize="14px"
+        <Stack
+          direction={'column'}
+          w="100%"
+          gap="2"
+          justifyContent={{ lg: 'start', base: 'center' }}
         >
-          Note:
-        </Text>
-        <Text fontSize="15px" fontWeight="light" maxW='450px'>
-          {petData.note}
-        </Text>
+          <Flex direction={{sm:"row", base:'column'}} gap="5">
+            <DataCard label="name" text={petData.name} />
+            <DataCard label="breed" text={petData.breed} />
+            <DataCard label="specie" text={petData.specie} />
+            
+          </Flex>
+          <Flex direction={{sm:"row", base:'column'}} gap="5">
+            <DataCard label="sex" text={petData.sex} />
+            <DataCard label="birth" text={petData.birth} />
+            <DataCard label="size" text={petData.size} />
+          </Flex>
+          <Flex direction={{sm:"row", base:'column'}} gap="5">
+          <DataCard label="weight" text={petData.weight} />
+            
+          </Flex>
+          <Flex direction="column" spacing="0px">
+            <Text
+              textTransform="capitalize"
+              fontWeight="bold"
+              fontFamily="Anek Bangla, sans-serif"
+              fontSize="14px"
+            >
+              Note:
+            </Text>
+            <Text fontSize="15px" fontWeight="light" maxW="450px">
+              {petData.note}
+            </Text>
+          </Flex>
+        </Stack>
+
+        <EditToolPet />
       </Stack>
     </>
   );

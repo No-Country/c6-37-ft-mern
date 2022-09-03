@@ -4,7 +4,7 @@ import SearchShop from './pscomponents/SearchShop';
 
 function PetShop() {
     return (
-        <Stack mt="140px">
+        <Stack mt={{base:"240px", lg:'140px'}}>
             <SearchShop/>
             <BoxesShop/>
         </Stack>

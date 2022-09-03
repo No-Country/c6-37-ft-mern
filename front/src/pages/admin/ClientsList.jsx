@@ -169,7 +169,7 @@ const ClientsList = () => {
   }, [rows]);
 
   return (
-    <Stack>
+    <Stack w={{base:'100%', lg:'auto'}} px={{base:4, lg:0}}>
       {selectedClient && state.name !== '' ? (
         <>
           <Button

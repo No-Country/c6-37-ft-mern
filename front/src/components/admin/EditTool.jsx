@@ -35,7 +35,7 @@ const EditTool = () => {
   };
 
   return (
-    <Stack direction="column" gap="4">
+    <Stack direction={{lg:"column", base:"row-reverse"}} gap="4">
       <Box
         cursor="pointer"
         ref={finalRef}

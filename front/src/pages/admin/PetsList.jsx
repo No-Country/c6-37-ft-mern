@@ -102,7 +102,7 @@ const PetsList = () => {
   }, [petsWithOwner]);
 
   return (
-    <Stack>
+    <Stack  w={{base:'100%', lg:'auto'}} px={{base:4, lg:0}}>
       {selectedPet && state.name !== '' ? (
         <>
           <Button

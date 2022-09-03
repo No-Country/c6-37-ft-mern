@@ -12,13 +12,14 @@ function Header() {
       h="720px"
       alignItems="center"
       pt={{ md: '0', base: '80px' }}
+      mt={{lg:'-140px!important'}}
       justifyContent="center"
       gap={{ md: '36', base: '5' }}
       name="home"
     >
       <Info />
       <Box
-        h="720px"
+        h="100%"
         bgImage="/assets/dog_hero.png"
         w="100%"
         maxW="500px"

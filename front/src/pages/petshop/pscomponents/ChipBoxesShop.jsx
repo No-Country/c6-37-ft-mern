@@ -22,7 +22,7 @@ const ChipBoxesShop = ({
       <VStack
         p="5"
         w="250px"
-        h="480px"
+        h="440px"
         borderRadius="14"
         boxShadow="3px 5px 40px 2px rgba(0, 0, 0, 0.25)"
         spacing="0"
@@ -48,10 +48,10 @@ const ChipBoxesShop = ({
         </Heading>
         <Text>{descriptionPetshop}</Text>
         <Text textAlign="center">{descriptionUnder}</Text>
-        <Text fontSize="22px" py="3">
+        <Text fontSize="24px" fontWeight='bold'py="3">
           {priceNumber}
         </Text>
-        <Box>
+        {/* <Box>
           <Button
             p="0px 10px"
             borderRadius="50px"
@@ -63,7 +63,7 @@ const ChipBoxesShop = ({
           >
             + Add to cart
           </Button>
-        </Box>
+        </Box> */}
       </VStack>
     </motion.button>
   );

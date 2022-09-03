@@ -40,7 +40,7 @@ function EditToolPet() {
   };
 
   return (
-    <Stack gap="5">
+    <Stack gap="5" direction={{lg:'column',base:'row'}}>
       <Box
         cursor="pointer"
         onClick={onOpen}
