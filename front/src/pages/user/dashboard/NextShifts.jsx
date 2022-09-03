@@ -79,9 +79,9 @@ function NextShifts() {
 
         <Flex maxH='200px' overflowY='auto' direction="column" w="100%">
           {consultsData.length > 0 ? (
-            consultsData.map((consult, index) => (
+            consultsData.map((consult) => (
               <DateShift
-                key={index}
+                key={consult._id}
                 consult={consult}
                 isDeleteable={true}
                 haveDeleteModal={true}

@@ -5,17 +5,8 @@ import useUser from './../hooks/useUser';
 import { useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-  Link,
-  DirectLink,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from 'react-scroll';
+import { Link } from 'react-scroll';
 import HamburgerMenu from '../components/header/HamburgerMenu';
-
 
 const Navbar = () => {
   const { isLogged } = useUser();
@@ -26,7 +17,7 @@ const Navbar = () => {
     fontSize: '16px',
     fontWeight: 'bold',
     textTransform: 'capitalize',
-    cursor: 'pointer'
+    cursor: 'pointer',
   };
 
   useEffect(() => {
@@ -43,13 +34,17 @@ const Navbar = () => {
     <Stack
       position="fixed"
       h="64px"
-      w='100%'
+      w="100%"
       maxW="1280px"
       direction="row"
       justifyContent="space-between"
       alignItems="center"
       px="5"
-      bgColor={scroll ? '#0B8CBF' : 'transparent' && {base: '#0B8CBF', md: 'transparent'}}
+      bgColor={
+        scroll
+          ? '#0B8CBF'
+          : 'transparent' && { base: '#0B8CBF', lg: 'transparent' }
+      }
       borderRadius="0 0 20px 20px"
       zIndex={20}
       transition="all linear 0.3s"
@@ -140,7 +135,11 @@ const Navbar = () => {
       </Flex>
 
       {!isLogged ? (
-        <Flex gap="5" alignItems="center" display={{ base: 'none', lg: 'flex' }}>
+        <Flex
+          gap="5"
+          alignItems="center"
+          display={{ base: 'none', lg: 'flex' }}
+        >
           <motion.div whileTap={{ scale: 0.8 }}>
             <Button
               as={RouterLink}
@@ -171,9 +170,9 @@ const Navbar = () => {
       )}
       <Flex display={{ base: 'flex', lg: 'none' }}>
         <motion.div whileTap={{ scale: 0.8 }}>
-        <HamburgerMenu />
+          <HamburgerMenu />
         </motion.div>
-        </Flex>
+      </Flex>
     </Stack>
   );
 };
